@@ -1,5 +1,4 @@
 "use strict";
-import MD5 from "./MD5.js";
 import "./leaflet.js";
 
 (function (factory) {
