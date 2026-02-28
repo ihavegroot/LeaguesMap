@@ -421,4 +421,557 @@ export default void function (factory) {
     L.objects.osrs = function (options) {
         return new L.Objects.OSRS(options);
     }
+
+    L.Storeline = L.DynamicIcons.extend({
+        onAdd: function (map) {
+            this._map = map;
+            this._selectedItem = null;
+            this._itemMarkers = {}; // Map of item name to array of markers
+            this._searchQuery = this.options.name ? this.options.name.toLowerCase() : '';
+            if (this.options.name) {
+                // Fetch names mapping for item IDs and full storeline data
+                Promise.all([
+                    fetch(`${this.options.folder}/names.json`).then(res => res.json()),
+                    fetch(`${this.options.folder}/storeline.json`).then(res => res.json())
+                ])
+                    .then(([names, allStoreData]) => {
+                        this._names = names;
+                        this._allStoreData = allStoreData; // Store all shop data
+                        return this.getData(this.options.name);
+                    })
+                    .then(locations => {
+                        this._icon_data = this.parseData(locations);
+                        this._icons = {};
+                        this._resetView();
+                        this._update();
+                        // Extract unique items and notify callback
+                        this.extractUniqueItems();
+                    }).catch(console.error);
+            } else {
+                throw new Error("No storeline name specified");
+            }
+        },
+
+        extractUniqueItems: function () {
+            let uniqueItems = new Map(); // item name -> array of store items
+            let regionFilter = Array.isArray(this.options.regions) ? new Set(this.options.regions) : null;
+            
+            for (let key in this._icon_data) {
+                this._icon_data[key].forEach(item => {
+                    // Double-check region filter (should already be filtered, but be explicit)
+                    if (regionFilter && !regionFilter.has(item.LeagueRegion)) {
+                        return;
+                    }
+                    
+                    if (!uniqueItems.has(item["Display name"])) {
+                        uniqueItems.set(item["Display name"], []);
+                    }
+                    uniqueItems.get(item["Display name"]).push(item);
+                });
+            }
+            
+            if (this.options.onItemsLoaded) {
+                this.options.onItemsLoaded(Array.from(uniqueItems.keys()).sort(), uniqueItems);
+            }
+        },
+
+        setSelectedItem: function (itemName) {
+            this._selectedItem = itemName;
+            // Update all markers
+            for (let key in this._icons) {
+                let marker = this._icons[key];
+                this.updateMarkerStyle(marker);
+            }
+        },
+
+        updateMarkerStyle: function (marker) {
+            if (!marker._storelineItem) return;
+            
+            let items = this._icon_data[this._tileCoordsToKey({
+                plane: marker._storelineItem.position.plane,
+                x: (marker._storelineItem.position.x >> 6),
+                y: -(marker._storelineItem.position.y >> 6)
+            })] || [];
+            
+            let hasSelectedItem = this._selectedItem && items.some(item => item["Display name"] === this._selectedItem);
+            
+            if (hasSelectedItem) {
+                marker.setIcon(L.icon({
+                    iconUrl: 'images/marker-icon.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    tooltipAnchor: [16, -28],
+                    shadowSize: [41, 41],
+                    className: 'storeline-marker-highlighted'
+                }));
+            } else {
+                marker.setIcon(L.icon({
+                    iconUrl: 'images/marker-icon.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    tooltipAnchor: [16, -28],
+                    shadowSize: [41, 41]
+                }));
+            }
+        },
+
+        getData: async function (name) {
+            let data = await fetch(`${this.options.folder}/storeline.json`).then(res => res.json(), _ => {throw new Error(`Unable to fetch ${this.options.folder}/storeline.json`)});
+
+            let regionFilter = Array.isArray(this.options.regions) ? new Set(this.options.regions) : null;
+            let isStrict = this.options.strict === true;
+            let searchLower = name.toLowerCase();
+
+            // Filter by display name (case-insensitive)
+            let filtered = data.filter(item => {
+                if (!item["Display name"] || !item.position) {
+                    return false;
+                }
+
+                let nameLower = item["Display name"].toLowerCase();
+                let nameMatches = isStrict 
+                    ? nameLower === searchLower 
+                    : nameLower.includes(searchLower);
+                
+                if (!nameMatches) {
+                    return false;
+                }
+
+                if (regionFilter) {
+                    if (!item.LeagueRegion) {
+                        return false;
+                    }
+                    return regionFilter.has(item.LeagueRegion);
+                }
+
+                return true;
+            });
+
+            return filtered;
+        },
+
+        parseData: function (data) {
+            let icon_data = {};
+
+            data.forEach(item => {
+                if (item.position) {
+                    let key = this._tileCoordsToKey({
+                        plane: item.position.plane,
+                        x: (item.position.x >> 6),
+                        y: -(item.position.y >> 6)
+                    });
+
+                    if (!(key in icon_data)) {
+                        icon_data[key] = [];
+                    }
+                    icon_data[key].push(item);
+                }
+            });
+
+            return icon_data;
+        },
+
+        createIcon: function (item) {
+            let icon = L.icon({
+                iconUrl: 'images/marker-icon.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                tooltipAnchor: [16, -28],
+                shadowSize: [41, 41]
+            });
+            let greyscaleIcon = L.icon({
+                iconUrl: 'images/marker-icon-greyscale.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                tooltipAnchor: [16, -28],
+                shadowSize: [41, 41]
+            });
+
+            let marker = L.marker([item.position.y + 0.5, item.position.x + 0.5], {
+                icon: item.position.plane === this._map.getPlane() ? icon : greyscaleIcon,
+            });
+
+            // Store item reference for highlighting
+            marker._storelineItem = item;
+
+            this._map.on('planechange', function (e) {
+                marker.setIcon(item.position.plane === e.newPlane ? icon : greyscaleIcon);
+            });
+
+            let textContainer = document.createElement('div');
+            textContainer.style.minWidth = '200px';
+            textContainer.style.width = 'fit-content';
+            let container = document.createElement('div');
+            container.appendChild(textContainer);
+
+            marker.bindPopup(container, {
+                autoPan: false,
+                maxWidth: 1000,
+                minWidth: 200,
+                className: 'storeline-popup-wide'
+            });
+
+            marker.on('popupopen', () => {
+                // Look up ALL items from this shop, not just matching ones
+                let shopName = item["Sold by"];
+                let shopLocation = item.position;
+                
+                if (this._allStoreData && shopName) {
+                    // Filter all store data for this specific shop and location
+                    let allShopItems = this._allStoreData.filter(storeItem => 
+                        storeItem["Sold by"] === shopName &&
+                        storeItem.position &&
+                        storeItem.position.x === shopLocation.x &&
+                        storeItem.position.y === shopLocation.y &&
+                        storeItem.position.plane === shopLocation.plane
+                    );
+                    this.populatePopup(textContainer, allShopItems);
+                } else {
+                    // Fallback to old method
+                    let key = this._tileCoordsToKey({
+                        plane: item.position.plane,
+                        x: (item.position.x >> 6),
+                        y: -(item.position.y >> 6)
+                    });
+                    let allItemsAtLocation = this._icon_data[key] || [item];
+                    let itemsAtLocation = allItemsAtLocation.filter(storeItem => storeItem["Sold by"] === item["Sold by"]);
+                    this.populatePopup(textContainer, itemsAtLocation);
+                }
+            });
+
+            return marker;
+        },
+
+        populatePopup: function (textContainer, item) {
+            // Clear previous content
+            textContainer.innerHTML = '';
+            
+            // item can be a single item or an array of items at the same location
+            let items = Array.isArray(item) ? item : [item];
+            
+            // Calculate number of columns and set container width accordingly
+            let itemsPerColumn = 5;
+            let numColumns = Math.ceil(items.length / itemsPerColumn);
+            let minWidth = numColumns > 1 ? Math.min(numColumns * 250, 1000) : 200;
+            textContainer.style.minWidth = `${minWidth}px`;
+            
+            let textfield = "";
+            
+            // Get location and store info from first item
+            if (items[0]["Sold by"]) {
+                let shopName = items[0]["Sold by"];
+                let wikiUrl = `https://oldschool.runescape.wiki/w/${shopName.replace(/ /g, '_')}`;
+                textfield += `<b><a href="${wikiUrl}" target="_blank" style="color: #0645ad;">${shopName}</a></b><br>`;
+            }
+            if (items[0].Location) {
+                textfield += `Location: ${items[0].Location}<br>`;
+            }
+            if (items[0].LeagueRegion) {
+                textfield += `Region: ${items[0].LeagueRegion}<br>`;
+            }
+            textfield += `x = ${items[0].position.x}<br>`;
+            textfield += `y = ${items[0].position.y}<br>`;
+            textfield += `plane = ${items[0].position.plane}<br>`;
+            textfield += `<br><b>Items (${items.length}):</b><br>`;
+
+            // Use the already calculated values for the HTML
+            let columnGap = 10;
+            
+            let itemsHtml = `<div style="${numColumns > 1 ? `column-count: ${numColumns}; column-gap: ${columnGap}px; min-width: ${minWidth}px;` : ''}">`;
+            items.forEach(storeItem => {
+                // Check if this item matches the search query
+                let isMatch = storeItem["Display name"] && 
+                             this._searchQuery && 
+                             storeItem["Display name"].toLowerCase().includes(this._searchQuery);
+                
+                let itemStyle = isMatch ? 'background-color: #ffffcc; padding: 4px; border-radius: 3px;' : '';
+                
+                itemsHtml += `<div style="display: flex; align-items: center; gap: 8px; margin: 4px 0; break-inside: avoid; ${itemStyle}">`;
+                
+                // Try to find item ID from names mapping
+                let itemId = null;
+                if (this._names) {
+                    for (let id in this._names) {
+                        if (this._names[id].toLowerCase() === storeItem["Sold item"].toLowerCase()) {
+                            itemId = id;
+                            break;
+                        }
+                    }
+                }
+                
+                // Add item icon if we found the item ID
+                if (itemId !== null) {
+                    itemsHtml += `<img src="https://raw.githubusercontent.com/runelite/static.runelite.net/refs/heads/gh-pages/cache/item/icon/${itemId}.png" alt="${storeItem["Display name"]}" style="width: 24px; height: 24px;" onerror="this.style.display='none'">`;
+                }
+                
+                itemsHtml += `<div>`;
+                itemsHtml += `<div><b>${storeItem["Display name"]}</b></div>`;
+                if (storeItem["Store sell price"] !== undefined) {
+                    itemsHtml += `Sell: ${storeItem["Store sell price"]}, `;
+                }
+                if (storeItem["Store buy price"] !== undefined) {
+                    itemsHtml += `Buy: ${storeItem["Store buy price"]}, `;
+                }
+                if (storeItem["Store stock"]) {
+                    itemsHtml += `Stock: ${storeItem["Store stock"]}`;
+                }
+                itemsHtml += `</div></div>`;
+            });
+            itemsHtml += `</div>`;
+
+            textfield += itemsHtml;
+            textContainer.innerHTML = textfield;
+        },
+    });
+
+    L.storeline = function (options) {
+        return new L.Storeline(options);
+    }
+
+    L.NPCs = L.LayerGroup.extend({
+        initialize: function (options) {
+            L.LayerGroup.prototype.initialize.call(this);
+            L.setOptions(this, options);
+        },
+
+        onAdd: function (map) {
+            this._map = map;
+            console.log('L.NPCs onAdd called with name:', this.options.name);
+            if (this.options.name) {
+                this.getData(this.options.name)
+                    .then(locations => {
+                        this.createMarkers(locations);
+                        // Call callback with found NPCs if provided
+                        if (this.options.onNPCsLoaded && typeof this.options.onNPCsLoaded === 'function') {
+                            let npcNames = [...new Set(locations.map(npc => npc.page_name))].sort();
+                            this.options.onNPCsLoaded(npcNames, locations);
+                        }
+                    }).catch(error => {
+                        console.error('L.NPCs error:', error);
+                        this._map.addMessage('Error loading NPC data');
+                    });
+            }
+        },
+
+        getData: async function (name) {
+            let data = await fetch(`${this.options.folder}/monsters.json`)
+                .then(res => res.json(), _ => {throw new Error(`Unable to fetch ${this.options.folder}/monsters.json`)});
+            
+            // Check if regions are provided
+            let hasRegionFilter = Array.isArray(this.options.regions);
+            let regionFilter = hasRegionFilter && this.options.regions.length > 0
+                ? new Set(this.options.regions.map(r => r.toLowerCase())) 
+                : null;
+            
+            let isStrict = this.options.strict === true;
+            let searchLower = name.toLowerCase();
+            
+            // Filter by NPC name (case-insensitive) and regions
+            let filtered = data.filter(npc => {
+                if (!npc.page_name || !npc.coordinates || npc.coordinates.length === 0) {
+                    return false;
+                }
+
+                let nameLower = npc.page_name.toLowerCase();
+                let nameMatches = isStrict 
+                    ? nameLower === searchLower 
+                    : nameLower.includes(searchLower);
+                
+                if (!nameMatches) {
+                    return false;
+                }
+
+                // If we have a region filter system but no regions are selected, show nothing
+                if (hasRegionFilter && !regionFilter) {
+                    return false;
+                }
+
+                // Filter by region if regions are specified
+                if (regionFilter) {
+                    // If we have a region filter, the NPC must have matching regions
+                    if (!npc.leagueregion || npc.leagueregion.length === 0) {
+                        return false;
+                    }
+                    return npc.leagueregion.some(region => regionFilter.has(region.toLowerCase()));
+                }
+
+                // No region filter system means include all NPCs
+                return true;
+            });
+
+            return filtered;
+        },
+
+        createMarkers: function (data) {
+            let totalLocations = 0;
+            
+            data.forEach(npc => {
+                if (npc.coordinates && npc.coordinates.length > 0) {
+                    npc.coordinates.forEach(coord => {
+                        totalLocations++;
+                        let marker = L.marker([coord[1] + 0.5, coord[0] + 0.5], {
+                            icon: L.icon({
+                                iconUrl: 'images/marker-icon.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                tooltipAnchor: [16, -28],
+                                shadowSize: [41, 41]
+                            })
+                        });
+
+                        let popupContent = `<div style="min-width: 200px;">`;
+                        popupContent += `<b><a href="https://oldschool.runescape.wiki/w/${npc.page_name.replace(/ /g, '_')}" target="_blank" style="color: #0645ad;">${npc.page_name}</a></b><br>`;
+                        if (npc.leagueregion && npc.leagueregion.length > 0) {
+                            popupContent += `Regions: ${npc.leagueregion.map(r => r.charAt(0).toUpperCase() + r.slice(1)).join(', ')}<br>`;
+                        }
+                        popupContent += `x = ${coord[0]}<br>`;
+                        popupContent += `y = ${coord[1]}<br>`;
+                        popupContent += `</div>`;
+
+                        marker.bindPopup(popupContent, {
+                            autoPan: false
+                        });
+
+                        this.addLayer(marker);
+                    });
+                }
+            });
+        },
+
+        onRemove: function (map) {
+            // Clear all layers before removing
+            this.clearLayers();
+            L.LayerGroup.prototype.onRemove.call(this, map);
+        }
+    });
+
+    L.npcs = function (options) {
+        return new L.NPCs(options);
+    }
+
+    L.Scenery = L.LayerGroup.extend({
+        initialize: function (options) {
+            L.LayerGroup.prototype.initialize.call(this);
+            L.setOptions(this, options);
+        },
+
+        onAdd: function (map) {
+            this._map = map;
+            if (this.options.name && this.options.name.trim()) {
+                this.getData(this.options.name)
+                    .then(locations => {
+                        this.createMarkers(locations);
+                        // Call callback with found objects if provided
+                        if (this.options.onObjectsLoaded && typeof this.options.onObjectsLoaded === 'function') {
+                            let objectNames = [...new Set(locations.map(obj => obj.page_name))].sort();
+                            this.options.onObjectsLoaded(objectNames, locations);
+                        }
+                    }).catch(error => {
+                        console.error('L.Scenery error:', error);
+                        this._map.addMessage('Error loading scenery data');
+                    });
+            }
+        },
+
+        getData: async function (name) {
+            let data = await fetch(`${this.options.folder}/scenery.json`)
+                .then(res => res.json(), _ => {throw new Error(`Unable to fetch ${this.options.folder}/scenery.json`)});
+            
+            // Check if regions are provided
+            let hasRegionFilter = Array.isArray(this.options.regions);
+            let regionFilter = hasRegionFilter && this.options.regions.length > 0
+                ? new Set(this.options.regions.map(r => r.toLowerCase())) 
+                : null;
+            
+            let isStrict = this.options.strict === true;
+            let searchLower = name.toLowerCase();
+            
+            // Filter by object name (case-insensitive) and regions
+            let filtered = data.filter(obj => {
+                if (!obj.page_name || !obj.coordinates || obj.coordinates.length === 0) {
+                    return false;
+                }
+
+                let nameLower = obj.page_name.toLowerCase();
+                let nameMatches = isStrict 
+                    ? nameLower === searchLower 
+                    : nameLower.includes(searchLower);
+                
+                if (!nameMatches) {
+                    return false;
+                }
+
+                // If we have a region filter system but no regions are selected, show nothing
+                if (hasRegionFilter && !regionFilter) {
+                    return false;
+                }
+
+                // Filter by region if regions are specified
+                if (regionFilter) {
+                    // If we have a region filter, the object must have matching regions
+                    if (!obj.leagueregion || obj.leagueregion.length === 0) {
+                        return false;
+                    }
+                    return obj.leagueregion.some(region => regionFilter.has(region.toLowerCase()));
+                }
+
+                // No region filter system means include all objects
+                return true;
+            });
+
+            return filtered;
+        },
+
+        createMarkers: function (data) {
+            let totalLocations = 0;
+            
+            data.forEach(obj => {
+                if (obj.coordinates && obj.coordinates.length > 0) {
+                    obj.coordinates.forEach(coord => {
+                        totalLocations++;
+                        let marker = L.marker([coord[1] + 0.5, coord[0] + 0.5], {
+                            icon: L.icon({
+                                iconUrl: 'images/marker-icon.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                tooltipAnchor: [16, -28],
+                                shadowSize: [41, 41]
+                            })
+                        });
+
+                        let popupContent = `<div style="min-width: 200px;">`;
+                        popupContent += `<b><a href="https://oldschool.runescape.wiki/w/${obj.page_name.replace(/ /g, '_')}" target="_blank" style="color: #0645ad;">${obj.page_name}</a></b><br>`;
+                        if (obj.leagueregion && obj.leagueregion.length > 0) {
+                            popupContent += `Regions: ${obj.leagueregion.map(r => r.charAt(0).toUpperCase() + r.slice(1)).join(', ')}<br>`;
+                        }
+                        popupContent += `x = ${coord[0]}<br>`;
+                        popupContent += `y = ${coord[1]}<br>`;
+                        popupContent += `</div>`;
+
+                        marker.bindPopup(popupContent, {
+                            autoPan: false
+                        });
+
+                        this.addLayer(marker);
+                    });
+                }
+            });
+        },
+
+        onRemove: function (map) {
+            // Clear all layers before removing
+            this.clearLayers();
+            L.LayerGroup.prototype.onRemove.call(this, map);
+        }
+    });
+
+    L.scenery = function (options) {
+        return new L.Scenery(options);
+    }
 });
