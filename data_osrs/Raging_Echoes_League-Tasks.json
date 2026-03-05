@@ -304,7 +304,7 @@
     "points": 10,
     "completion": "87%",
     "strategy": {
-      "search": ""
+      "search": "n/a"
     }
   },
   {
@@ -635,7 +635,6 @@
     "points": 10,
     "completion": "85.9%",
     "strategy": {
-      "search": "",
       "points": "1586,3099,1353,3023,1365,2939,1366,3321,1350,3057,1367,3032,1450,3354,1687,2972"
     }
   },
@@ -857,7 +856,6 @@
     "points": 10,
     "completion": "67.1%",
     "strategy": {
-      "search": "",
       "points": "2984,3293"
     }
   },
@@ -891,7 +889,6 @@
     "points": 10,
     "completion": "92.4%",
     "strategy": {
-      "search": "",
       "points": "2884,3398"
     }
   },
@@ -914,7 +911,6 @@
     "points": 10,
     "completion": "77%",
     "strategy": {
-      "search": "",
       "points": "3010,3197"
     }
   },
@@ -948,7 +944,6 @@
     "points": 10,
     "completion": "25.8%",
     "strategy": {
-      "search": "",
       "points": "3371,3127"
     }
   },
@@ -971,7 +966,6 @@
     "points": 10,
     "completion": "61.7%",
     "strategy": {
-      "search": "",
       "points": "3309,3264"
     }
   },
@@ -983,7 +977,7 @@
     "points": 10,
     "completion": "46.3%",
     "strategy": {
-      "search": ""
+      "search": "Ali the Tea Seller"
     }
   },
   {
