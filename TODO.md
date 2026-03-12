@@ -9,3 +9,5 @@ Sort something better for multi point tasks
     each task with steps has that many task panes in the list, each pane has clickable links to other parts
 Add tasks for diary steps
 Add monster drop item search
+
+different coloured pins for npcs, ground items, shops, objects
