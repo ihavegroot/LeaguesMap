@@ -1,11 +1,7 @@
 # TODO
 
 General UI
-    fix broken '"> div on item icons
     fix slayer shops
-    fix offset for icons
-    offset icons intentionlly if multiple spawns on same tile
-   
     Consider different PIN colours for shop items/NPCs/spawns/objects
 
 Backing Data

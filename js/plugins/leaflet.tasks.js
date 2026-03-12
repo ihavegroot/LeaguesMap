@@ -357,6 +357,46 @@ document.getElementById('task-show-general').addEventListener('change', e => {
         return allSpawnsData;
     }
 
+    function getSpawnTypeOffsets(count) {
+        const radius = 0.24;
+        if (count <= 1) return [[0, 0]];
+        if (count === 2) return [[-radius, 0], [radius, 0]];
+        if (count === 3) return [[0, -radius], [radius * 0.87, radius * 0.5], [-radius * 0.87, radius * 0.5]];
+        if (count === 4) return [[-radius, -radius], [radius, -radius], [-radius, radius], [radius, radius]];
+
+        const offsets = [];
+        for (let i = 0; i < count; i++) {
+            const angle = (-Math.PI / 2) + ((Math.PI * 2 * i) / count);
+            offsets.push([Math.cos(angle) * 0.3, Math.sin(angle) * 0.3]);
+        }
+        return offsets;
+    }
+
+    function buildSpawnOffsetLookup(items) {
+        const tileTypes = new Map();
+
+        items.forEach(item => {
+            const itemKey = item.page_name.toLowerCase();
+            item.coordinates.forEach(coord => {
+                const tileKey = `${coord[0]},${coord[1]}`;
+                if (!tileTypes.has(tileKey)) tileTypes.set(tileKey, []);
+                const types = tileTypes.get(tileKey);
+                if (!types.includes(itemKey)) types.push(itemKey);
+            });
+        });
+
+        const offsetLookup = new Map();
+        tileTypes.forEach((types, tileKey) => {
+            if (types.length <= 1) return;
+            const offsets = getSpawnTypeOffsets(types.length);
+            types.forEach((itemKey, index) => {
+                offsetLookup.set(`${tileKey}|${itemKey}`, offsets[index] || [0, 0]);
+            });
+        });
+
+        return offsetLookup;
+    }
+
     function buildSpawnsLayer(regions) {
         if (spawnsLayer) {
             const map = window.runescape_map;
@@ -378,15 +418,19 @@ document.getElementById('task-show-general').addEventListener('change', e => {
         }
 
         const fallbackHtml = `<div class='item-spawn-icon-fallback'></div>`;
+        const visibleSpawns = allSpawnsData.filter(item => {
+            if (!item.leagueregion || !item.coordinates || item.coordinates.length === 0) return false;
+            return item.leagueregion.some(r => regionSet.has(r.toLowerCase()));
+        });
+        const spawnOffsetLookup = buildSpawnOffsetLookup(visibleSpawns);
 
-        allSpawnsData.forEach(item => {
-            if (!item.leagueregion || !item.coordinates || item.coordinates.length === 0) return;
-            if (!item.leagueregion.some(r => regionSet.has(r.toLowerCase()))) return;
+        visibleSpawns.forEach(item => {
 
             const regionLabel = item.leagueregion
                 .map(r => r.charAt(0).toUpperCase() + r.slice(1)).join(', ');
 
-            const itemId = nameToId[item.page_name.toLowerCase()] ?? null;
+            const itemKey = item.page_name.toLowerCase();
+            const itemId = nameToId[itemKey] ?? null;
             const iconHtml = itemId !== null
                 ? `<img src="https://raw.githubusercontent.com/runelite/static.runelite.net/refs/heads/gh-pages/cache/item/icon/${itemId}.png" alt="${item.page_name}" class="item-spawn-icon-img" onerror="this.outerHTML='${fallbackHtml}'">`
                 : fallbackHtml;
@@ -400,7 +444,8 @@ document.getElementById('task-show-general').addEventListener('change', e => {
             });
 
             item.coordinates.forEach(coord => {
-                const marker = L.marker([coord[1] + 0.5, coord[0] + 0.5], { icon: divIcon });
+                const offset = spawnOffsetLookup.get(`${coord[0]},${coord[1]}|${itemKey}`) || [0, 0];
+                const marker = L.marker([coord[1] + 0.5 + offset[1], coord[0] + 0.5 + offset[0]], { icon: divIcon });
 
                 let popupContent = `<div class="osrs-popup-inner" style="display: flex; align-items: center; gap: 8px;">`;
                 if (itemId !== null) {
