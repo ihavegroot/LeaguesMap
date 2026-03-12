@@ -429,6 +429,14 @@ export default void function (factory) {
             this._selectedItem = null;
             this._itemMarkers = {}; // Map of item name to array of markers
             this._searchQuery = this.options.name ? this.options.name.toLowerCase() : '';
+            this._searchStrict = !!this.options.strict;
+            // Build a list of all searched terms for multi-term highlight support.
+            // If the UnifiedSearch passed the full terms array, use it; otherwise fall back to the single term.
+            if (this.options.allTerms && this.options.allTerms.length > 0) {
+                this._searchTerms = this.options.allTerms.map(t => t.toLowerCase());
+            } else {
+                this._searchTerms = this._searchQuery ? [this._searchQuery] : [];
+            }
             if (this.options.name) {
                 // Fetch names mapping for item IDs and full storeline data
                 Promise.all([
@@ -683,10 +691,12 @@ export default void function (factory) {
             
             let itemsHtml = `<div style="${numColumns > 1 ? `column-count: ${numColumns}; column-gap: ${columnGap}px; min-width: ${minWidth}px;` : ''}">`;
             items.forEach(storeItem => {
-                // Check if this item matches the search query
-                let isMatch = storeItem["Sold item"] && 
-                             this._searchQuery && 
-                             storeItem["Sold item"].toLowerCase().includes(this._searchQuery);
+                // Check if this item matches any of the searched terms (strict = exact name, loose = substring)
+                const soldLower = storeItem["Sold item"] ? storeItem["Sold item"].toLowerCase() : '';
+                let isMatch = soldLower && this._searchTerms.length > 0 &&
+                    this._searchTerms.some(term =>
+                        this._searchStrict ? soldLower === term : soldLower.includes(term)
+                    );
                 
                 let itemStyle = isMatch ? 'background-color: rgba(255,215,0,0.15); border-left: 2px solid #ffd700; padding: 4px; border-radius: 3px;' : '';
                 

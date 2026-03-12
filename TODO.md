@@ -1,12 +1,8 @@
 # TODO
 
 
-automatically add pins for tasks
-    Task has one location: add direct pin
-    task has multiple locations
-        split into clusters
-        list clusters
-        allow user to select from list or manual pin
+check spiny helmet in slayer shops
+fix slayer equipment shop wider than panel!
 
 Sort something better for multi point tasks
     ie buy stew for oli gets split into two tasks, "give stew to oli 1/x" "giove stew to oli 2/x" etc

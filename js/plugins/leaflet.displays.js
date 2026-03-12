@@ -965,6 +965,7 @@ export default void function (factory) {
                     terms.forEach(t => {
                         this._storemaps.push(L.storeline({
                             name: t,
+                            allTerms: terms,
                             folder: this.options.folder,
                             regions: regions,
                             strict: strict,
