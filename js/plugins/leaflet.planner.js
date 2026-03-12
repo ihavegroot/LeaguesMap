@@ -581,15 +581,22 @@ function renderPlanner() {
         return s + (t ? (t.points || 10) : 10);
     }, 0);
     ctrl.innerHTML =
-        `<span class="planner-ctrl-label">Lines:</span>` +
-        ['all','nearby','none'].map(m =>
-            `<button class="planner-line-btn${plannerLineMode === m ? ' planner-line-btn-active' : ''}" data-mode="${m}">${m}</button>`
-        ).join('') +
-        `<span class="planner-ctrl-sep"></span>` +
-        `<button class="planner-line-btn${plannerPinsVisible ? ' planner-line-btn-active' : ''}" id="planner-pins-toggle">Pins</button>` +
-        `<button class="planner-line-btn" id="planner-group-add">+ Group</button>` +
-        `<span class="planner-ctrl-sep"></span>` +
-        `<span class="planner-ctrl-label">${flatItems.length} tasks · ${pinnedCount} pinned · ${runningTotal} pts total</span>`;
+        `<div class="planner-controls-row">` +
+            `<span class="planner-ctrl-label">Lines:</span>` +
+            ['all','nearby','none'].map(m =>
+                `<button class="planner-line-btn${plannerLineMode === m ? ' planner-line-btn-active' : ''}" data-mode="${m}">${m}</button>`
+            ).join('') +
+            `<span class="planner-ctrl-sep"></span>` +
+            `<button class="planner-line-btn${plannerPinsVisible ? ' planner-line-btn-active' : ''}" id="planner-pins-toggle">Pins</button>` +
+            `<button class="planner-line-btn" id="planner-group-add">+ Group</button>` +
+            `<span class="planner-ctrl-sep"></span>` +
+            `<span class="planner-ctrl-label">${flatItems.length} tasks · ${pinnedCount} pinned · ${runningTotal} pts total</span>` +
+        `</div>` +
+        `<div class="planner-controls-row">` +
+            `<button class="planner-line-btn" id="planner-export-btn" title="Download planner as JSON">⬇ Export JSON</button>` +
+            `<button class="planner-line-btn" id="planner-import-btn" title="Load planner from JSON file">⬆ Import JSON</button>` +
+            `<input type="file" id="planner-import-input" accept=".json,application/json" style="display:none"/>` +
+        `</div>`;
     ctrl.querySelectorAll && ctrl.querySelectorAll('.planner-line-btn[data-mode]').forEach(btn => {
         btn.addEventListener('click', () => {
             plannerLineMode = btn.dataset.mode;
@@ -615,6 +622,55 @@ function renderPlanner() {
             plannerAddTargetGroupId = newGroup.id;
             savePlanner();
             renderPlanner();
+        });
+    }
+
+    const exportBtn = ctrl.querySelector('#planner-export-btn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            ensurePlannerGroups();
+            const data = JSON.stringify({ version: 2, groups: plannerGroups }, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const date = new Date().toISOString().slice(0, 10);
+            a.href = url;
+            a.download = `planner-${date}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    const importBtn   = ctrl.querySelector('#planner-import-btn');
+    const importInput = ctrl.querySelector('#planner-import-input');
+    if (importBtn && importInput) {
+        importBtn.addEventListener('click', () => importInput.click());
+        importInput.addEventListener('change', () => {
+            const file = importInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = evt => {
+                try {
+                    const parsed = JSON.parse(evt.target.result);
+                    // Accept { version:2, groups:[] } or legacy flat array
+                    if (Array.isArray(parsed)) {
+                        plannerGroups = [makePlannerGroup(DEFAULT_GROUP_NAME, parsed)];
+                    } else if (parsed && Array.isArray(parsed.groups)) {
+                        plannerGroups = parsed.groups;
+                    } else {
+                        alert('Unrecognised planner file format.');
+                        return;
+                    }
+                    ensurePlannerGroups();
+                    savePlanner();
+                    redrawMapOverlays();
+                    renderPlanner();
+                } catch (err) {
+                    alert('Failed to parse JSON: ' + err.message);
+                }
+                importInput.value = ''; // allow re-importing same file
+            };
+            reader.readAsText(file);
         });
     }
     container.appendChild(ctrl);

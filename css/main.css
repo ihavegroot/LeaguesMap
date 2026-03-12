@@ -654,11 +654,16 @@ img.huechange { filter: hue-rotate(120deg); }
 .planner-controls {
     flex: 0 0 auto;
     display: flex;
-    align-items: center;
-    gap: 5px;
+    flex-direction: column;
+    gap: 4px;
     padding: 5px 8px;
     background-color: #1e1600;
     border-bottom: 1px solid #3a2a00;
+}
+.planner-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     flex-wrap: wrap;
 }
 .planner-ctrl-label {
