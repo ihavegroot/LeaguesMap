@@ -11,7 +11,6 @@ Backing Data
     fix cabbages(2) spawn
 
 Planner Panel
-    divider/way to group sections of planned tasks?
     Sort something better for multi point tasks
         ie buy stew for oli gets split into two tasks, "give stew to oli 1/x" "give stew to oli 2/x" etc
         each task with steps has that many task panes in the list, each pane has clickable links to other parts

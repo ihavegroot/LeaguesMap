@@ -772,7 +772,7 @@ function buildPlannerGroup(group, orderById, runPtsById) {
     dragHandle.addEventListener('mousedown', () => { groupDragFromHandle = true; });
     wrap.draggable = true;
     wrap.addEventListener('dragstart', e => {
-        if (!groupDragFromHandle) { e.preventDefault(); return; }
+        if (!groupDragFromHandle) { return; }
         groupDragFromHandle = false;
         dragGroupSrcId = groupId;
         dragSrcId = null;
