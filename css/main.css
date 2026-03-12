@@ -1088,7 +1088,15 @@ img.huechange { filter: hue-rotate(120deg); }
 .planner-search-input::placeholder { color: #4a3a10; }
 .planner-search-input:focus { border-color: #ffd700; }
 
-.planner-search-results { margin-top: 4px; }
+.planner-search-results {
+    margin-top: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+}
+.planner-search-results::-webkit-scrollbar { width: 6px; }
+.planner-search-results::-webkit-scrollbar-track { background: #1a1a1a; }
+.planner-search-results::-webkit-scrollbar-thumb { background: #5a3f00; border-radius: 3px; }
+.planner-search-results::-webkit-scrollbar-thumb:hover { background: #ffd700; }
 .planner-search-result {
     display: flex;
     align-items: center;

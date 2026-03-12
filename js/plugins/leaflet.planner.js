@@ -794,7 +794,7 @@ function buildAddSection() {
             if (existingTaskNames.has(t.name)) return false;
             const hay = `${t.name} ${t.task} ${t.area || ''}`.toLowerCase();
             return hay.includes(q);
-        }).slice(0, 12);
+        }).slice(0, 200);
 
         if (matches.length === 0) {
             results.innerHTML = '<div class="planner-no-results">No tasks found.</div>';

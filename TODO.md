@@ -11,10 +11,7 @@ Backing Data
     fix cabbages(2) pawn
 
 Planner Panel
-    dont close tasklist when adding a task to planned list
-    remove added tasks from search suggestions for planner
     divider/way to group sections of planned tasks?
-    add scrollbar for planner search suggestions
     Sort something better for multi point tasks
         ie buy stew for oli gets split into two tasks, "give stew to oli 1/x" "give stew to oli 2/x" etc
         each task with steps has that many task panes in the list, each pane has clickable links to other parts
