@@ -88,7 +88,7 @@ export default void function (factory) {
                         }
                     }
 
-                    const fallbackHtml = `<div class="item-spawn-icon-fallback"></div>`;
+                    const fallbackHtml = `<div class=\'item-spawn-icon-fallback\'></div>`;
                     let iconHtml = itemId !== null
                         ? `<img src="https://raw.githubusercontent.com/runelite/static.runelite.net/refs/heads/gh-pages/cache/item/icon/${itemId}.png" alt="${item.page_name}" class="item-spawn-icon-img" onerror="this.outerHTML='${fallbackHtml}'">`
                         : fallbackHtml;

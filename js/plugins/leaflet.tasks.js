@@ -377,7 +377,7 @@ document.getElementById('task-show-general').addEventListener('change', e => {
             }
         }
 
-        const fallbackHtml = `<div class="item-spawn-icon-fallback"></div>`;
+        const fallbackHtml = `<div class=\'item-spawn-icon-fallback\'></div>`;
 
         allSpawnsData.forEach(item => {
             if (!item.leagueregion || !item.coordinates || item.coordinates.length === 0) return;
