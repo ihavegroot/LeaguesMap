@@ -1062,7 +1062,10 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
     if (clearPinBtn) {
         clearPinBtn.addEventListener('click', e => {
             e.stopPropagation();
-            item.pinCoords = null;
+            const ctx = findItemContext(item.id);
+            const liveItem = ctx ? ctx.item : null;
+            if (!liveItem) return;
+            liveItem.pinCoords = null;
             savePlanner();
             redrawMapOverlays();
             renderPlanner();

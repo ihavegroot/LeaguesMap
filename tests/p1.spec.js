@@ -69,23 +69,29 @@ test.describe('P1 feature coverage', () => {
 
   test('group delete moves tasks to fallback group', async ({ page }) => {
     await gotoApp(page);
-    const seeded = await seedPlannerWithFirstTasks(page, 2);
+    await seedPlannerWithFirstTasks(page, 2);
     await openPlannerTab(page);
 
     await addPlannerGroup(page, 'Route B');
     await expect(page.locator('.planner-group')).toHaveCount(2);
 
-    const firstGroup = page.locator('.planner-group').first();
     const secondGroup = page.locator('.planner-group').nth(1);
+    const groupSelect = page.locator('#planner-target-group');
+    await groupSelect.selectOption({ label: 'Route B' });
 
-    await firstGroup.locator('.planner-card').first().dragTo(secondGroup.locator('.planner-drop-top'));
+    await page.fill('#planner-search-input', 'kill');
+    const routeBAddRow = page.locator('.planner-search-result').first();
+    const movedTaskName = (await routeBAddRow.locator('.planner-search-result-name').innerText()).trim();
+    await routeBAddRow.locator('.planner-search-add-btn').click();
+
     await expect(secondGroup.locator('.planner-card')).toHaveCount(1);
+    await expect(secondGroup.locator('.planner-card .planner-card-name', { hasText: movedTaskName }).first()).toBeVisible();
 
     await secondGroup.locator('.planner-group-remove').click();
 
     await expect(page.locator('.planner-group')).toHaveCount(1);
-    await expect(page.locator('.planner-group').first().locator('.planner-card')).toHaveCount(2);
-    await expect(page.locator('.planner-group').first().locator('.planner-card .planner-card-name', { hasText: seeded[0] }).first()).toBeVisible();
+    await expect(page.locator('.planner-group').first().locator('.planner-card')).toHaveCount(3);
+    await expect(page.locator('.planner-group').first().locator('.planner-card .planner-card-name', { hasText: movedTaskName }).first()).toBeVisible();
   });
 
   test('planner inline search add inserts into selected target group', async ({ page }) => {
@@ -156,6 +162,23 @@ test.describe('P1 feature coverage', () => {
 
     await card.locator('.planner-comment-del').first().click();
     await expect(card.locator('.planner-comment-text', { hasText: 'Bring teleport tabs' })).toHaveCount(0);
+  });
+
+  test('planner clear pin removes selected location', async ({ page }) => {
+    await gotoApp(page);
+    await seedPlannerWithFirstTasks(page, 1);
+    await openPlannerTab(page);
+
+    const card = page.locator('.planner-card').first();
+    await card.locator('.planner-pin-btn').click();
+    await page.locator('#map').click({ position: { x: 120, y: 120 } });
+
+    const clearBtn = card.locator('.planner-pin-clear-btn');
+    await expect(clearBtn).toBeVisible();
+    await clearBtn.click();
+
+    await expect(card.locator('.planner-pin-clear-btn')).toHaveCount(0);
+    await expect(card.locator('.planner-pin-btn')).toHaveText('📍 Set pin');
   });
 
   test('import malformed JSON shows error and keeps state', async ({ page }) => {
