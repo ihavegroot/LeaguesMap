@@ -1,7 +1,6 @@
 # TODO
 
 General UI
-    fix slayer shops
     Consider different PIN colours for shop items/NPCs/spawns/objects
 
 Backing Data

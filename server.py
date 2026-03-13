@@ -1,6 +1,7 @@
 import http.server
 import mimetypes
 import os
+import socketserver
 
 # Ensure .js files are served with correct MIME type
 mimetypes.add_type('application/javascript', '.js')
@@ -12,7 +13,15 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/javascript')
         super().end_headers()
 
+
+class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+    request_queue_size = int(os.environ.get('SERVER_REQUEST_QUEUE_SIZE', '128'))
+
 if __name__ == '__main__':
-    server = http.server.HTTPServer(('127.0.0.1', 8000), MyHTTPRequestHandler)
-    print('Server running at http://127.0.0.1:8000')
+    host = os.environ.get('SERVER_HOST', '127.0.0.1')
+    port = int(os.environ.get('SERVER_PORT', '8000'))
+    server = ThreadedHTTPServer((host, port), MyHTTPRequestHandler)
+    print(f'Server running at http://{host}:{port} (threaded, queue={server.request_queue_size})')
     server.serve_forever()
