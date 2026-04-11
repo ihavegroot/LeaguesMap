@@ -377,9 +377,39 @@ async function loadSuggestedClusters(task) {
     const searchRaw = task && task.strategy && task.strategy.search ? task.strategy.search.trim() : '';
     if (!searchRaw || searchRaw.toLowerCase() === 'n/a') return [];
 
-    const strict = /^".*"$/.test(searchRaw);
-    const searchLower = (strict ? searchRaw.slice(1, -1) : searchRaw).toLowerCase();
-    if (!searchLower) return [];
+    // Match UnifiedSearch behavior: split on commas outside parentheses.
+    const splitTerms = [];
+    let depth = 0;
+    let current = '';
+    for (const ch of searchRaw) {
+        if (ch === '(') {
+            depth++;
+            current += ch;
+        } else if (ch === ')') {
+            depth = Math.max(0, depth - 1);
+            current += ch;
+        } else if (ch === ',' && depth === 0) {
+            splitTerms.push(current);
+            current = '';
+        } else {
+            current += ch;
+        }
+    }
+    if (current) splitTerms.push(current);
+
+    const terms = splitTerms
+        .map(t => t.trim())
+        .filter(Boolean)
+        .map(t => {
+            const strict = /^".*"$/.test(t);
+            return {
+                strict,
+                lower: (strict ? t.slice(1, -1) : t).toLowerCase(),
+            };
+        })
+        .filter(t => t.lower.length > 0);
+
+    if (terms.length === 0) return [];
 
     const regions = window._getCurrentRegions ? window._getCurrentRegions() : null;
     const regionSet = regions && Array.isArray(regions)
@@ -397,7 +427,8 @@ async function loadSuggestedClusters(task) {
         data.forEach(entry => {
             if (!entry.page_name || !entry.coordinates) return;
             const nl = entry.page_name.toLowerCase();
-            if (strict ? nl !== searchLower : !nl.includes(searchLower)) return;
+            const matchesAny = terms.some(term => term.strict ? nl === term.lower : nl.includes(term.lower));
+            if (!matchesAny) return;
             if (regionSet) {
                 const er = entry.leagueregion || [];
                 if (er.length > 0 && !er.some(r => regionSet.has(r.toLowerCase()))) return;

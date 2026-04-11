@@ -796,5 +796,69 @@
   "3859": {
     "taskName": "Catch 50 Moonlight Antelopes",
     "search": "Moonlight Antelope"
+  },
+  "2642": {
+    "taskName": "Visit Ferox Enclave",
+    "search": "Banker (Ferox Enclave)"
+  },
+  "2504": {
+    "taskName": "Defeat a Fire Giant in the Wilderness",
+    "search": "Fire giant"
+  },
+  "2550": {
+    "taskName": "Enter the Wilderness Resource Area",
+    "points": "3184,3945"
+  },
+  "2552": {
+    "taskName": "Enter the Wilderness God Wars Dungeon",
+    "points": "3016,3737,3068,3737"
+  },
+  "2553": {
+    "taskName": "Use the Bank at the Mage Arena",
+    "search": "Lever (Mage Arena bank)"
+  },
+  "5201": {
+    "taskName": "Sacrifice Some Bones at the Chaos Temple",
+    "points": "2950,3824"
+  },
+  "2485": {
+    "taskName": "Bury Some Lava Dragon Bones",
+    "points": "3201,3846"
+  },
+  "2489": {
+    "taskName": "Complete the Wilderness Agility Course",
+    "search": "Log balance (Wilderness Agility Course)"
+  },
+  "2490": {
+    "taskName": "Catch a Black Salamander",
+    "search": "Black salamander (Hunter)"
+  },
+  "2491": {
+    "taskName": "Catch a Black Chinchompa",
+    "search": "Black chinchompa (Hunter)"
+  },
+  "2496": {
+    "taskName": "Use the Abyss",
+    "search": "Mage of Zamorak"
+  },
+  "2500": {
+    "taskName": "Defeat a Lava Dragon in the Wilderness",
+    "search": "Lava dragon"
+  },
+  "2501": {
+    "taskName": "Defeat the Crazy Archaeologist",
+    "search": "Crazy Archaeologist"
+  },
+  "2509": {
+    "taskName": "Defeat the Chaos Fanatic",
+    "search": "Chaos Fanatic"
+  },
+  "2512": {
+    "taskName": "Defeat a Green Dragon in the Wilderness",
+    "search": "Green Dragon"
+  },
+  "2515": {
+    "taskName": "Equip a Fedora",
+    "search": "crazy archaeologist"
   }
 }
