@@ -1262,6 +1262,21 @@ img.huechange { filter: hue-rotate(120deg); }
     padding: 1px 6px;
     white-space: nowrap;
 }
+.planner-running-tasks {
+    flex: 0 0 auto;
+    font-size: 10px;
+    color: #6a5820;
+    background-color: #1a1200;
+    border: 1px solid #3a2800;
+    border-radius: 10px;
+    padding: 1px 6px;
+    white-space: nowrap;
+}
+.planner-running-hit {
+    color: #ffd700;
+    border-color: #ffd700;
+    background-color: #2a2000;
+}
 .planner-remove-btn {
     flex: 0 0 auto;
     background: none;
@@ -1798,6 +1813,82 @@ img.huechange { filter: hue-rotate(120deg); }
 .planner-search-add-btn:hover:not(:disabled) { background-color: #3a2f00; border-color: #ffd700; }
 .planner-search-add-btn:disabled { opacity: 0.45; cursor: default; }
 .planner-no-results { font-size: 12px; color: #5a4a20; padding: 4px 5px; }
+
+/* ── Planner Task Dependencies ─────────────────────────────── */
+.planner-deps-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    color: #a89060;
+}
+.planner-deps-label {
+    color: #7a6030;
+    font-size: 11px;
+    flex: 0 0 auto;
+}
+.planner-dep-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background-color: #1a1400;
+    border: 1px solid #3a2800;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-size: 11px;
+}
+.planner-dep-chip-out-of-order {
+    border-color: #8a6020;
+    background-color: #2a1f00;
+}
+.planner-dep-link {
+    color: #d4b76c;
+    cursor: pointer;
+    text-decoration: none;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.planner-dep-link:hover { color: #ffd700; text-decoration: underline; }
+.planner-dep-add-btn { flex: 0 0 auto; }
+.planner-dep-warning {
+    color: #e6b84a;
+    font-size: 13px;
+    margin: 0 2px;
+    cursor: help;
+}
+.planner-dep-picker {
+    margin-top: 4px;
+    background-color: #0a0700;
+    border: 1px solid #3a2800;
+    border-radius: 3px;
+    padding: 4px;
+}
+.planner-dep-picker[hidden] { display: none; }
+.planner-dep-search { width: 100%; box-sizing: border-box; }
+.planner-dep-results { max-height: 140px; }
+.planner-dep-result-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.planner-dep-result-disabled:hover { background-color: transparent; }
+.planner-dep-result-note {
+    flex: 0 0 auto;
+    font-size: 10px;
+    color: #d66a6a;
+    text-transform: uppercase;
+}
+.planner-card-flash {
+    animation: planner-card-flash-anim 1.2s ease-out;
+}
+@keyframes planner-card-flash-anim {
+    0%   { box-shadow: 0 0 0 2px #ffd700; }
+    100% { box-shadow: 0 0 0 2px transparent; }
+}
 
 /* ── All Shops Toggle Control ─────────────────────────────── */
 .leaflet-control-allshops {

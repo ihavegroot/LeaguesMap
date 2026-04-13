@@ -38,6 +38,22 @@ function tierFor(points) {
 
 const VIRTUAL_COLOR = '#00cccc'; // teal – visually distinct from all tier colours
 
+// ─── League progression thresholds (placeholder values) ──────────
+// Point thresholds unlock relics (7 total). First relic confirmed at 600 pts;
+// final relic estimated around 25,000 pts from prior-season data.
+// Task thresholds unlock regions (4 total). First region confirmed at 80 tasks;
+// full region unlock estimated around 400 tasks. Middle values are best-guess
+// placeholders and will be revised once official data is released — see tooltip.
+const POINT_THRESHOLDS = [600, 1800, 3500, 6000, 10000, 16000, 25000];
+const TASK_THRESHOLDS  = [80, 175, 275, 400];
+const THRESHOLD_NOTE = 'Milestone values are placeholders based on historical seasons and may change as official League 6 data becomes available.';
+
+function milestonesHit(value, thresholds) {
+    let n = 0;
+    for (const t of thresholds) { if (value >= t) n++; else break; }
+    return n;
+}
+
 // ─── State ────────────────────────────────────────────────────────
 let plannerGroups = [];  // [{ id, name, collapsed, showPins, items:[{ id, taskName, ... }] }]
 let allTasksRef  = [];   // mirror of allTasks from leaflet.tasks.js
@@ -74,7 +90,59 @@ function normalizePlannerItem(raw) {
         id: raw && raw.id ? raw.id : genId(),
         taskName: taskName,
         comments: Array.isArray(raw && raw.comments) ? raw.comments : [],
+        dependsOn: Array.isArray(raw && raw.dependsOn) ? raw.dependsOn.filter(x => typeof x === 'string') : [],
     };
+}
+
+// ─── Dependency helpers ─────────────────────────────────────────
+// Items reference prerequisites by item id. Dependencies are logical
+// within a single group (groups are disjoint phases).
+function findItemById(itemId) {
+    const ctx = findItemContext(itemId);
+    return ctx ? ctx.item : null;
+}
+
+// Returns array of items in the same group that have `itemId` as a prereq.
+function getDependents(itemId) {
+    const ctx = findItemContext(itemId);
+    if (!ctx) return [];
+    return ctx.group.items.filter(i => Array.isArray(i.dependsOn) && i.dependsOn.includes(itemId));
+}
+
+// Strip any dep references to ids that no longer exist in the same group.
+function pruneStaleDeps() {
+    for (const group of plannerGroups) {
+        const liveIds = new Set(group.items.map(i => i.id));
+        for (const item of group.items) {
+            if (Array.isArray(item.dependsOn) && item.dependsOn.length) {
+                item.dependsOn = item.dependsOn.filter(id => liveIds.has(id) && id !== item.id);
+            } else {
+                item.dependsOn = item.dependsOn || [];
+            }
+        }
+    }
+}
+
+// Would adding `candidateDepId` to `targetItem.dependsOn` create a cycle?
+// i.e. is `targetItem.id` transitively a dependency of `candidateDepId`?
+function wouldCreateCycle(targetItemId, candidateDepId) {
+    if (targetItemId === candidateDepId) return true;
+    const ctx = findItemContext(candidateDepId);
+    if (!ctx) return false;
+    const groupItems = ctx.group.items;
+    const byId = new Map(groupItems.map(i => [i.id, i]));
+    const stack = [candidateDepId];
+    const seen = new Set();
+    while (stack.length) {
+        const id = stack.pop();
+        if (id === targetItemId) return true;
+        if (seen.has(id)) continue;
+        seen.add(id);
+        const node = byId.get(id);
+        if (!node || !Array.isArray(node.dependsOn)) continue;
+        for (const depId of node.dependsOn) stack.push(depId);
+    }
+    return false;
 }
 
 function makePlannerGroup(name, items) {
@@ -151,6 +219,7 @@ function ensurePlannerGroups() {
     if (!plannerAddTargetGroupId || !plannerGroups.some(g => g.id === plannerAddTargetGroupId)) {
         plannerAddTargetGroupId = plannerGroups[0].id;
     }
+    pruneStaleDeps();
 }
 
 function allPlannerItems() {
@@ -786,20 +855,59 @@ async function autoRouteGroup(group) {
     });
     if (routable.length < 2) return;
 
-    // Seed the walk with the first pinned item
+    // Build dep lookup restricted to the routable set. Deps pointing
+    // outside this set (unroutable items, stale ids) are treated as
+    // already-satisfied, since they cannot gate routing order.
+    const routableIds = new Set(routable.map(r => r.item.id));
+    const depsFor = (entry) => {
+        const raw = Array.isArray(entry.item.dependsOn) ? entry.item.dependsOn : [];
+        return raw.filter(id => routableIds.has(id));
+    };
+    const placedIds = new Set();
+    const isEligible = (entry) => depsFor(entry).every(id => placedIds.has(id));
+
     const startEntry = routable.find(r => r.originalIdx === startIdx);
-    const ordered = [startEntry];
-    const remaining = new Set(routable.filter(r => r !== startEntry));
+    const ordered = [];
+    const remaining = new Set(routable);
+
+    // If the seed has in-group prereqs, place them first in any valid
+    // topo order. We walk prereqs depth-first so each is placed only
+    // once its own prereqs are satisfied.
+    const placePrereqsFor = (entry) => {
+        for (const depId of depsFor(entry)) {
+            if (placedIds.has(depId)) continue;
+            const depEntry = routable.find(r => r.item.id === depId);
+            if (!depEntry || !remaining.has(depEntry)) continue;
+            placePrereqsFor(depEntry);
+            if (!placedIds.has(depEntry.item.id)) {
+                const coord = depEntry.candidates[0];
+                if (!depEntry.item.pinCoords) {
+                    depEntry.item.pinCoords = { lat: coord.lat, lng: coord.lng };
+                }
+                ordered.push(depEntry);
+                placedIds.add(depEntry.item.id);
+                remaining.delete(depEntry);
+            }
+        }
+    };
+    placePrereqsFor(startEntry);
+
+    // Seed with the pinned start item.
+    ordered.push(startEntry);
+    placedIds.add(startEntry.item.id);
+    remaining.delete(startEntry);
     let currentPos = startEntry.candidates[0];
 
-    // Greedy nearest-neighbour: at each step pick the unvisited task
-    // whose closest candidate location is nearest to currentPos.
+    // Greedy nearest-eligible: at each step pick the unvisited task
+    // whose prereqs are all placed and whose closest candidate location
+    // is nearest to currentPos.
     while (remaining.size > 0) {
         let bestDist = Infinity;
         let bestEntry = null;
         let bestCoord = null;
 
         for (const entry of remaining) {
+            if (!isEligible(entry)) continue;
             for (const coord of entry.candidates) {
                 const d = (coord.lat - currentPos.lat) ** 2
                         + (coord.lng - currentPos.lng) ** 2;
@@ -811,12 +919,29 @@ async function autoRouteGroup(group) {
             }
         }
 
-        // Auto-assign pin to the chosen location if the item wasn't pinned
+        // Safety net: if no eligible entry (e.g. a dep cycle slipped
+        // through), fall back to nearest-remaining to avoid an infinite
+        // loop. UI cycle-prevention should normally make this impossible.
+        if (!bestEntry) {
+            for (const entry of remaining) {
+                for (const coord of entry.candidates) {
+                    const d = (coord.lat - currentPos.lat) ** 2
+                            + (coord.lng - currentPos.lng) ** 2;
+                    if (d < bestDist) {
+                        bestDist = d;
+                        bestEntry = entry;
+                        bestCoord = coord;
+                    }
+                }
+            }
+        }
+
         if (!bestEntry.item.pinCoords) {
             bestEntry.item.pinCoords = { lat: bestCoord.lat, lng: bestCoord.lng };
         }
 
         ordered.push(bestEntry);
+        placedIds.add(bestEntry.item.id);
         remaining.delete(bestEntry);
         currentPos = bestCoord;
     }
@@ -1389,13 +1514,17 @@ function renderPlanner() {
 
     const orderById = new Map();
     const runPtsById = new Map();
+    const runTasksById = new Map();
     let runPts = 0;
+    let runTasks = 0;
     flatItems.forEach((item, idx) => {
         const task = item.virtual ? null : getTask(item.taskName);
         const pts  = item.virtual ? (item.customPoints || 0) : (task ? (task.points || 10) : 10);
         runPts += pts;
+        if (!item.virtual) runTasks++;
         orderById.set(item.id, idx + 1);
         runPtsById.set(item.id, runPts);
+        runTasksById.set(item.id, runTasks);
     });
 
     // Group drop zone helper — one before each group, one at the very end
@@ -1408,7 +1537,7 @@ function renderPlanner() {
 
     plannerGroups.forEach((group, gi) => {
         container.appendChild(makeGroupDropZone(gi));
-        container.appendChild(buildPlannerGroup(group, orderById, runPtsById));
+        container.appendChild(buildPlannerGroup(group, orderById, runPtsById, runTasksById));
     });
     container.appendChild(makeGroupDropZone(plannerGroups.length));
 
@@ -1418,7 +1547,7 @@ function renderPlanner() {
     container.scrollTop = scrollTop;
 }
 
-function buildPlannerGroup(group, orderById, runPtsById) {
+function buildPlannerGroup(group, orderById, runPtsById, runTasksById) {
     const wrap = document.createElement('div');
     wrap.className = 'planner-group';
     wrap.dataset.groupId = group.id;
@@ -1582,7 +1711,8 @@ function buildPlannerGroup(group, orderById, runPtsById) {
         const pts  = item.virtual ? (item.customPoints || 0) : (task ? (task.points || 10) : 10);
         const orderNum = orderById.get(item.id) || 0;
         const runPts = runPtsById.get(item.id) || 0;
-        body.appendChild(buildPlannerCard(item, task, pts, runPts, orderNum));
+        const runTasks = runTasksById ? (runTasksById.get(item.id) || 0) : 0;
+        body.appendChild(buildPlannerCard(item, task, pts, runPts, orderNum, runTasks));
 
         const dz = document.createElement('div');
         dz.className = 'planner-drop-zone';
@@ -1663,12 +1793,70 @@ function wireExternalDrop(el, targetGroupId, insertIdx) {
     });
 }
 
-function buildPlannerCard(item, task, pts, runPts, orderNum) {
+function buildDepsRowHtml(item) {
+    const ctx = findItemContext(item.id);
+    if (!ctx) return '';
+    const groupItems = ctx.group.items;
+    const byId = new Map(groupItems.map(i => [i.id, i]));
+    const selfIdx = ctx.itemIdx;
+
+    const deps = Array.isArray(item.dependsOn) ? item.dependsOn : [];
+    const chipsHtml = deps.map(depId => {
+        const depItem = byId.get(depId);
+        if (!depItem) return '';
+        const depName = depItem.virtual
+            ? (depItem.customName || 'Unnamed step')
+            : (getTask(depItem.taskName)?.name || depItem.taskName || 'Unknown');
+        const depIdx = groupItems.findIndex(i => i.id === depId);
+        const ordered = depIdx !== -1 && depIdx < selfIdx;
+        const cls = 'planner-dep-chip' + (ordered ? '' : ' planner-dep-chip-out-of-order');
+        return `<span class="${cls}">` +
+            `<a class="planner-dep-link" data-depid="${depId}" title="Scroll to prerequisite">🔗 ${esc(depName)}</a>` +
+            `<button class="planner-remove-btn planner-dep-remove" data-id="${item.id}" data-depid="${depId}" title="Remove dependency">✕</button>` +
+        `</span>`;
+    }).join('');
+
+    return `<div class="planner-deps-row">` +
+        `<span class="planner-deps-label">Depends on:</span>` +
+        chipsHtml +
+        `<button class="planner-search-add-btn planner-dep-add-btn" data-id="${item.id}" title="Add a prerequisite task from this group">+ Add</button>` +
+    `</div>` +
+    `<div class="planner-dep-picker" data-id="${item.id}" hidden>` +
+        `<input class="planner-group-name planner-dep-search" type="text" placeholder="Search tasks in this group..." autocomplete="off"/>` +
+        `<div class="planner-search-results planner-dep-results"></div>` +
+    `</div>`;
+}
+
+function hasOutOfOrderDep(item) {
+    const ctx = findItemContext(item.id);
+    if (!ctx) return false;
+    const deps = Array.isArray(item.dependsOn) ? item.dependsOn : [];
+    if (!deps.length) return false;
+    const selfIdx = ctx.itemIdx;
+    return deps.some(depId => {
+        const depIdx = ctx.group.items.findIndex(i => i.id === depId);
+        return depIdx !== -1 && depIdx >= selfIdx;
+    });
+}
+
+function buildPlannerCard(item, task, pts, runPts, orderNum, runTasks) {
     const isVirtual = !!item.virtual;
     const tier  = isVirtual ? { name: 'Custom step', color: VIRTUAL_COLOR } : tierFor(pts);
     const color = tier.color;
 
     const isCompleted = !isVirtual && window._completedTasks && window._completedTasks.has(item.taskName);
+    const depWarn = hasOutOfOrderDep(item);
+
+    const ptsMilestones  = milestonesHit(runPts, POINT_THRESHOLDS);
+    const taskMilestones = milestonesHit(runTasks || 0, TASK_THRESHOLDS);
+    const ptsHitCls      = ptsMilestones > 0 ? ' planner-running-hit' : '';
+    const tasksHitCls    = taskMilestones > 0 ? ' planner-running-hit' : '';
+    const ptsTitle = ptsMilestones > 0
+        ? `Running total — ${ptsMilestones}/${POINT_THRESHOLDS.length} relic milestone(s) reached. ${THRESHOLD_NOTE}`
+        : `Running total. Next relic milestone at ${POINT_THRESHOLDS[0]} pts. ${THRESHOLD_NOTE}`;
+    const tasksTitle = taskMilestones > 0
+        ? `Cumulative tasks — ${taskMilestones}/${TASK_THRESHOLDS.length} region milestone(s) reached. ${THRESHOLD_NOTE}`
+        : `Cumulative completable tasks (custom steps excluded). Next region milestone at ${TASK_THRESHOLDS[0]} tasks. ${THRESHOLD_NOTE}`;
 
     const card = document.createElement('div');
     card.className = 'planner-card' + (isVirtual ? ' planner-card-virtual' : '') + (isCompleted ? ' planner-card-done' : '');
@@ -1709,7 +1897,9 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
             `<span class="planner-order-num">${orderNum}</span>` +
             `<span class="planner-tier-dot" style="background:${color}" title="${tier.name} (${pts} pts)"></span>` +
             headerMiddle +
-            `<span class="planner-running-pts" title="Running total">${runPts} pts</span>` +
+            `<span class="planner-running-pts${ptsHitCls}" title="${esc(ptsTitle)}">${runPts} pts</span>` +
+            `<span class="planner-running-tasks${tasksHitCls}" title="${esc(tasksTitle)}">${runTasks || 0} tasks</span>` +
+            (depWarn ? `<span class="planner-dep-warning" title="A prerequisite for this task appears later in the order. Auto-route will fix this, or move it up manually.">⚠</span>` : '') +
             completedCheckHtml +
             `<button class="planner-remove-btn" data-id="${item.id}" title="Remove from planner">✕</button>` +
         `</div>` +
@@ -1717,6 +1907,7 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
             ? `<input class="planner-virtual-desc" value="${esc(item.customDesc || '')}" placeholder="Description (optional)..." data-id="${item.id}"/>`
             : (task ? `<div class="planner-card-desc">${esc(task.task)}</div>` : '')) +
         (isVirtual ? '' : buildPlannerSkillReqsHtml(task)) +
+        buildDepsRowHtml(item) +
         buildSuggestionsHtml(item, task) +
         `<div class="planner-card-pin-row">` +
             `<button class="planner-pin-btn${item.pinCoords ? ' planner-pin-set' : ''}" data-id="${item.id}">${pinLabel}</button>` +
@@ -1846,6 +2037,18 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
     // ── Remove ───────────────────────────────────────────────────
     card.querySelector('.planner-remove-btn').addEventListener('click', e => {
         e.stopPropagation();
+        const dependents = getDependents(item.id);
+        if (dependents.length > 0) {
+            const names = dependents.map(d => d.virtual
+                ? (d.customName || 'Unnamed step')
+                : d.taskName).join(', ');
+            const msg = `${dependents.length} task(s) depend on this one (${names}). ` +
+                `Remove anyway? Their dependency links to this task will be dropped.`;
+            if (!confirm(msg)) return;
+            for (const dep of dependents) {
+                dep.dependsOn = (dep.dependsOn || []).filter(id => id !== item.id);
+            }
+        }
         removeItemById(item.id);
         if (plannerSelectedId === item.id) plannerSelectedId = null;
         savePlanner();
@@ -1902,7 +2105,127 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
     commentInput.addEventListener('keydown', e => { if (e.key === 'Enter') submitComment(); });
     commentInput.addEventListener('click', e => e.stopPropagation());
 
+    // ── Dependencies ─────────────────────────────────────────────
+    wireDepsUi(card, item);
+
     return card;
+}
+
+function scrollPlannerItemIntoView(itemId) {
+    const el = document.querySelector(`.planner-card[data-id="${itemId}"]`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('planner-card-flash');
+    setTimeout(() => el.classList.remove('planner-card-flash'), 1200);
+}
+
+function wireDepsUi(card, item) {
+    // Dep chip link → scroll to prereq
+    card.querySelectorAll('.planner-dep-link').forEach(link => {
+        link.addEventListener('click', e => {
+            e.stopPropagation();
+            e.preventDefault();
+            scrollPlannerItemIntoView(link.dataset.depid);
+        });
+    });
+
+    // Remove a dependency (with confirm)
+    card.querySelectorAll('.planner-dep-remove').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const depId = btn.dataset.depid;
+            const liveItem = findItemById(item.id);
+            if (!liveItem) return;
+            const depItem = findItemById(depId);
+            const depName = depItem
+                ? (depItem.virtual ? (depItem.customName || 'Unnamed step') : depItem.taskName)
+                : 'this task';
+            if (!confirm(`Remove dependency on "${depName}"?`)) return;
+            liveItem.dependsOn = (liveItem.dependsOn || []).filter(id => id !== depId);
+            savePlanner();
+            renderPlanner();
+        });
+    });
+
+    // Toggle picker
+    const addBtn = card.querySelector('.planner-dep-add-btn');
+    const picker = card.querySelector('.planner-dep-picker');
+    if (!addBtn || !picker) return;
+    const searchInput = picker.querySelector('.planner-dep-search');
+    const resultsEl = picker.querySelector('.planner-dep-results');
+
+    const clearChildren = (node) => { while (node.firstChild) node.removeChild(node.firstChild); };
+
+    const renderDepResults = () => {
+        const ctx = findItemContext(item.id);
+        if (!ctx) return;
+        const q = searchInput.value.trim().toLowerCase();
+        const currentDeps = new Set(Array.isArray(item.dependsOn) ? item.dependsOn : []);
+        const candidates = ctx.group.items
+            .filter(i => i.id !== item.id && !currentDeps.has(i.id))
+            .map(i => {
+                const name = i.virtual
+                    ? (i.customName || 'Unnamed step')
+                    : (getTask(i.taskName)?.name || i.taskName || '');
+                return { item: i, name };
+            })
+            .filter(({ name }) => !q || name.toLowerCase().includes(q));
+
+        clearChildren(resultsEl);
+        if (candidates.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'planner-no-results';
+            empty.textContent = 'No tasks in this group to depend on.';
+            resultsEl.appendChild(empty);
+            return;
+        }
+        candidates.forEach(({ item: cand, name }) => {
+            const cycle = wouldCreateCycle(item.id, cand.id);
+            const row = document.createElement('div');
+            row.className = 'planner-search-result planner-dep-result' + (cycle ? ' planner-dep-result-disabled' : '');
+            row.title = cycle
+                ? `Cannot add: "${name}" already depends on this task (direct or transitively). Adding would create a cycle.`
+                : 'Click to set as prerequisite';
+
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'planner-search-result-name planner-dep-result-name';
+            nameSpan.textContent = name;
+            row.appendChild(nameSpan);
+
+            if (cycle) {
+                const note = document.createElement('span');
+                note.className = 'planner-dep-result-note';
+                note.textContent = 'cycle';
+                row.appendChild(note);
+            } else {
+                row.addEventListener('click', () => {
+                    const liveItem = findItemById(item.id);
+                    if (!liveItem) return;
+                    if (!Array.isArray(liveItem.dependsOn)) liveItem.dependsOn = [];
+                    if (!liveItem.dependsOn.includes(cand.id)) liveItem.dependsOn.push(cand.id);
+                    savePlanner();
+                    renderPlanner();
+                });
+            }
+            resultsEl.appendChild(row);
+        });
+    };
+
+    addBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = picker.hidden === false;
+        picker.hidden = open;
+        if (!open) {
+            searchInput.value = '';
+            renderDepResults();
+            requestAnimationFrame(() => searchInput.focus());
+        }
+    });
+    searchInput.addEventListener('input', renderDepResults);
+    searchInput.addEventListener('click', e => e.stopPropagation());
+    searchInput.addEventListener('keydown', e => {
+        if (e.key === 'Escape') { picker.hidden = true; }
+    });
 }
 
 function buildAddSection() {
@@ -2058,6 +2381,30 @@ function buildAddSection() {
 
     return wrap;
 }
+
+// ─── Test API ─────────────────────────────────────────────────────
+// Minimal hooks for Playwright tests. Not used by production code.
+window._plannerTestApi = {
+    setGroups(groups) {
+        plannerGroups = (groups || []).map(g => ({
+            id: g.id || genId(),
+            name: g.name || DEFAULT_GROUP_NAME,
+            collapsed: !!g.collapsed,
+            showPins: g.showPins !== false,
+            items: (g.items || []).map(normalizePlannerItem),
+        }));
+        ensurePlannerGroups();
+    },
+    getGroups() { return plannerGroups; },
+    async autoRouteGroup(groupId) {
+        const g = findGroupById(groupId);
+        if (!g) throw new Error(`group not found: ${groupId}`);
+        await autoRouteGroup(g);
+        return g.items.map(i => ({ id: i.id, taskName: i.taskName, pinCoords: i.pinCoords, dependsOn: i.dependsOn }));
+    },
+    wouldCreateCycle(targetItemId, candidateDepId) { return wouldCreateCycle(targetItemId, candidateDepId); },
+    getDependents(itemId) { return getDependents(itemId).map(i => i.id); },
+};
 
 // ─── Public API ───────────────────────────────────────────────────
 // Called by leaflet.tasks.js to add a task from the active list

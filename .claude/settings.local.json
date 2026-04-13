@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c js/plugins/leaflet.planner.js)",
+      "Bash(npx playwright:*)",
+      "Bash(node -c tests/autoroute-deps.spec.js)"
+    ]
+  }
+}
