@@ -189,7 +189,7 @@
     "search": "Fishing spot (cage, harpoon"
   },
   "Catch 75 Trout": {
-    "search": ""
+    "search": "Rod Fishing spot (lure, bait)"
   },
   "Catch a Baby Impling": {
     "search": "n/a"
@@ -198,13 +198,13 @@
     "search": "Ruby harvest,Sapphire glacialis,Snowy knight,Black warlock,Sunlight Moth,Moonlight moth"
   },
   "Catch a Herring": {
-    "search": "Fishing rod,Fishing bait,Fishing spot (small net, bait)"
+    "search": "Fishing spot (small net, bait)"
   },
   "Catch a Jerboa": {
     "search": "Jerboa"
   },
   "Catch a Karambwanji": {
-    "search": "Small fishing net,Fishing spot (karambwanji)"
+    "search": "Fishing spot (karambwanji)"
   },
   "Catch a Pyre fox": {
     "search": "Pyre fox"
@@ -213,28 +213,28 @@
     "search": "Rod Fishing spot (lure, bait)"
   },
   "Catch a Shrimp": {
-    "search": "Small fishing net,Fishing spot (small net, bait)"
+    "search": "Fishing spot (small net, bait)"
   },
   "Catch a Swamp Lizard or Salamander": {
     "search": "Swamp Lizard,Orange Salamander,red salamander, black salamander"
   },
   "Catch an Anchovy": {
-    "search": "Small fishing net,Fishing spot (small net, bait)"
+    "search": "Fishing spot (small net, bait)"
   },
   "Charter a Ship From Sunset Coast to Civitas": {
     "search": "Reinn (Sunset Coast)"
   },
   "Check a grown Fruit Tree": {
-    "search": ""
+    "search": "Fruit tree patch"
   },
   "Check a grown Tree": {
-    "search": ""
+    "search": "tree patch"
   },
   "Chop 100 Willow Logs": {
-    "search": ""
+    "search": "willow tree"
   },
   "Chop 50 Maple Logs": {
-    "search": ""
+    "search": "maple tree"
   },
   "Chop a dense jungle": {
     "search": ""
@@ -255,13 +255,13 @@
     "search": ""
   },
   "Churn some butter": {
-    "search": ""
+    "search": "Dairy churn"
   },
   "Clean 15 Grimy Tarromin": {
-    "search": "Grimy tarromin"
+    "search": ""
   },
   "Clean 25 Grimy Guam Leafs": {
-    "search": "Grimy guam leaf"
+    "search": ""
   },
   "Clean 50 Grimy Cadantine": {
     "search": ""
@@ -273,7 +273,7 @@
     "search": ""
   },
   "Clean a Grimy Guam": {
-    "search": "Grimy guam leaf"
+    "search": ""
   },
   "Complete 1 Slayer Task": {
     "search": ""
@@ -291,16 +291,16 @@
     "search": ""
   },
   "Complete a Ribbiting Tale": {
-    "search": ""
+    "search": "Marcellus"
   },
   "Complete At First Light": {
-    "search": ""
+    "search": "Guildmaster_Apatura"
   },
   "Complete Death on the Isle": {
-    "search": ""
+    "search": "Patzi"
   },
   "Complete Meat and Greet": {
-    "search": ""
+    "search": "Emelio"
   },
   "Complete Shadows of Custodia": {
     "search": ""
@@ -381,13 +381,13 @@
     "search": ""
   },
   "Cook Shrimp": {
-    "search": "Raw shrimp"
+    "search": ""
   },
   "Cook something with an apron": {
-    "search": ""
+    "search": "white apron"
   },
   "Craft 20 Silver items": {
-    "search": ""
+    "search": "Furnace"
   },
   "Craft 200 Essence Into Runes": {
     "search": ""
@@ -411,7 +411,7 @@
     "search": ""
   },
   "Create a Compost Potion": {
-    "search": "Volcanic ash,Harralander,Grimy harralander,Vial,Vial of water,Harralander potion (unf)"
+    "search": "Harralander potion (unf)"
   },
   "Create a Green d'hide shield": {
     "search": ""
@@ -429,25 +429,25 @@
     "search": "Unicorn horn dust,Unicorn horn,Pestle and mortar,Marrentill,Grimy marrentill,Vial,Vial of water,Marrentill potion (unf)"
   },
   "Cry near a child": {
-    "search": ""
+    "search": "Child (Civitas illa Fortis)"
   },
   "Cut a Ruby": {
     "search": ""
   },
   "Dance near a bard": {
-    "search": ""
+    "search": "Bard"
   },
   "Defeat 10 Frost Crabs": {
-    "search": ""
+    "search": "Frost Crab"
   },
   "Defeat 25 Superior slayer creatures": {
     "search": ""
   },
   "Defeat 3 chickens in 6 seconds": {
-    "search": ""
+    "search": "chicken"
   },
   "Defeat 5 Bunnies": {
-    "search": ""
+    "search": "Rabbit"
   },
   "Defeat 5 creatures with a mace": {
     "search": ""
@@ -462,13 +462,13 @@
     "search": ""
   },
   "Defeat a Buffalo": {
-    "search": ""
+    "search": "Buffalo"
   },
   "Defeat a Chaos Dwarf in the Wilderness": {
     "search": "Chaos Dwarf"
   },
   "Defeat a Chicken": {
-    "search": ""
+    "search": "Chicken"
   },
   "Defeat a Cockatrice in the Fremennik Province": {
     "search": "Cockatrice,Mirror shield"
@@ -477,10 +477,10 @@
     "search": ""
   },
   "Defeat a Dire Wolf": {
-    "search": ""
+    "search": "Dire Wolf"
   },
   "Defeat a Frog": {
-    "search": ""
+    "search": "Frog"
   },
   "Defeat a fully grown jaguar without taking any damage from it": {
     "search": ""
@@ -489,37 +489,37 @@
     "search": ""
   },
   "Defeat a Hill Giant": {
-    "search": ""
+    "search": "Hill Giant"
   },
   "Defeat a Mithril Dragon": {
-    "search": ""
+    "search": "Mithril Dragon"
   },
   "Defeat a Oryx with melee": {
-    "search": ""
+    "search": "Oryx"
   },
   "Defeat a Rat": {
-    "search": ""
+    "search": "Rat"
   },
   "Defeat a scorpion": {
-    "search": ""
+    "search": "Scorpion"
   },
   "Defeat a Scorpion with a Mithril Spear": {
-    "search": ""
+    "search": "Scorpion"
   },
   "Defeat a Seagull": {
-    "search": ""
+    "search": "Seagull"
   },
   "Defeat a Snake in Karamja": {
-    "search": ""
+    "search": "snake"
   },
   "Defeat a Steel Dragon on Karamja": {
-    "search": ""
+    "search": "Steel Dragon"
   },
   "Defeat a Superior slayer creature": {
     "search": ""
   },
   "Defeat a thief": {
-    "search": ""
+    "search": "Thief_(Varlamore)"
   },
   "Defeat a Troll in Asgarnia": {
     "search": "Troll"
@@ -534,13 +534,13 @@
     "search": ""
   },
   "Defeat an Icefiend in Varlamore": {
-    "search": ""
+    "search": "Icefiend"
   },
   "Defeat an Imp in a basement": {
-    "search": ""
+    "search": "imp"
   },
   "Defeat an Imp with an earth spell": {
-    "search": ""
+    "search": "imp"
   },
   "Defeat Awakened Duke Sucellus": {
     "search": ""
@@ -601,10 +601,10 @@
     "points": "1555,3170,1713,3086"
   },
   "Drink some moon-lite": {
-    "search": ""
+    "search": "moon-lite"
   },
   "Dye a cape Purple": {
-    "search": ""
+    "search": "Purple dye"
   },
   "Eat a piece of food that restores at least 6 hitpoints": {
     "search": ""
@@ -856,7 +856,7 @@
     "search": "Crate (Pirate's Treasure),Banana"
   },
   "Fill a Grape Barrel for the Foreman": {
-    "search": ""
+    "search": "Vineyard forema"
   },
   "Fill a Large Pouch": {
     "search": ""
@@ -865,10 +865,10 @@
     "search": ""
   },
   "Fill something up from a water pump": {
-    "search": ""
+    "search": "Water pump (Varlamore)"
   },
   "Fish a House Key": {
-    "search": ""
+    "search": "Fishing spot (Civitas illa Fortis)"
   },
   "Fletch 1000 arrow shafts": {
     "search": ""
@@ -937,7 +937,7 @@
     "search": ""
   },
   "Get a haircut": {
-    "search": ""
+    "search": "Sonalo"
   },
   "Give an Entling a haircut": {
     "search": ""
@@ -955,7 +955,7 @@
     "search": ""
   },
   "Inspect a green flame": {
-    "search": ""
+        "points": "1575,3311"
   },
   "Jump on Yama's stepping stones 666 times": {
     "search": ""
@@ -973,7 +973,7 @@
     "search": ""
   },
   "Kill 8 penguins within 5 seconds": {
-    "search": ""
+    "search": "penguin"
   },
   "Kill a Black Dragon in Tirannwn": {
     "search": ""
@@ -982,7 +982,7 @@
     "search": ""
   },
   "Light a Torch": {
-    "search": "Unlit torch,Tinderbox"
+    "search": "Unlit torch"
   },
   "Make 20 Stamina Potions": {
     "search": ""
@@ -1003,16 +1003,16 @@
     "search": "Eye of newt,Grimy guam leaf,Guam leaf,Vial,Vial of water,Guam potion (unf)"
   },
   "Make some Flour": {
-    "search": ""
+    "search": "Flour bin"
   },
   "Milk a Buffalo": {
     "search": "Dairy Buffalo"
   },
   "Mine 10 Silver": {
-    "search": ""
+    "search": "silver rocks"
   },
   "Mine 20 Mithril Ore in the Stonecutter Outpost": {
-    "search": "Avinia "
+    "search": "Avinia"
   },
   "Mine 250 Blessed Bone Shards": {
     "search": "Calcified rocks"
@@ -1021,16 +1021,16 @@
     "search": "Bronze pickaxe,Tin rocks"
   },
   "Mine 50 Iron Ore": {
-    "search": ""
+    "search": "iron rocks"
   },
   "Mine 50 Mithril Ore": {
-    "search": ""
+    "search": "mithril rocks"
   },
   "Mine some Clay": {
-    "search": ""
+    "search": "clar rocks"
   },
   "Mine some coal from Stone cutter outpost": {
-    "search": ""
+    "search": "coal rocks"
   },
   "Mine some Ore With a Rune Pickaxe": {
     "search": ""
@@ -1078,7 +1078,7 @@
     "search": "n/a"
   },
   "Pet a Caique": {
-    "search": ""
+    "search": "Caique"
   },
   "Pet Renu": {
     "search": "Renu"
@@ -1087,7 +1087,7 @@
     "search": "Xolo"
   },
   "Pick 6 flax": {
-    "search": ""
+    "search": "flax"
   },
   "Pick 6 wheat, 6 cabbages and 6 potatoes": {
     "search": ""
@@ -1103,10 +1103,11 @@
     "no_strict": true
   },
   "Pickpocket a knight of varlamore 20 times": {
-    "search": ""
+    "search": "Knight of Varlamore",
+        "no_strict": true
   },
   "Pickpocket a Master Farmer": {
-    "search": ""
+    "search": "master farmer"
   },
   "Plant Seeds in an Allotment Patch": {
     "search": "Allotment Patch"
@@ -1118,7 +1119,7 @@
     "search": "Estate agent"
   },
   "Rake a Flower Patch": {
-    "search": ""
+    "search": "Flower Patch"
   },
   "Reach a Prayer Bonus of 15": {
     "search": ""
@@ -1166,7 +1167,7 @@
     "search": ""
   },
   "Salute next to a statue of Quoatlos": {
-    "search": ""
+    "search": "Statue of Quoatlos"
   },
   "Scatter some Ashes in Yama's lair": {
     "search": ""
@@ -1175,7 +1176,7 @@
     "search": ""
   },
   "Sell some silk to a silk trader": {
-    "search": ""
+    "search": "Silk Merchant (Civitas illa Fortis)"
   },
   "Set a mummy ablaze": {
     "search": "Mummy (Ancient Pyramid)"
@@ -1187,19 +1188,19 @@
     "search": ""
   },
   "Sit near a stolen cabbage": {
-    "search": ""
+    "search": "Stolen cabbage"
   },
   "Slay 250 Creatures": {
     "search": ""
   },
   "Sleep in Paramaya Inn": {
-    "search": ""
+    "search": "Kaleb Paramaya"
   },
   "Smelt a Bronze Bar": {
     "search": "Copper ore,Tin ore,Bronze pickaxe,Copper rock,Tin rock,Furnace"
   },
   "Smelt a Steel Bar": {
-    "search": ""
+    "search": "furnace"
   },
   "Smelt an Iron Bar": {
     "search": "Iron ore,Bronze pickaxe,Iron rock,Furnace"
@@ -1217,10 +1218,10 @@
     "search": ""
   },
   "Snare 15 Tropical Wagtails": {
-    "search": ""
+    "search": "Tropical Wagtail"
   },
   "Snare 5 Crimson Swifts": {
-    "search": ""
+    "search": "Crimson Swift"
   },
   "Snare a Bird": {
     "search": "Bird snare,Crimson swift"
@@ -1247,7 +1248,7 @@
     "search": "Spice Stall"
   },
   "Steal some bread": {
-    "search": ""
+    "search": "Bakery stall"
   },
   "Step onto an Ent trail": {
     "search": ""
@@ -1262,13 +1263,13 @@
     "search": "Uncut red topaz"
   },
   "Successfully pickpocket a Citizen 10 times in a row": {
-    "search": ""
+    "search": "Citizen"
   },
   "Take a Shortcut Across the Shilo Village River": {
     "search": ""
   },
   "Talk to a Gladiator": {
-    "search": ""
+    "points": "1795,3107"
   },
   "Talk to any Port master": {
     "search": ""
@@ -1286,16 +1287,16 @@
     "search": ""
   },
   "Travel in Achilka's boat": {
-    "search": ""
+    "search": "Achilka"
   },
   "Travel to Aldarin via Fairy ring": {
     "search": ""
   },
   "Travel using the Quetzal Transport System": {
-    "search": ""
+    "search": "renu"
   },
   "Trim your beard in Cam torum": {
-    "search": ""
+    "search": "Sonalo"
   },
   "Turn any Logs Into a Plank": {
     "search": "sawmill",
@@ -1311,7 +1312,7 @@
     "search": ""
   },
   "Use the pottery oven in Civitas": {
-    "search": ""
+    "search": "Pottery Oven"
   },
   "Use the Protect from Melee Prayer": {
     "search": ""
