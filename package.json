@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "start": "python server.py",
     "test:e2e": "playwright test",
     "test:e2e:core": "playwright test tests/p0.spec.js tests/p1.spec.js",
     "test:e2e:perf": "playwright test tests/perf.spec.js --workers=1",
