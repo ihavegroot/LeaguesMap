@@ -316,6 +316,15 @@ function getTask(name) {
     return allTasksByName.get(name) || null;
 }
 
+function autoPinFromLocation(taskName) {
+    const task = allTasksByName.get(taskName);
+    const loc = task && task.location;
+    if (loc && Number.isFinite(loc.x) && Number.isFinite(loc.y)) {
+        return { lat: loc.y + 0.5, lng: loc.x + 0.5 };
+    }
+    return null;
+}
+
 // ─── Strategy location clustering ─────────────────────────────────
 const CLUSTER_RADIUS = 10;
 
@@ -440,7 +449,16 @@ async function loadSuggestedClusters(task) {
     extract(spawns);
     extract(scenery);
 
-    return clusterCoords(allCoords);
+    const searchClusters = clusterCoords(allCoords);
+    if (searchClusters.length > 0) return searchClusters;
+
+    // Fall back to the task's own location field
+    const loc = task && task.location;
+    if (loc && Number.isFinite(loc.x) && Number.isFinite(loc.y)) {
+        return [{ lat: loc.y + 0.5, lng: loc.x + 0.5, x: loc.x, y: loc.y, count: 1 }];
+    }
+
+    return [];
 }
 
 const SUGG_VISIBLE = 5; // how many location buttons to show before collapsing
@@ -1636,7 +1654,7 @@ function wireExternalDrop(el, targetGroupId, insertIdx) {
         const taskName = e.dataTransfer.getData('text/plain');
         const targetGroup = findGroupById(targetGroupId);
         if (taskName && targetGroup && !allPlannerItems().some(i => i.taskName === taskName)) {
-            const newItem = { id: genId(), taskName, pinCoords: null, comments: [] };
+            const newItem = { id: genId(), taskName, pinCoords: autoPinFromLocation(taskName), comments: [] };
             targetGroup.items.splice(insertIdx, 0, newItem);
             savePlanner();
             redrawMapOverlays();
@@ -1967,7 +1985,7 @@ function buildAddSection() {
             row.querySelector('.planner-search-add-btn').addEventListener('click', () => {
                 const targetGroup = getTargetGroup();
                 if (!targetGroup) return;
-                targetGroup.items.push({ id: genId(), taskName: task.name, pinCoords: null, comments: [] });
+                targetGroup.items.push({ id: genId(), taskName: task.name, pinCoords: autoPinFromLocation(task.name), comments: [] });
                 savePlanner();
                 plannerAddSearchShouldFocus = true;
                 redrawMapOverlays();
@@ -2051,7 +2069,7 @@ window._plannerAddTask = function(taskName) {
     }
     ensurePlannerGroups();
     const targetGroup = findGroupById(plannerAddTargetGroupId) || plannerGroups[0];
-    targetGroup.items.push({ id: genId(), taskName, pinCoords: null, comments: [] });
+    targetGroup.items.push({ id: genId(), taskName, pinCoords: autoPinFromLocation(taskName), comments: [] });
     savePlanner();
     redrawMapOverlays();
     activatePlannerTab();

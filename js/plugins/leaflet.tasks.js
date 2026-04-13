@@ -188,6 +188,10 @@ function normalizeTask(rawTask, strategyMap) {
     const strategyPoints = strategy && strategy.points ? strategy.points.trim() : '';
     const parsedStrategyPoints = strategyPoints ? parseStrategyPoints(strategyPoints) : [];
 
+    const location = rawTask.location || null;
+    const hasLocation = location && Number.isFinite(location.x) && Number.isFinite(location.y);
+    const locationAsCoords = hasLocation ? [{ x: location.x, y: location.y }] : [];
+
     return {
         taskId: Number.isFinite(structId) ? structId : null,
         name,
@@ -204,12 +208,13 @@ function normalizeTask(rawTask, strategyMap) {
         tierName: rawTask.tierName ?? '',
         sortId: rawTask.sortId ?? null,
         strategy,
+        location: hasLocation ? location : null,
         _searchText: `${name} ${description} ${wikiNotes} ${area} ${rawTask.category ?? ''} ${rawTask.skill ?? ''}`.toLowerCase(),
         _pointsValue: Number(points) || 0,
         _strategySearch: strategySearch,
         _strategyPoints: strategyPoints,
-        _strategyPinCount: parsedStrategyPoints.length,
-        _strategyCoords: parsedStrategyPoints,
+        _strategyPinCount: parsedStrategyPoints.length > 0 ? parsedStrategyPoints.length : locationAsCoords.length,
+        _strategyCoords: parsedStrategyPoints.length > 0 ? parsedStrategyPoints : locationAsCoords,
         _strictSearch: !(strategy && strategy.no_strict),
     };
 }
@@ -469,6 +474,7 @@ function buildCard(task) {
             areaHtml +
             (searchTerm ? `<span class="task-card-strategy-hint">🔍 ${escHtml(searchTerm)}</span>` : '') +
             (pointsStr  ? `<span class="task-card-strategy-hint">📍 ${task._strategyPinCount} pin(s)</span>` : '') +
+            (!pointsStr && task.location ? `<span class="task-card-strategy-hint">📍 Location</span>` : '') +
             `<span class="task-card-completion">${escHtml(task.completion)} players</span>` +
         `</div>`;
 
