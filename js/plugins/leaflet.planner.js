@@ -316,6 +316,94 @@ function getTask(name) {
     return allTasksByName.get(name) || null;
 }
 
+function normalizeTaskNameKey(name) {
+    return String(name ?? '').trim().toLowerCase();
+}
+
+function parseGoogleSheetsTaskNames(rawText) {
+    if (!rawText || !rawText.trim()) return [];
+    const names = [];
+    const seen = new Set();
+    const lines = rawText.split(/\r?\n/);
+    for (const lineRaw of lines) {
+        const line = String(lineRaw ?? '').trim();
+        if (!line) continue;
+        let firstCell = line.split('\t')[0].trim();
+        // Accept values copied as quoted CSV/Sheet cells.
+        firstCell = firstCell.replace(/^"(.*)"$/, '$1').trim();
+        if (!firstCell) continue;
+        const normalized = normalizeTaskNameKey(firstCell);
+        // Ignore a common header row when users copy with headers.
+        if (normalized === 'task' || normalized === 'task name' || normalized === 'taskname') continue;
+        if (seen.has(normalized)) continue;
+        seen.add(normalized);
+        names.push(firstCell);
+    }
+    return names;
+}
+
+function showPlannerMultilineInputModal({ title, message, initialValue = '', placeholder = '', confirmLabel = 'Import' }) {
+    return new Promise((resolve) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'planner-input-modal';
+        overlay.innerHTML = `
+            <div class="planner-input-modal-box" role="dialog" aria-modal="true" aria-label="${title}">
+                <div class="planner-input-modal-header">
+                    <div class="planner-input-modal-title">${title}</div>
+                    <button type="button" class="planner-input-modal-close" aria-label="Close">x</button>
+                </div>
+                <div class="planner-input-modal-body">
+                    <div class="planner-input-modal-message">${message}</div>
+                    <textarea class="planner-input-modal-textarea" spellcheck="false" placeholder="${placeholder}"></textarea>
+                </div>
+                <div class="planner-input-modal-actions">
+                    <button type="button" class="planner-input-modal-btn planner-input-modal-cancel">Cancel</button>
+                    <button type="button" class="planner-input-modal-btn planner-input-modal-confirm">${confirmLabel}</button>
+                </div>
+            </div>
+        `;
+
+        const textarea = overlay.querySelector('.planner-input-modal-textarea');
+        const closeBtn = overlay.querySelector('.planner-input-modal-close');
+        const cancelBtn = overlay.querySelector('.planner-input-modal-cancel');
+        const confirmBtn = overlay.querySelector('.planner-input-modal-confirm');
+
+        let settled = false;
+        const cleanup = (result) => {
+            if (settled) return;
+            settled = true;
+            document.removeEventListener('keydown', onKeydown, true);
+            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            resolve(result);
+        };
+
+        const onKeydown = (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                cleanup(null);
+                return;
+            }
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                cleanup(textarea.value || '');
+            }
+        };
+
+        closeBtn.addEventListener('click', () => cleanup(null));
+        cancelBtn.addEventListener('click', () => cleanup(null));
+        confirmBtn.addEventListener('click', () => cleanup(textarea.value || ''));
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) cleanup(null);
+        });
+
+        document.body.appendChild(overlay);
+        textarea.value = initialValue;
+        textarea.focus();
+        textarea.select();
+        document.addEventListener('keydown', onKeydown, true);
+    });
+}
+
 // ─── Strategy location clustering ─────────────────────────────────
 const CLUSTER_RADIUS = 10;
 
@@ -960,6 +1048,7 @@ function renderPlanner() {
                 `<div class="planner-dropdown-menu" id="planner-export-menu" style="display:none">` +
                     `<button class="planner-dropdown-opt" id="planner-export-map-btn" title="Download planner as JSON">⬇ LeaguesMap JSON</button>` +
                     `<button class="planner-dropdown-opt" id="planner-export-plugin-btn" title="Copy plugin route JSON to clipboard">⬇ Copy Plugin</button>` +
+                    `<button class="planner-dropdown-opt" id="planner-export-sheets-btn" title="Copy task names for a single Google Sheets column">⬇ Copy Google Sheets</button>` +
                 `</div>` +
             `</div>` +
             `<div class="planner-dropdown-wrap" id="planner-import-wrap">` +
@@ -967,6 +1056,7 @@ function renderPlanner() {
                 `<div class="planner-dropdown-menu" id="planner-import-menu" style="display:none">` +
                     `<button class="planner-dropdown-opt" id="planner-import-map-btn" title="Load planner from JSON file">⬆ LeaguesMap JSON</button>` +
                     `<button class="planner-dropdown-opt" id="planner-import-plugin-btn" title="Paste plugin route JSON from clipboard">⬆ Paste Plugin</button>` +
+                    `<button class="planner-dropdown-opt" id="planner-import-sheets-btn" title="Paste a single column of task names from Google Sheets">⬆ Paste Google Sheets</button>` +
                 `</div>` +
             `</div>` +
             `<input type="file" id="planner-import-input" accept=".json,application/json" style="display:none"/>` +
@@ -1090,6 +1180,33 @@ function renderPlanner() {
                 URL.revokeObjectURL(url);
             }
         });
+
+        // Option 3: copy planner task names for a single Google Sheets column
+        const sheetsExportBtn = ctrl.querySelector('#planner-export-sheets-btn');
+        if (sheetsExportBtn) {
+            sheetsExportBtn.addEventListener('click', async () => {
+                exportMenu.style.display = 'none';
+                const names = allPlannerItems()
+                    .filter(i => !i.virtual && i.taskName)
+                    .map(i => i.taskName);
+                const payload = names.join('\n');
+                try {
+                    await navigator.clipboard.writeText(payload);
+                    const orig = sheetsExportBtn.textContent;
+                    sheetsExportBtn.textContent = '✓ Copied!';
+                    setTimeout(() => { sheetsExportBtn.textContent = orig; }, 1800);
+                    exportMenu.style.display = 'block';
+                } catch {
+                    const blob = new Blob([payload], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `planner-task-names-${new Date().toISOString().slice(0, 10)}.txt`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            });
+        }
     }
 
     // ── Import dropdown ────────────────────────────────────────────────────
@@ -1184,6 +1301,90 @@ function renderPlanner() {
                 savePlanner();
                 redrawMapOverlays();
                 renderPlanner();
+            });
+        }
+
+        // Option 3: paste Google Sheets task-name column from clipboard
+        const pasteSheetsBtn = ctrl.querySelector('#planner-import-sheets-btn');
+        if (pasteSheetsBtn) {
+            pasteSheetsBtn.addEventListener('click', async () => {
+                const text = await showPlannerMultilineInputModal({
+                    title: 'Paste Google Sheets Tasks',
+                    message: 'Paste one task name per line. First column from a copied sheet range is supported.',
+                    initialValue: '',
+                    placeholder: 'Example:\nSteal a House Key\nChop an Oak Tree\nCook a Shrimp',
+                    confirmLabel: 'Import Tasks',
+                });
+
+                if (text == null) {
+                    return;
+                }
+
+                if (!text.trim()) {
+                    alert('No task names were provided.');
+                    return;
+                }
+
+                const rawNames = parseGoogleSheetsTaskNames(text);
+                if (rawNames.length === 0) {
+                    alert('No task names found in clipboard. Expected one task name per row.');
+                    return;
+                }
+
+                if (allTasksByName.size === 0) {
+                    alert('Tasks are still loading. Please try again in a moment.');
+                    return;
+                }
+
+                const byNormalized = new Map(
+                    Array.from(allTasksByName.keys()).map(name => [normalizeTaskNameKey(name), name])
+                );
+
+                const matchedCanonical = [];
+                const missing = [];
+                for (const rawName of rawNames) {
+                    const key = normalizeTaskNameKey(rawName);
+                    const canonical = byNormalized.get(key);
+                    if (canonical) matchedCanonical.push(canonical);
+                    else missing.push(rawName);
+                }
+
+                if (matchedCanonical.length === 0) {
+                    alert('No task names matched known Leagues tasks.');
+                    return;
+                }
+
+                const importedItems = matchedCanonical.map(taskName => ({
+                    id: genId(),
+                    taskName,
+                    pinCoords: null,
+                    comments: [],
+                }));
+
+                plannerGroups = [makePlannerGroup(DEFAULT_GROUP_NAME, importedItems)];
+                ensurePlannerGroups();
+                activeRouteName = null;
+
+                if (!activeUserRouteId || !userRoutes.find(r => r.id === activeUserRouteId)) {
+                    const nr = {
+                        id: genId(),
+                        name: 'Imported Google Sheets',
+                        sections: plannerGroups,
+                    };
+                    userRoutes.push(nr);
+                    activeUserRouteId = nr.id;
+                }
+
+                const activeRoute = userRoutes.find(r => r.id === activeUserRouteId);
+                if (activeRoute) activeRoute.sections = plannerGroups;
+
+                savePlanner();
+                redrawMapOverlays();
+                renderPlanner();
+
+                if (missing.length > 0) {
+                    alert(`Imported ${matchedCanonical.length} tasks. ${missing.length} names were not matched.`);
+                }
             });
         }
     }

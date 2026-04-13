@@ -1046,6 +1046,123 @@ img.huechange { filter: hue-rotate(120deg); }
 .planner-dropdown-opt:last-child { border-bottom: none; }
 .planner-dropdown-opt:hover { background: #2a2000; color: #c8a040; }
 
+.planner-input-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9500;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.planner-input-modal-box {
+    width: min(860px, 96vw);
+    max-height: 88vh;
+    background: #1a1400;
+    border: 2px solid #8b7a20;
+    border-radius: 6px;
+    color: #e8d5a0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+}
+
+.planner-input-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid #3a2800;
+}
+
+.planner-input-modal-title {
+    color: #ffd700;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.planner-input-modal-close {
+    background: none;
+    border: 1px solid #5a4000;
+    color: #c8b880;
+    border-radius: 3px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.planner-input-modal-close:hover {
+    background-color: #3a0000;
+    color: #ffd700;
+    border-color: #cc0000;
+}
+
+.planner-input-modal-body {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.planner-input-modal-message {
+    color: #c8b880;
+    font-size: 13px;
+}
+
+.planner-input-modal-textarea {
+    width: 100%;
+    min-height: 280px;
+    max-height: calc(88vh - 180px);
+    resize: vertical;
+    box-sizing: border-box;
+    background: #111;
+    border: 1px solid #5a3f00;
+    border-radius: 4px;
+    color: #e8d5a0;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: Consolas, Monaco, monospace;
+}
+
+.planner-input-modal-textarea:focus {
+    outline: none;
+    border-color: #ffd700;
+}
+
+.planner-input-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 14px 14px;
+    border-top: 1px solid #3a2800;
+}
+
+.planner-input-modal-btn {
+    border: 1px solid #5a3f00;
+    border-radius: 4px;
+    background: #1a1400;
+    color: #c8b880;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.planner-input-modal-btn:hover {
+    background-color: #2a2000;
+    color: #ffd700;
+    border-color: #8a6a00;
+}
+
+.planner-input-modal-confirm {
+    border-color: #8a6a00;
+    color: #ffd700;
+}
+
 /* Planner groups */
 .planner-group {
     margin: 6px 6px 0;
