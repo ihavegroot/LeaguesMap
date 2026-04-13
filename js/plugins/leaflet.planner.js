@@ -1,6 +1,8 @@
 'use strict';
 
 import { fetchJsonCached } from "../data/json-cache.js";
+import { convertPluginRouteToMapData, convertMapDataToPluginRoute } from "../data/tasks-tracker-plugin-route-bridge.js";
+import { mergeExistingPins } from "../data/tasks-tracker-plugin-route-bridge.js";
 
 /**
  * League Task Planner
@@ -19,6 +21,7 @@ import { fetchJsonCached } from "../data/json-cache.js";
 const PLANNER_KEY    = 'league_planner_v1';
 const ROUTES_KEY     = 'league_planner_routes_v1';
 const DEFAULT_GROUP_NAME = 'Main';
+const TASK_TYPE =  'LEAGUE_6';
 
 // ─── Tier colour helpers ──────────────────────────────────────────
 const TIERS = [
@@ -84,6 +87,55 @@ function makePlannerGroup(name, items) {
     };
 }
 
+function normalizeExternalItem(raw) {
+    const custom = raw && raw.customItem ? raw.customItem : null;
+    const label = custom && typeof custom.label === 'string' ? custom.label.trim() : '';
+    const description = custom && typeof custom.description === 'string' ? custom.description.trim() : '';
+    const note = raw && typeof raw.note === 'string' ? raw.note.trim() : '';
+    const location = raw && raw.location ? raw.location : null;
+    const hasLocation = location &&
+        Number.isFinite(location.x) &&
+        Number.isFinite(location.y);
+
+    const comments = note
+        ? note.split(/\r?\n/).map(s => s.trim()).filter(Boolean)
+        : [];
+
+    return normalizePlannerItem({
+        id: (raw && raw.id) || (custom && custom.id) || genId(),
+        virtual: true,
+        customName: label || 'Unnamed step',
+        customDesc: description,
+        comments,
+        pinCoords: hasLocation
+            ? {
+                lat: Number(location.y),
+                lng: Number(location.x),
+            }
+            : null,
+    });
+}
+
+function normalizeExternalSections(parsed) {
+    if (!parsed || !Array.isArray(parsed.sections)) return null;
+    const hasCustomItems = parsed.sections.some(section =>
+        section && Array.isArray(section.items) && section.items.some(item => item && item.customItem)
+    );
+    if (!hasCustomItems) return null;
+
+    return parsed.sections.map(section => {
+        const sectionName = section && typeof section.name === 'string' ? section.name : DEFAULT_GROUP_NAME;
+        const sectionItems = Array.isArray(section && section.items) ? section.items : [];
+        return {
+            id: section && section.id ? String(section.id) : genId(),
+            name: sectionName,
+            collapsed: false,
+            showPins: true,
+            items: sectionItems.map(normalizeExternalItem),
+        };
+    });
+}
+
 function ensurePlannerGroups() {
     if (!Array.isArray(plannerGroups)) plannerGroups = [];
     plannerGroups = plannerGroups.map(g => ({
@@ -144,8 +196,8 @@ function applyPlanData(parsed) {
         // v1: bare array of items
         plannerGroups = [makePlannerGroup(DEFAULT_GROUP_NAME, parsed)];
     } else if (parsed && Array.isArray(parsed.sections)) {
-        // v3+: sections key
-        plannerGroups = parsed.sections;
+        // v3+: sections key (or external route format with customItem/location)
+        plannerGroups = normalizeExternalSections(parsed) || parsed.sections;
     } else if (parsed && Array.isArray(parsed.groups)) {
         // v2 backwards compat: groups key
         plannerGroups = parsed.groups;
@@ -250,6 +302,11 @@ function buildExportSections() {
     }));
 }
 
+function getCurrentRouteName() {
+    const activeRoute = activeUserRouteId ? userRoutes.find(r => r.id === activeUserRouteId) : null;
+    return activeRouteName || (activeRoute && activeRoute.name) || 'My Plan';
+}
+
 function genId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2);
 }
@@ -320,9 +377,39 @@ async function loadSuggestedClusters(task) {
     const searchRaw = task && task.strategy && task.strategy.search ? task.strategy.search.trim() : '';
     if (!searchRaw || searchRaw.toLowerCase() === 'n/a') return [];
 
-    const strict = /^".*"$/.test(searchRaw);
-    const searchLower = (strict ? searchRaw.slice(1, -1) : searchRaw).toLowerCase();
-    if (!searchLower) return [];
+    // Match UnifiedSearch behavior: split on commas outside parentheses.
+    const splitTerms = [];
+    let depth = 0;
+    let current = '';
+    for (const ch of searchRaw) {
+        if (ch === '(') {
+            depth++;
+            current += ch;
+        } else if (ch === ')') {
+            depth = Math.max(0, depth - 1);
+            current += ch;
+        } else if (ch === ',' && depth === 0) {
+            splitTerms.push(current);
+            current = '';
+        } else {
+            current += ch;
+        }
+    }
+    if (current) splitTerms.push(current);
+
+    const terms = splitTerms
+        .map(t => t.trim())
+        .filter(Boolean)
+        .map(t => {
+            const strict = /^".*"$/.test(t);
+            return {
+                strict,
+                lower: (strict ? t.slice(1, -1) : t).toLowerCase(),
+            };
+        })
+        .filter(t => t.lower.length > 0);
+
+    if (terms.length === 0) return [];
 
     const regions = window._getCurrentRegions ? window._getCurrentRegions() : null;
     const regionSet = regions && Array.isArray(regions)
@@ -340,7 +427,8 @@ async function loadSuggestedClusters(task) {
         data.forEach(entry => {
             if (!entry.page_name || !entry.coordinates) return;
             const nl = entry.page_name.toLowerCase();
-            if (strict ? nl !== searchLower : !nl.includes(searchLower)) return;
+            const matchesAny = terms.some(term => term.strict ? nl === term.lower : nl.includes(term.lower));
+            if (!matchesAny) return;
             if (regionSet) {
                 const er = entry.leagueregion || [];
                 if (er.length > 0 && !er.some(r => regionSet.has(r.toLowerCase()))) return;
@@ -913,7 +1001,7 @@ function renderPlanner() {
     const ctrl = document.createElement('div');
     ctrl.id = 'planner-controls';
     ctrl.className = 'planner-controls';
-    const pinnedCount = flatItems.filter(i => i.pinCoords).length;
+    const taskCount = flatItems.filter(i => !i.virtual).length;
     let runningTotal = flatItems.reduce((s, i) => {
         if (i.virtual) return s + (i.customPoints || 0);
         const t = getTask(i.taskName);
@@ -944,11 +1032,23 @@ function renderPlanner() {
             `<span class="planner-ctrl-sep"></span>` +
             `<button class="planner-line-btn${plannerPinsVisible ? ' planner-line-btn-active' : ''}" id="planner-pins-toggle">Pins</button>` +
             `<span class="planner-ctrl-sep"></span>` +
-            `<span class="planner-ctrl-label">${flatItems.length} tasks · ${pinnedCount} pinned · ${runningTotal} pts total</span>` +
+            `<span class="planner-ctrl-label">${taskCount} tasks · ${runningTotal} pts total</span>` +
         `</div>` +
         `<div class="planner-controls-row">` +
-            `<button class="planner-line-btn" id="planner-export-btn" title="Download planner as JSON">⬇ Export JSON</button>` +
-            `<button class="planner-line-btn" id="planner-import-btn" title="Load planner from JSON file">⬆ Import JSON</button>` +
+            `<div class="planner-dropdown-wrap" id="planner-export-wrap">` +
+                `<button class="planner-line-btn" id="planner-export-btn" title="Export planner">⬇ Export ▾</button>` +
+                `<div class="planner-dropdown-menu" id="planner-export-menu" style="display:none">` +
+                    `<button class="planner-dropdown-opt" id="planner-export-map-btn" title="Download planner as JSON">⬇ LeaguesMap JSON</button>` +
+                    `<button class="planner-dropdown-opt" id="planner-export-plugin-btn" title="Copy plugin route JSON to clipboard">⬇ Copy Plugin</button>` +
+                `</div>` +
+            `</div>` +
+            `<div class="planner-dropdown-wrap" id="planner-import-wrap">` +
+                `<button class="planner-line-btn" id="planner-import-btn" title="Import planner">⬆ Import ▾</button>` +
+                `<div class="planner-dropdown-menu" id="planner-import-menu" style="display:none">` +
+                    `<button class="planner-dropdown-opt" id="planner-import-map-btn" title="Load planner from JSON file">⬆ LeaguesMap JSON</button>` +
+                    `<button class="planner-dropdown-opt" id="planner-import-plugin-btn" title="Paste plugin route JSON from clipboard">⬆ Paste Plugin</button>` +
+                `</div>` +
+            `</div>` +
             `<input type="file" id="planner-import-input" accept=".json,application/json" style="display:none"/>` +
             `<button class="planner-line-btn" id="planner-new-route-btn" title="Create a new empty route">+ New Route</button>` +
             `<button class="planner-line-btn" id="planner-autoroute-btn" title="Reorder tasks by nearest-neighbour from the first pinned task">⟳ Auto-route</button>` +
@@ -1007,26 +1107,79 @@ function renderPlanner() {
             renderPlanner();
         });
     }
-    const exportBtn = ctrl.querySelector('#planner-export-btn');
-    if (exportBtn) {
-        exportBtn.addEventListener('click', () => {
+
+    const createDropdown = (btn, menu) => {
+        if (btn && menu) {
+            // Toggle dropdown open/closed
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const open = menu.style.display !== 'none';
+                menu.style.display = open ? 'none' : 'block';
+            }
+            );
+            // Close on outside click
+            document.addEventListener('click', () => { menu.style.display = 'none'; });
+        }
+    };
+
+    // ── Export dropdown ────────────────────────────────────────────────────
+    const exportBtn  = ctrl.querySelector('#planner-export-btn');
+    const exportMenu = ctrl.querySelector('#planner-export-menu');
+    if (exportBtn && exportMenu) {
+        createDropdown(exportBtn, exportMenu);
+
+        // Option 1: download LeaguesMap JSON
+        ctrl.querySelector('#planner-export-map-btn').addEventListener('click', () => {
+            exportMenu.style.display = 'none';
             const sections = buildExportSections();
-            const data = JSON.stringify({ version: 3, taskType: 'LEAGUE_5', source: 'GrootsLeagueMap', sections }, null, 2);
+            const data = JSON.stringify({
+                version: 3,
+                name: getCurrentRouteName(),
+                taskType: TASK_TYPE,
+                source: 'GrootsLeagueMap',
+                sections,
+            }, null, 2);
             const blob = new Blob([data], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            const date = new Date().toISOString().slice(0, 10);
             a.href = url;
-            a.download = `planner-${date}.json`;
+            a.download = `planner-${new Date().toISOString().slice(0, 10)}.json`;
             a.click();
             URL.revokeObjectURL(url);
         });
+
+        // Option 2: copy plugin CustomRoute JSON to clipboard
+        const pluginExportBtn = ctrl.querySelector('#planner-export-plugin-btn');
+        pluginExportBtn.addEventListener('click', async () => {
+            exportMenu.style.display = 'none';
+            const routeName = getCurrentRouteName();
+            const data = JSON.stringify(convertMapDataToPluginRoute(buildExportSections(), routeName, TASK_TYPE), null, 2);
+            try {
+                await navigator.clipboard.writeText(data);
+                const orig = pluginExportBtn.textContent;
+                pluginExportBtn.textContent = '✓ Copied!';
+                setTimeout(() => { pluginExportBtn.textContent = orig; }, 1800);
+                exportMenu.style.display = 'block';
+            } catch {
+                // Fallback: download file if clipboard not available
+                const blob = new Blob([data], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `plugin-route-${new Date().toISOString().slice(0, 10)}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        });
     }
 
-    const importBtn   = ctrl.querySelector('#planner-import-btn');
+    // ── Import dropdown ────────────────────────────────────────────────────
+    const importBtn  = ctrl.querySelector('#planner-import-btn');
+    const importMenu = ctrl.querySelector('#planner-import-menu');
     const importInput = ctrl.querySelector('#planner-import-input');
-    if (importBtn && importInput) {
-        importBtn.addEventListener('click', () => importInput.click());
+    if (importBtn && importMenu && importInput) {
+        createDropdown(importBtn, importMenu);
+
         importInput.addEventListener('change', () => {
             const file = importInput.files[0];
             if (!file) return;
@@ -1041,9 +1194,15 @@ function renderPlanner() {
                     activeRouteName = null;
                     // Save into active user route, creating one first if none exists
                     if (!activeUserRouteId || !userRoutes.find(r => r.id === activeUserRouteId)) {
-                        const nr = { id: genId(), name: 'Imported Plan', sections: plannerGroups };
+                        const nr = {
+                            id: genId(),
+                            name: String(parsed && parsed.name ? parsed.name : 'Imported Plan'),
+                            sections: plannerGroups,
+                        };
                         userRoutes.push(nr);
                         activeUserRouteId = nr.id;
+                    } else if (parsed && parsed.name) {
+                        userRoutes.find(r => r.id === activeUserRouteId).name = String(parsed.name);
                     }
                     savePlanner();
                     redrawMapOverlays();
@@ -1055,6 +1214,59 @@ function renderPlanner() {
             };
             reader.readAsText(file);
         });
+
+        // Option 1: upload LeaguesMap JSON by file input
+        ctrl.querySelector('#planner-import-map-btn').addEventListener('click', () => importInput.click());
+
+        // Option 2: paste plugin CustomRoute JSON from clipboard
+        const pastePluginBtn = ctrl.querySelector('#planner-import-plugin-btn');
+        if (pastePluginBtn) {
+            pastePluginBtn.addEventListener('click', async () => {
+                let text;
+                try {
+                    text = await navigator.clipboard.readText();
+                } catch {
+                    alert('Clipboard read failed. Please paste the JSON into a text file and use ⬆ Import JSON instead.');
+                    return;
+                }
+                let parsed;
+                try {
+                    parsed = JSON.parse(text);
+                } catch (err) {
+                    alert('Clipboard does not contain valid JSON.\n\n' + err.message);
+                    return;
+                }
+                const convertedData = convertPluginRouteToMapData(parsed);
+                const converted = mergeExistingPins(convertedData, plannerGroups);
+                const importedRouteName = converted._pluginRouteName || 'Imported Plugin Route';
+                const importedRouteId = converted.id;
+
+                let importedSections = Array.isArray(converted.sections) ? converted.sections : plannerGroups;
+                let importedRoute = userRoutes.find(r => r.id === importedRouteId);
+                if (!importedRoute) {
+                    importedRoute = {
+                        id: importedRouteId,
+                        name: importedRouteName,
+                        sections: importedSections
+                    };
+                    userRoutes.push(importedRoute);
+                } else {
+                    importedRoute.sections = importedSections;
+                }
+
+                activeUserRouteId = importedRouteId;
+                activeRouteName = null;
+                const planApplied = applyPlanData(converted);
+                if (!planApplied) {
+                    alert('Failed to apply plugin route data.');
+                    return;
+                }
+
+                savePlanner();
+                redrawMapOverlays();
+                renderPlanner();
+            });
+        }
     }
     const clearBtn = ctrl.querySelector('#planner-clear-btn');
     if (clearBtn) {
