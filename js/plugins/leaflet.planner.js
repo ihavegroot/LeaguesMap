@@ -49,6 +49,7 @@ let plannerPinsVisible = true;
 let plannerSelectedId  = null;       // highlighted item id
 let pinningMode        = false;
 let pinningItemId      = null;
+let plannerItemContextId = null;
 let plannerPinsLayer   = null;
 let plannerLinesLayer  = null;
 let plannerSuggLayer   = null;   // orange suggestion-location pins for selected card
@@ -155,6 +156,43 @@ function ensurePlannerGroups() {
 
 function allPlannerItems() {
     return plannerGroups.flatMap(g => g.items);
+}
+
+function getPlannerOrderContexts() {
+    const ordered = [];
+    plannerGroups.forEach((group, groupIdx) => {
+        group.items.forEach((item, itemIdx) => {
+            ordered.push({ group, groupIdx, item, itemIdx });
+        });
+    });
+    return ordered;
+}
+
+function movePlannerItemToOrder(itemId, desiredOrder) {
+    const ordered = getPlannerOrderContexts();
+    const total = ordered.length;
+    const sourceIndex = ordered.findIndex(entry => entry.item.id === itemId);
+    if (sourceIndex === -1 || total <= 1) return false;
+
+    const targetOrder = Math.max(1, Math.min(total, Number.parseInt(desiredOrder, 10) || 1));
+    const currentOrder = sourceIndex + 1;
+    if (targetOrder === currentOrder) return true;
+
+    const sourceCtx = findItemContext(itemId);
+    if (!sourceCtx) return false;
+    const [moved] = sourceCtx.group.items.splice(sourceCtx.itemIdx, 1);
+    if (!moved) return false;
+
+    const remaining = getPlannerOrderContexts();
+    const insertIdx = Math.max(0, Math.min(remaining.length, targetOrder - 1));
+    if (insertIdx >= remaining.length) {
+        const lastGroup = plannerGroups[plannerGroups.length - 1] || sourceCtx.group;
+        lastGroup.items.push(moved);
+    } else {
+        const targetCtx = remaining[insertIdx];
+        targetCtx.group.items.splice(targetCtx.itemIdx, 0, moved);
+    }
+    return true;
 }
 
 function findGroupById(groupId) {
@@ -876,8 +914,23 @@ function cancelPinning() {
 // ─── Map context menu ─────────────────────────────────────────────
 let _mapContextMenuLatLng = null;
 
+function positionPlannerContextMenu(menu, clientX, clientY) {
+    menu.style.left = clientX + 'px';
+    menu.style.top = clientY + 'px';
+    requestAnimationFrame(() => {
+        const rect = menu.getBoundingClientRect();
+        let nextLeft = clientX;
+        let nextTop = clientY;
+        if (rect.right > window.innerWidth) nextLeft = Math.max(8, clientX - rect.width);
+        if (rect.bottom > window.innerHeight) nextTop = Math.max(8, clientY - rect.height);
+        menu.style.left = nextLeft + 'px';
+        menu.style.top = nextTop + 'px';
+    });
+}
+
 function showMapContextMenu(latlng, clientX, clientY) {
     hideMapContextMenu();
+    hidePlannerItemContextMenu();
     _mapContextMenuLatLng = latlng;
 
     const menu = document.createElement('div');
@@ -894,16 +947,8 @@ function showMapContextMenu(latlng, clientX, clientY) {
         '<input id="planner-ctx-search-input" class="planner-ctx-input" type="text" placeholder="Search tasks\u2026" autocomplete="off"/>' +
         '<div id="planner-ctx-search-results" class="planner-ctx-results"></div>';
 
-    menu.style.left = clientX + 'px';
-    menu.style.top  = clientY + 'px';
     document.body.appendChild(menu);
-
-    // Nudge off-screen edges
-    requestAnimationFrame(() => {
-        const rect = menu.getBoundingClientRect();
-        if (rect.right  > window.innerWidth)  menu.style.left = (clientX - rect.width)  + 'px';
-        if (rect.bottom > window.innerHeight) menu.style.top  = (clientY - rect.height) + 'px';
-    });
+    positionPlannerContextMenu(menu, clientX, clientY);
 
     const addItemWithPin = (item) => {
         ensurePlannerGroups();
@@ -946,6 +991,93 @@ function hideMapContextMenu() {
     const existing = document.getElementById('planner-map-ctx-menu');
     if (existing) existing.remove();
     _mapContextMenuLatLng = null;
+}
+
+function showPlannerItemContextMenu(itemId, clientX, clientY) {
+    hideMapContextMenu();
+    hidePlannerItemContextMenu();
+
+    const ordered = getPlannerOrderContexts();
+    const sourceIndex = ordered.findIndex(entry => entry.item.id === itemId);
+    if (sourceIndex === -1) return;
+
+    const currentOrder = sourceIndex + 1;
+    const total = ordered.length;
+    plannerItemContextId = itemId;
+
+    const menu = document.createElement('div');
+    menu.id = 'planner-item-ctx-menu';
+    menu.className = 'planner-map-ctx-menu planner-item-ctx-menu';
+    menu.innerHTML =
+        '<div class="planner-ctx-section-label">Move task</div>' +
+        `<div class="planner-ctx-note">Current position: ${currentOrder} of ${total}</div>` +
+        '<div class="planner-ctx-row planner-ctx-row-tight">' +
+            `<input id="planner-item-move-input" class="planner-ctx-input planner-ctx-number-input" type="number" min="1" max="${total}" value="${currentOrder}" inputmode="numeric" autocomplete="off"/>` +
+            '<button class="planner-line-btn" id="planner-item-move-btn">Move</button>' +
+        '</div>';
+
+    document.body.appendChild(menu);
+    positionPlannerContextMenu(menu, clientX, clientY);
+
+    const input = menu.querySelector('#planner-item-move-input');
+    const moveBtn = menu.querySelector('#planner-item-move-btn');
+
+    const dismissOnPointer = (e) => {
+        if (!menu.contains(e.target)) hidePlannerItemContextMenu();
+    };
+    const dismissOnKey = (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            hidePlannerItemContextMenu();
+        }
+    };
+
+    menu._dismissOnPointer = dismissOnPointer;
+    menu._dismissOnKey = dismissOnKey;
+    document.addEventListener('pointerdown', dismissOnPointer, true);
+    document.addEventListener('keydown', dismissOnKey, true);
+
+    const applyMove = () => {
+        const desired = Number.parseInt(input.value, 10);
+        if (!Number.isFinite(desired) || desired < 1 || desired > total) {
+            alert(`Enter a position from 1 to ${total}.`);
+            input.focus();
+            input.select();
+            return;
+        }
+        if (!movePlannerItemToOrder(itemId, desired)) {
+            hidePlannerItemContextMenu();
+            return;
+        }
+        plannerSelectedId = itemId;
+        savePlanner();
+        redrawMapOverlays();
+        renderPlanner();
+        hidePlannerItemContextMenu();
+    };
+
+    moveBtn.addEventListener('click', applyMove);
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            applyMove();
+        }
+    });
+
+    requestAnimationFrame(() => {
+        input.focus();
+        input.select();
+    });
+}
+
+function hidePlannerItemContextMenu() {
+    const existing = document.getElementById('planner-item-ctx-menu');
+    if (existing) {
+        if (existing._dismissOnPointer) document.removeEventListener('pointerdown', existing._dismissOnPointer, true);
+        if (existing._dismissOnKey) document.removeEventListener('keydown', existing._dismissOnKey, true);
+        existing.remove();
+    }
+    plannerItemContextId = null;
 }
 
 function _renderCtxSearchResults(query, container, onAdd) {
@@ -996,6 +1128,30 @@ function updateStatusBanner(msg) {
 function renderPlanner() {
     const container = document.getElementById('planner-list');
     if (!container) return;
+
+    if (!container._plannerItemContextBound) {
+        container.addEventListener('contextmenu', (e) => {
+            const card = e.target && e.target.closest ? e.target.closest('.planner-card') : null;
+            if (!card || !container.contains(card)) return;
+
+            // Keep native right-click behavior for editable inputs.
+            if (e.target.closest('input, textarea, select')) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            const itemId = card.dataset.id;
+            if (!itemId) return;
+
+            plannerSelectedId = itemId;
+            redrawMapOverlays();
+            document.querySelectorAll('.planner-card').forEach(c => {
+                c.classList.toggle('planner-card-selected', c.dataset.id === plannerSelectedId);
+            });
+            showPlannerItemContextMenu(itemId, e.clientX, e.clientY);
+        });
+        container._plannerItemContextBound = true;
+    }
 
     ensurePlannerGroups();
     const flatItems = allPlannerItems();
@@ -1882,6 +2038,7 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
 
     // ── Drag (internal reorder) ──────────────────────────────────
     card.addEventListener('dragstart', e => {
+        hidePlannerItemContextMenu();
         dragSrcId = item.id;
         card.classList.add('planner-dragging');
         e.dataTransfer.effectAllowed = 'move';
@@ -1894,6 +2051,7 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
 
     // ── Selection (for suggestion pins) ──────────────────────────
     card.addEventListener('click', e => {
+        hidePlannerItemContextMenu();
         if (e.target.closest('button, input')) return;
         plannerSelectedId = (plannerSelectedId === item.id) ? null : item.id;
         redrawMapOverlays();
@@ -1904,6 +2062,18 @@ function buildPlannerCard(item, task, pts, runPts, orderNum) {
         if (item.pinCoords && plannerMap) {
             plannerMap.setView([item.pinCoords.lat, item.pinCoords.lng], Math.max(plannerMap.getZoom(), 0));
         }
+    });
+
+    card.addEventListener('contextmenu', e => {
+        if (e.target.closest('button, input, label')) return;
+        e.preventDefault();
+        e.stopPropagation();
+        plannerSelectedId = item.id;
+        redrawMapOverlays();
+        document.querySelectorAll('.planner-card').forEach(c => {
+            c.classList.toggle('planner-card-selected', c.dataset.id === plannerSelectedId);
+        });
+        showPlannerItemContextMenu(item.id, e.clientX, e.clientY);
     });
 
     // ── Completion toggle ─────────────────────────────────────────
@@ -2234,7 +2404,10 @@ function initPlanner(map) {
     });
 
     // Any click on the map body (not inside the menu) dismisses the menu
-    map.getContainer().addEventListener('click', () => hideMapContextMenu());
+    map.getContainer().addEventListener('click', () => {
+        hideMapContextMenu();
+        hidePlannerItemContextMenu();
+    });
 
     // Try to get allTasks; retry until leaflet.tasks.js populates it
     function tryGetTasks() {
