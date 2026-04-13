@@ -603,7 +603,12 @@ function redrawMapOverlays() {
         })))
         .filter(x => x.item.pinCoords);
 
-    if (pinned.length === 0) return;
+    // Even with zero placed planner pins, we still want suggested location
+    // pins to show for the currently selected task card.
+    if (pinned.length === 0) {
+        redrawSuggestionPins();
+        return;
+    }
 
     const visiblePinned = pinned.filter(x => x.group.showPins);
 
