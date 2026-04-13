@@ -21,7 +21,7 @@ import { mergeExistingPins } from "../data/tasks-tracker-plugin-route-bridge.js"
 const PLANNER_KEY    = 'league_planner_v1';
 const ROUTES_KEY     = 'league_planner_routes_v1';
 const DEFAULT_GROUP_NAME = 'Main';
-const TASK_TYPE =  'LEAGUE_5';
+const TASK_TYPE =  'LEAGUE_6';
 
 // ─── Tier colour helpers ──────────────────────────────────────────
 const TIERS = [

@@ -9,7 +9,7 @@ import { fetchJsonCached } from "../data/json-cache.js";
  * Completed-task tracking persists in localStorage and is shown on planner cards.
  */
 
-const TASKS_URL = 'https://raw.githubusercontent.com/syrifgit/OSRSTaskHub/refs/heads/main/leagues/league-5-raging-echoes/LEAGUE_5.full.json';
+const TASKS_URL = 'https://raw.githubusercontent.com/syrifgit/OSRSTaskHub/refs/heads/main/leagues/league-6-demonic-pacts/LEAGUE_6.full.json';
 const TASK_STRATEGY_URL = 'data_osrs/strategy.json';
 const STORAGE_KEY = 'league_tasks_completed';
 const TASK_PANEL_WIDTH_KEY = 'league_task_panel_width';
@@ -153,9 +153,29 @@ function pointsForTask(task) {
     return 0;
 }
 
+function normalizeStrategyKey(value) {
+    return String(value ?? '').trim().toLowerCase();
+}
+
+function resolveTaskStrategy(rawTask, strategyMap) {
+    const taskName = String(rawTask.name ?? '').trim();
+    const byNameKey = normalizeStrategyKey(taskName);
+    if (byNameKey && strategyMap[byNameKey]) {
+        return strategyMap[byNameKey];
+    }
+
+    // Back-compat: support older strategy files keyed by structId.
+    const structId = Number(rawTask.structId ?? rawTask.structID ?? rawTask.id ?? rawTask.taskId);
+    if (Number.isFinite(structId)) {
+        return strategyMap[String(structId)] || null;
+    }
+
+    return null;
+}
+
 function normalizeTask(rawTask, strategyMap) {
     const structId = Number(rawTask.structId ?? rawTask.structID ?? rawTask.id ?? rawTask.taskId);
-    const strategy = Number.isFinite(structId) ? (strategyMap[String(structId)] || null) : null;
+    const strategy = resolveTaskStrategy(rawTask, strategyMap);
     const name = String(rawTask.name ?? strategy?.taskName ?? '').trim();
     const description = String(rawTask.description ?? rawTask.task ?? '').trim();
     const area = normalizeArea(rawTask.area);
@@ -822,9 +842,12 @@ async function init() {
             ? tasksData
             : (Array.isArray(tasksData?.tasks) ? tasksData.tasks : []);
 
-        const strategyMap = strategyData && typeof strategyData === 'object'
-            ? strategyData
-            : {};
+        const strategyMap = {};
+        if (strategyData && typeof strategyData === 'object') {
+            Object.entries(strategyData).forEach(([key, value]) => {
+                strategyMap[normalizeStrategyKey(key)] = value;
+            });
+        }
 
         allTasks = taskList
             .map(task => normalizeTask(task, strategyMap))

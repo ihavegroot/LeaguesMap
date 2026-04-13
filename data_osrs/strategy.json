@@ -1,864 +1,1322 @@
-{
-  "1864": {
-    "taskName": "Burn Some Normal Logs",
+﻿{
+  "1 Araxxor Kill": {
+    "search": "n/a"
+  },
+  "1 Easy Clue Scroll": {
+    "search": "n/a"
+  },
+  "1 Elite Clue Scroll": {
+    "search": "n/a"
+  },
+  "1 Hard Clue Scroll": {
+    "search": "n/a"
+  },
+  "1 Hueycoatl Kill": {
+    "search": "Scoreboard (The Hueycoatl)"
+  },
+  "1 Medium Clue Scroll": {
+    "search": "n/a"
+  },
+  "1 Skotizo Kill": {
+    "search": "n/a"
+  },
+  "15 Collection log slots": {
+    "search": "n/a"
+  },
+  "150 Lizardmen Shaman Kills": {
+    "search": "n/a"
+  },
+  "25 Chambers of Xeric": {
+    "search": "n/a"
+  },
+  "25 Easy Clue Scrolls": {
+    "search": "n/a"
+  },
+  "25 Elite Clue Scrolls": {
+    "search": "n/a"
+  },
+  "25 Hard Clue Scrolls": {
+    "search": "n/a"
+  },
+  "25 Medium Clue Scrolls": {
+    "search": "n/a"
+  },
+  "30 Collection log slots": {
+    "search": "n/a"
+  },
+  "5 Collection log slots": {
+    "search": "n/a"
+  },
+  "50 Collection log slots": {
+    "search": "n/a"
+  },
+  "75 Easy Clue Scrolls": {
+    "search": "n/a"
+  },
+  "75 Medium Clue Scrolls": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 10": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 20": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 30": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 40": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 5": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 50": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level 60": {
+    "search": "n/a"
+  },
+  "Achieve Your First Level Up": {
+    "search": "n/a"
+  },
+  "Activate a prayer near an altar": {
+    "search": "altar"
+  },
+  "Activate all Statues of Ates": {
+    "search": ""
+  },
+  "Activate Smite": {
+    "search": ""
+  },
+  "Activate the Statue of Ates": {
+    "search": "Statue (Ates)"
+  },
+  "Admire some beautiful scenery": {
+    "search": "Beautiful tree stump,Beautiful log,Beautiful rock"
+  },
+  "Assemble a Slayer Helm": {
+    "search": ""
+  },
+  "Attack a dummy": {
+    "search": ""
+  },
+  "Bow near a quetzal": {
+    "search": "renu"
+  },
+  "Break down 10 calcified deposits": {
+    "search": "calcified deposit"
+  },
+  "Build a Mahogany Portal": {
+    "search": ""
+  },
+  "Build a Quetzal Landing Site": {
+    "search": "renu"
+  },
+  "Build a Room in Your Player Owned House": {
+    "search": ""
+  },
+  "Build an Oak Larder": {
+    "search": ""
+  },
+  "Burn 100 Willow Logs": {
+    "search": ""
+  },
+  "Burn 25 Maple Logs": {
+    "search": ""
+  },
+  "Burn Some Coloured Logs": {
+    "search": ""
+  },
+  "Burn Some Food": {
+    "search": "n/a"
+  },
+  "Burn Some Normal Logs": {
     "search": "Logs,Tinderbox"
   },
-  "1865": {
-    "taskName": "Burn Some Oak Logs",
+  "Burn Some Oak Logs": {
     "search": "Oak logs,Tinderbox"
   },
-  "2641": {
-    "taskName": "Bury Some Bones",
-    "search": "Bones"
+  "Bury 6 bones": {
+    "search": "bones"
   },
-  "4907": {
-    "taskName": "Buy Something From Trader Crewmembers",
-    "search": "Trader crewmember"
+  "Bury some wyrm bones near a Wyrm skeleton": {
+    "search": ""
   },
-  "1834": {
-    "taskName": "Catch a Herring",
+  "Bury Some Wyvern or Dragon Bones": {
+    "search": ""
+  },
+  "Butter a potato": {
+    "search": ""
+  },
+  "Buy a Snapdragon From Pirate Jackie the Fruit": {
+    "search": ""
+  },
+  "Cast an Earth Blast Spell": {
+    "search": ""
+  },
+  "Cast Home Teleport": {
+    "search": "n/a"
+  },
+  "Cast Ice Barrage": {
+    "search": ""
+  },
+  "Cast Low Level Alchemy": {
+    "search": ""
+  },
+  "Catch 10 Cod": {
+    "search": "Fishing spot (big net, harpoon)"
+  },
+  "Catch 100 Swordfish": {
+    "search": "Fishing spot (cage, harpoon)"
+  },
+  "Catch 100 Tuna": {
+    "search": "Fishing spot (cage, harpoon)"
+  },
+  "Catch 20 mackerel": {
+    "search": "Fishing spot (big net, harpoon)"
+  },
+  "Catch 50 Implings in Puro-Puro": {
+    "search": ""
+  },
+  "Catch 50 Karambwan": {
+    "search": ""
+  },
+  "Catch 50 Tuna": {
+    "search": "Fishing spot (cage, harpoon)"
+  },
+  "Catch 75 Lobsters": {
+    "search": "Fishing spot (cage, harpoon"
+  },
+  "Catch 75 Trout": {
+    "search": ""
+  },
+  "Catch a Baby Impling": {
+    "search": "n/a"
+  },
+  "Catch a Butterfly": {
+    "search": "Ruby harvest,Sapphire glacialis,Snowy knight,Black warlock,Sunlight Moth,Moonlight moth"
+  },
+  "Catch a Herring": {
     "search": "Fishing rod,Fishing bait,Fishing spot (small net, bait)"
   },
-  "1833": {
-    "taskName": "Catch a Shrimp",
-    "search": "Small fishing net,Fishing spot (small net, bait)"
+  "Catch a Jerboa": {
+    "search": "Jerboa"
   },
-  "1835": {
-    "taskName": "Catch an Anchovy",
-    "search": "Small fishing net,Fishing spot (small net, bait)"
-  },
-  "1811": {
-    "taskName": "Check Your Slayer Task",
-    "search": "Enchanted gem"
-  },
-  "4825": {
-    "taskName": "Chop Some Logs",
-    "search": "Bronze axe"
-  },
-  "4826": {
-    "taskName": "Chop Some Logs With a Steel Axe",
-    "search": "Steel axe"
-  },
-  "1222": {
-    "taskName": "Clean 15 Grimy Tarromin",
-    "search": "Grimy tarromin"
-  },
-  "1221": {
-    "taskName": "Clean 25 Grimy Guam Leafs",
-    "search": "Grimy guam leaf"
-  },
-  "1884": {
-    "taskName": "Clean a Grimy Guam",
-    "search": "Grimy guam leaf"
-  },
-  "4828": {
-    "taskName": "Cook Shrimp",
-    "search": "Raw shrimp"
-  },
-  "1826": {
-    "taskName": "Craft a Leather Body",
-    "search": "Leather,Needle,Thread,Cowhide,Ellis,Tanner,Leatherworker,Sbott,Eodan,Mary,Chouani"
-  },
-  "5113": {
-    "taskName": "Create a Compost Potion",
-    "search": "Volcanic ash,Harralander,Grimy harralander,Vial,Vial of water,Harralander potion (unf)"
-  },
-  "5112": {
-    "taskName": "Create an Antipoison",
-    "search": "Unicorn horn dust,Unicorn horn,Pestle and mortar,Marrentill,Grimy marrentill,Vial,Vial of water,Marrentill potion (unf)"
-  },
-  "5032": {
-    "taskName": "Cry in a wheat field",
-    "search": "Wheat"
-  },
-  "5033": {
-    "taskName": "Dance in a graveyard",
-    "points": "3569,3402,3696,3184,3164,3672,1497,3564,3245,3200,3434,3461"
-  },
-  "2633": {
-    "taskName": "Defeat a Goblin",
-    "search": "Goblin"
-  },
-  "2634": {
-    "taskName": "Defeat a Guard",
-    "search": "Guard"
-  },
-  "2631": {
-    "taskName": "Defeat a Moss Giant",
-    "search": "Moss giant"
-  },
-  "1886": {
-    "taskName": "Drink a Strength Potion",
-    "search": "Limpwurt,Limpwurt seed,Grimy tarromin,Tarromin,Vial,Vial of water,Tarromin potion (unf)"
-  },
-  "5014": {
-    "taskName": "Dye a cape orange",
-    "search": "Black cape,Blue cape,Green cape,Pink cape,Purple cape,Red cape,Yellow cape,Orange cape,Orange dye,Red dye,Yellow dye"
-  },
-  "1780": {
-    "taskName": "Eat a Banana",
-    "search": "Banana"
-  },
-  "5013": {
-    "taskName": "Enter Puro Puro from Gielinor",
-    "search": "Crop circle"
-  },
-  "749": {
-    "taskName": "Enter your Player Owned House",
-    "search": "Portal (Player-owned house)"
-  },
-  "1814": {
-    "taskName": "Equip a Spiny Helmet",
-    "search": "Spiny helmet"
-  },
-  "1914": {
-    "taskName": "Equip a Studded Body and Chaps",
-    "search": "Studded body,Studded chaps"
-  },
-  "1923": {
-    "taskName": "Equip an Elemental Staff",
-    "search": "Staff of air,Staff of water,Staff of earth,Staff of fire"
-  },
-  "1802": {
-    "taskName": "Fletch an Oak Shortbow",
-    "search": "Oak shortbow (u),Oak logs,Knife,Bowstring,Flax,Spinning wheel"
-  },
-  "1801": {
-    "taskName": "Fletch Some Arrow Shafts",
-    "search": "Knife,Logs"
-  },
-  "5021": {
-    "taskName": "Kill a Necromancer",
-    "search": "Necromancer"
-  },
-  "1866": {
-    "taskName": "Light a Torch",
-    "search": "Unlit torch,Tinderbox"
-  },
-  "1859": {
-    "taskName": "Locate a Runecrafting Altar With a Talisman",
-    "search": "Air talisman,Water talisman,Earth talisman,Fire talisman,Body talisman,Mind talisman,Cosmic talisman,Chaos talisman,Nature talisman,Law talisman,Death talisman,Blood talisman,Wrath talisman,Elemental talisman,Catalytic talisman"
-  },
-  "1885": {
-    "taskName": "Make an Attack Potion",
-    "search": "Eye of newt,Grimy guam leaf,Guam leaf,Vial,Vial of water,Guam potion (unf)"
-  },
-  "5969": {
-    "taskName": "Mine 5 Tin Ore",
-    "search": "Bronze pickaxe,Tin rocks"
-  },
-  "1794": {
-    "taskName": "Mine some Copper Ore",
-    "search": "Bronze pickaxe,Copper rocks"
-  },
-  "1781": {
-    "taskName": "Mine some essence",
-    "search": "Bronze pickaxe,Rune essence(rock)"
-  },
-  "1795": {
-    "taskName": "Mine some Ore With a Steel Pickaxe",
-    "search": "Steel pickaxe"
-  },
-  "1764": {
-    "taskName": "Pickpocket a Citizen",
-    "search": "Citizen",
-    "no_strict": true
-  },
-  "1772": {
-    "taskName": "Plant Seeds in an Allotment Patch",
-    "search": "Allotment Patch"
-  },
-  "1849": {
-    "taskName": "Purchase a Player Owned House",
-    "search": "Estate agent"
-  },
-  "1771": {
-    "taskName": "Rake a Farming Patch",
-    "points": "1586,3099,1353,3023,1365,2939,1366,3321,1350,3057,1367,3032,1450,3354,1687,2972"
-  },
-  "2639": {
-    "taskName": "Restore 5 Prayer Points at an Altar",
-    "search": "Altar (Varlamore)"
-  },
-  "1220": {
-    "taskName": "Scatter some Ashes",
-    "search": "Fiendish ashes,Vile ashes,Malicious ashes,Abyssal ashes,Infernal ashes"
-  },
-  "1840": {
-    "taskName": "Smelt a Bronze Bar",
-    "search": "Copper ore,Tin ore,Bronze pickaxe,Copper rock,Tin rock,Furnace"
-  },
-  "1841": {
-    "taskName": "Smelt an Iron Bar",
-    "search": "Iron ore,Bronze pickaxe,Iron rock,Furnace"
-  },
-  "5119": {
-    "taskName": "Smith a Bronze full helm",
-    "search": "Bronze bar,Hammer,Anvil"
-  },
-  "5120": {
-    "taskName": "Smith a Bronze plateskirt",
-    "search": "Bronze bar,Hammer,Anvil"
-  },
-  "1873": {
-    "taskName": "Snare a Bird",
-    "search": "Bird snare,Crimson swift"
-  },
-  "1824": {
-    "taskName": "Spin a Ball of Wool",
-    "search": "Spinning wheel"
-  },
-  "4821": {
-    "taskName": "Steal a Chocolate Slice",
-    "search": "Bakery stall"
-  },
-  "3795": {
-    "taskName": "Steal Some Silk",
-    "search": "Silk stall"
-  },
-  "5096": {
-    "taskName": "Successfully Cut a Red Topaz",
-    "search": "Uncut red topaz"
-  },
-  "4829": {
-    "taskName": "Turn any Logs Into a Plank",
-    "search": "sawmill",
-    "no_strict": true
-  },
-  "1902": {
-    "taskName": "Visit Death's Domain",
-    "search": "Death's Office"
-  },
-  "1857": {
-    "taskName": "Visit the Rune Essence Mine",
-    "search": "Aubury,Archmage Sedridor, Wizard Distentor, Wizard Cromperty, Brimstail"
-  },
-  "2166": {
-    "taskName": "Balance 5 barrels on your head",
-    "search": "Jimmy (Warriors' Guild)"
-  },
-  "2282": {
-    "taskName": "Craft an Air Rune",
-    "points": "2984,3293"
-  },
-  "2294": {
-    "taskName": "Defeat a Troll in Asgarnia",
-    "search": "Troll"
-  },
-  "5070": {
-    "taskName": "Eat a magic cabbage",
-    "search": "Cabbage (Draynor Manor)"
-  },
-  "5160": {
-    "taskName": "Enter the Taverley Dungeon",
-    "points": "2884,3398"
-  },
-  "5082": {
-    "taskName": "Give Thurgo a redberry pie",
-    "search": "Thurgo"
-  },
-  "5058": {
-    "taskName": "Kill a port sarim prisoner",
-    "points": "3010,3197"
-  },
-  "2096": {
-    "taskName": "Use the Falador Party room",
-    "search": "Party pete"
-  },
-  "3816": {
-    "taskName": "1 Tempoross Kill",
-    "search": "Captain Pudi"
-  },
-  "2164": {
-    "taskName": "Catch a Salmon",
-    "points": "3371,3127"
-  },
-  "5177": {
-    "taskName": "Complete the Al Kharid Agility Course",
-    "search": "Ellis"
-  },
-  "2362": {
-    "taskName": "Craft a Fire Rune",
-    "points": "3309,3264"
-  },
-  "2241": {
-    "taskName": "Drink some of Ali's tea",
-    "search": "Ali the Tea Seller"
-  },
-  "2404": {
-    "taskName": "Enter the Kalphite Lair",
-    "points": "3228,3108",
-    "search": "Rope"
-  },
-  "2266": {
-    "taskName": "Kill a Billy Goat",
-    "search": "Billy Goat"
-  },
-  "2350": {
-    "taskName": "Pick a Winter Sq'irk",
-    "search": "Apprentice"
-  },
-  "5162": {
-    "taskName": "Room 1 of Pyramid Plunder",
-    "search": "An anonymous looking door"
-  },
-  "5163": {
-    "taskName": "Room 2 of Pyramid Plunder",
-    "search": "An anonymous looking door"
-  },
-  "5164": {
-    "taskName": "Room 3 of Pyramid Plunder",
-    "search": "An anonymous looking door"
-  },
-  "2161": {
-    "taskName": "Set a mummy ablaze",
-    "search": "Mummy (Ancient Pyramid)"
-  },
-  "2560": {
-    "taskName": "Take a Carpet Ride from Pollnivneach to Sophanem",
-    "points": "3346,2944"
-  },
-  "2354": {
-    "taskName": "Turn in a Winter Sq'irkjuice to Osman",
-    "search": "Osman"
-  },
-  "2398": {
-    "taskName": "Use the Bank in Nardah",
-    "points": "3315,2797"
-  },
-  "2041": {
-    "taskName": "Catch a Cerulean Twitch",
-    "search": "Cerulean twitch,Bird snare"
-  },
-  "2040": {
-    "taskName": "Catch a Polar Kebbit",
-    "points": "2711,3830,2717,3819",
-    "search": "Noose wand"
-  },
-  "5037": {
-    "taskName": "Chop down an arctic pine tree",
-    "search": "Arctic pine tree,Bronze axe"
-  },
-  "2340": {
-    "taskName": "Cut the Swaying Tree",
-    "search": "Swaying tree,Bronze axe"
-  },
-  "2090": {
-    "taskName": "Defeat a Cockatrice in the Fremennik Province",
-    "search": "Cockatrice,Mirror shield"
-  },
-  "2094": {
-    "taskName": "Defeat a Pyrefiend in the Fremennik Province",
-    "search": "Pyrefiend"
-  },
-  "2085": {
-    "taskName": "Defeat a Rock Crab in the Fremennik Province",
-    "search": "Rock crab"
-  },
-  "2046": {
-    "taskName": "Kill a Rooster",
-    "search": "Rooster"
-  },
-  "5035": {
-    "taskName": "Kill a Yak",
-    "search": "Yak"
-  },
-  "2053": {
-    "taskName": "Pick up Snapegrass",
-    "search": "Snape grass"
-  },
-  "2067": {
-    "taskName": "Switch to the Lunar Spellbook",
-    "search": "Astral altar"
-  },
-  "2137": {
-    "taskName": "Use the Bank on Jatizso",
-    "points": "2417,3800"
-  },
-  "2141": {
-    "taskName": "Use the Bank on Lunar Isle",
-    "points": "2098,3920"
-  },
-  "2139": {
-    "taskName": "Use the Bank on Neitiznot",
-    "points": "2335,3808"
-  },
-  "5150": {
-    "taskName": "Brimstail Rune Essence Mine teleport",
-    "search": "Brimstail"
-  },
-  "2198": {
-    "taskName": "Catch a Crimson Swift in the Feldip Hills",
-    "search": "Crimson swift,Bird snare"
-  },
-  "5115": {
-    "taskName": "Catch a wild kebbit",
-    "search": "Wild kebbit"
-  },
-  "2194": {
-    "taskName": "Complete the Gnome Stronghold Agility Course",
-    "search": "Log balance (Gnome Stronghold Agility Course)"
-  },
-  "2229": {
-    "taskName": "Defeat a Bloodveld in Kandarin",
-    "search": "Bloodveld"
-  },
-  "751": {
-    "taskName": "Defeat a Fire Giant in Kandarin",
-    "search": "Fire giant"
-  },
-  "3898": {
-    "taskName": "Get Stung By Bees",
-    "search": "Beehive"
-  },
-  "5016": {
-    "taskName": "Kill Salarin the Twisted",
-    "search": "Salarin the Twisted"
-  },
-  "2152": {
-    "taskName": "Obtain Jack's legendary rod",
-    "search": "Grandpa Jack"
-  },
-  "3896": {
-    "taskName": "Pick Wheat in Catherby",
-    "search": "Wheat"
-  },
-  "2149": {
-    "taskName": "Receive a gift from Arnold",
-    "search": "Arnold Lydspor"
-  },
-  "2245": {
-    "taskName": "Visit the Tree Gnome Stronghold",
-    "points": "2461,3383"
-  },
-  "2242": {
-    "taskName": "Visit the Tree Gnome Village",
-    "search": "Elkoy"
-  },
-  "4891": {
-    "taskName": "Catch a Karambwanji",
+  "Catch a Karambwanji": {
     "search": "Small fishing net,Fishing spot (karambwanji)"
   },
-  "2183": {
-    "taskName": "Fill a Crate With Bananas",
-    "search": "Crate (Pirate's Treasure),Banana"
+  "Catch a Pyre fox": {
+    "search": "Pyre fox"
   },
-  "1776": {
-    "taskName": "Kill a Snake in Karamja",
-    "search": "Snake"
+  "Catch a Salmon on Karamja": {
+    "search": "Rod Fishing spot (lure, bait)"
   },
-  "2187": {
-    "taskName": "Pick a Pineapple on Karamja",
-    "search": "Pineapple Plant (wild)"
+  "Catch a Shrimp": {
+    "search": "Small fishing net,Fishing spot (small net, bait)"
   },
-  "2143": {
-    "taskName": "Receive an Agility Arena Ticket",
-    "search": "Cap'n Izzy No-Beard"
+  "Catch a Swamp Lizard or Salamander": {
+    "search": "Swamp Lizard,Orange Salamander,red salamander, black salamander"
   },
-  "5546": {
-    "taskName": "1 Sarachnis Kill",
-    "search": "Sarachnis"
+  "Catch an Anchovy": {
+    "search": "Small fishing net,Fishing spot (small net, bait)"
   },
-  "5456": {
-    "taskName": "1 Wintertodt Kill",
-    "search": "Doors of Dinh"
-  },
-  "5693": {
-    "taskName": "Bank at Land's End",
-    "points": "1513,3421"
-  },
-  "5694": {
-    "taskName": "Bank at Mount Quidamortem",
-    "points": "1324,3825"
-  },
-  "5034": {
-    "taskName": "Brutally murder Conrad King",
-    "search": "Conrad King"
-  },
-  "5468": {
-    "taskName": "Complete 1 Farming Contract",
-    "search": "Guildmaster Jane"
-  },
-  "5022": {
-    "taskName": "Drink a LizardKicker",
-    "search": "Lizardkicker"
-  },
-  "2413": {
-    "taskName": "Eat a Field Ration",
-    "search": "Field ration"
-  },
-  "5031": {
-    "taskName": "Equip a Protest Banner",
-    "search": "Protest Banners"
-  },
-  "2358": {
-    "taskName": "Kill a Barbarian in Kourend",
-    "search": "Barbarian"
-  },
-  "5630": {
-    "taskName": "Open 1 Grubby Chest",
-    "search": "Grubby chest,Grubby key"
-  },
-  "3790": {
-    "taskName": "Repair a Fishing Crane",
-    "search": "Fishing Crane"
-  },
-  "5695": {
-    "taskName": "Travel to Molch Island",
-    "search": "Boaty"
-  },
-  "5644": {
-    "taskName": "Turn in 1 Library Book",
-    "points": "1632,3808"
-  },
-  "2407": {
-    "taskName": "Use the Mine cart transportation System",
-    "search": "Minecart (Lovakengj Minecart Network)"
-  },
-  "2196": {
-    "taskName": "Ask for a Quest from Bob",
-    "search": "Bob"
-  },
-  "5061": {
-    "taskName": "Chop a log from a potato tree",
-    "points": "3147,3273,3259,3300"
-  },
-  "4842": {
-    "taskName": "Complete the Draynor Agility Course",
-    "search": "Rough wall (Draynor Village Rooftop Course)"
-  },
-  "2006": {
-    "taskName": "Complete the Natural History Quiz",
-    "points": "3257,3452"
-  },
-  "5841": {
-    "taskName": "Complete the Varrock Agility Course",
-    "search": "Rough wall (Varrock Rooftop Course)"
-  },
-  "1960": {
-    "taskName": "Defeat the Lesser Demon in the Wizards' Tower",
-    "points": "3110,3157"
-  },
-  "1217": {
-    "taskName": "Drink a beer in the Longhall",
-    "points": "3079,3441"
-  },
-  "2211": {
-    "taskName": "Eat an Onion",
-    "search": "Onion"
-  },
-  "1988": {
-    "taskName": "Enter Zanaris",
-    "points": "3202,3169,2996,3116.5,2700,3249.5,1430,3325.5,1651,3012.5,2735,5223.5,2780,3615.5,2500,3898.5,3284,2707.5,2319,3621.5,1827,3540.5,2571,2958.5,2503,3638.5,3597,3497.5,3059,4877.5,2644,3497.5,3410,3326.5,3251,3097.5,2635,3268.5,2267,2978.5,2650,4732.5,2150,3072.5,2385,3037.5,3041,4534.5,3469,3433.5,2412,4436.5,2437,5128.5,3573,4373.5,2740,3353.5,1295,3495.5,2513,3886.5,2528,3129.5,1302,3764.5,1639,3870.5,3178,2449.5,2705,3578.5,2075,4850.5,1359,2943.5,2801,3005.5,3447,3472.5,3082,3208.5,2740,2740.5,2682,3083.5,3037,4765.5,3038,5350.5,3108,3151.5,2658,3232.5,1455,3660.5,2900,3113.5,3129,3498.5,2744,3721.5,2923,10456.5,3423,3018.5,2213,3101.5,3447,9826.5,2343,4444.5,2446,3171"
-  },
-  "2208": {
-    "taskName": "Equip an Iron dagger",
-    "search": "Iron dagger"
-  },
-  "5059": {
-    "taskName": "Get a chair to follow you",
-    "search": "Chair (Draynor Manor)"
-  },
-  "5060": {
-    "taskName": "Get your revenge against a Dark Wizard",
-    "search": "Hairdresser,Emma,Sonalo"
-  },
-  "5067": {
-    "taskName": "Have Elsie tell you a story",
-    "search": "Elsie,Cup of tea"
-  },
-  "5057": {
-    "taskName": "Have Ned make you some rope",
-    "search": "Ned,Ball of wool"
-  },
-  "5053": {
-    "taskName": "Insult Aggie the Witch",
-    "search": "Aggie"
-  },
-  "1218": {
-    "taskName": "Kill a Barbarian in the Barbarian Village",
-    "search": "Barbarian"
-  },
-  "2200": {
-    "taskName": "Kill a Chicken with your fists",
-    "search": "Chicken"
-  },
-  "2174": {
-    "taskName": "Kill a Cow in one hit",
-    "search": "Cow"
-  },
-  "2212": {
-    "taskName": "Kill a Duck with a fire spell",
-    "search": "Duck,Fire rune,Air rune,Mind rune"
-  },
-  "2237": {
-    "taskName": "Kill a Frog",
-    "search": "Frog,Giant frog"
-  },
-  "2238": {
-    "taskName": "Kill a Goblin holding a spear",
-    "search": "Goblin"
-  },
-  "2185": {
-    "taskName": "Kill a Mugger",
-    "search": "Mugger"
-  },
-  "2197": {
-    "taskName": "Kill a Ram",
-    "search": "Ram"
-  },
-  "2177": {
-    "taskName": "Kill a Rat",
-    "search": "Rat"
-  },
-  "2171": {
-    "taskName": "Kill a Spider by kicking it",
-    "search": "Spider"
-  },
-  "2236": {
-    "taskName": "Kill an Imp with an earth spell",
-    "search": "Imp,Earth rune,Air rune,Mind rune"
-  },
-  "5051": {
-    "taskName": "Milk a cow",
-    "search": "Bucket,Dairy cow"
-  },
-  "5073": {
-    "taskName": "Pan for an Uncut Jade",
-    "search": "Panning point,Panning tray"
-  },
-  "1992": {
-    "taskName": "Pet a Stray Dog in Varrock",
-    "search": "Stray dog"
-  },
-  "3887": {
-    "taskName": "Pet the Museum Camp dog",
-    "search": "Dog (Museum Camp)"
-  },
-  "1208": {
-    "taskName": "Pick a Cabbage in Varrock",
-    "search": "Cabbage (scenery)"
-  },
-  "2210": {
-    "taskName": "Pray at an Altar in Lumbridge",
-    "points": "3243,3207"
-  },
-  "5078": {
-    "taskName": "Slash a web in varrock sewers",
-    "points": "3237,3458"
-  },
-  "1951": {
-    "taskName": "Steal From the Varrock Tea Stall",
-    "points": "3269,3410"
-  },
-  "1212": {
-    "taskName": "Stroke your cat",
-    "search": "Gertrude"
-  },
-  "1777": {
-    "taskName": "Take a Canoe to Champions Guild",
-    "search": "Bronze axe,Canoe Station"
-  },
-  "2192": {
-    "taskName": "Talk to Hans",
-    "search": "Hans"
-  },
-  "2163": {
-    "taskName": "Upset the homeless",
-    "points": "3362,3451"
-  },
-  "2002": {
-    "taskName": "Use a Fairy Ring",
-    "points": "2996,3116.5,2700,3249.5,1430,3325.5,1651,3012.5,2735,5223.5,2780,3615.5,2500,3898.5,3284,2707.5,2319,3621.5,1827,3540.5,2571,2958.5,2503,3638.5,3597,3497.5,3059,4877.5,2644,3497.5,3410,3326.5,3251,3097.5,2635,3268.5,2267,2978.5,2650,4732.5,2150,3072.5,2385,3037.5,3041,4534.5,3469,3433.5,2412,4436.5,2437,5128.5,3573,4373.5,2740,3353.5,1295,3495.5,2513,3886.5,2528,3129.5,1302,3764.5,1639,3870.5,3178,2449.5,2705,3578.5,2075,4850.5,1359,2943.5,2801,3005.5,3447,3472.5,3082,3208.5,2740,2740.5,2682,3083.5,3037,4765.5,3038,5350.5,3108,3151.5,2658,3232.5,1455,3660.5,2900,3113.5,3129,3498.5,2744,3721.5,2923,10456.5,3423,3018.5,2213,3101.5,3447,9826.5,2343,4444.5,2446,3171"
-  },
-  "1211": {
-    "taskName": "Use the Northern Staircase in Lumbridge",
-    "points": "3205,3229"
-  },
-  "3809": {
-    "taskName": "Charter a Ship From Sunset Coast to Civitas",
+  "Charter a Ship From Sunset Coast to Civitas": {
     "search": "Reinn (Sunset Coast)"
   },
-  "3903": {
-    "taskName": "Drink from a bird bath",
+  "Check a grown Fruit Tree": {
+    "search": ""
+  },
+  "Check a grown Tree": {
+    "search": ""
+  },
+  "Chop 100 Willow Logs": {
+    "search": ""
+  },
+  "Chop 50 Maple Logs": {
+    "search": ""
+  },
+  "Chop a dense jungle": {
+    "search": ""
+  },
+  "Chop a tree in the Tlati Rainforest": {
+    "search": ""
+  },
+  "Chop Some Logs": {
+    "search": "Bronze axe"
+  },
+  "Chop Some Logs With a Rune Axe": {
+    "search": ""
+  },
+  "Chop Some Logs With a Steel Axe": {
+    "search": "Steel axe"
+  },
+  "Chop some Rising Roots": {
+    "search": ""
+  },
+  "Churn some butter": {
+    "search": ""
+  },
+  "Clean 15 Grimy Tarromin": {
+    "search": "Grimy tarromin"
+  },
+  "Clean 25 Grimy Guam Leafs": {
+    "search": "Grimy guam leaf"
+  },
+  "Clean 50 Grimy Cadantine": {
+    "search": ""
+  },
+  "Clean 50 Grimy Ranarr Weed": {
+    "search": ""
+  },
+  "Clean a Grimy Avantoe": {
+    "search": ""
+  },
+  "Clean a Grimy Guam": {
+    "search": "Grimy guam leaf"
+  },
+  "Complete 1 Slayer Task": {
+    "search": ""
+  },
+  "Complete 10 Hunter Rumours": {
+    "search": ""
+  },
+  "Complete 10 laps of the Varlamore Agility Course": {
+    "search": ""
+  },
+  "Complete 25 Hunter Rumours": {
+    "search": ""
+  },
+  "Complete a Hunter Rumour": {
+    "search": ""
+  },
+  "Complete a Ribbiting Tale": {
+    "search": ""
+  },
+  "Complete At First Light": {
+    "search": ""
+  },
+  "Complete Death on the Isle": {
+    "search": ""
+  },
+  "Complete Meat and Greet": {
+    "search": ""
+  },
+  "Complete Shadows of Custodia": {
+    "search": ""
+  },
+  "Complete the Corrupted Gauntlet": {
+    "search": ""
+  },
+  "Complete the Easy Karamja Diary": {
+    "search": ""
+  },
+  "Complete the Evil Bob random event": {
+    "search": ""
+  },
+  "Complete the Flowering Bush event": {
+    "search": ""
+  },
+  "Complete the Heart of Darkness": {
+    "search": ""
+  },
+  "Complete the Leagues Tutorial": {
+    "search": "n/a"
+  },
+  "Complete the Maze random event": {
+    "search": ""
+  },
+  "Complete the Medium Karamja Diary": {
+    "search": ""
+  },
+  "Complete the Pheasant Forestry Event": {
+    "search": ""
+  },
+  "Complete the Pillory random event": {
+    "search": ""
+  },
+  "Complete the Pinball random event": {
+    "search": ""
+  },
+  "Complete the Postie Pete random event": {
+    "search": ""
+  },
+  "Complete the Prison Pete random event": {
+    "search": ""
+  },
+  "Complete the Ritual Forestry Event": {
+    "search": ""
+  },
+  "Complete the Struggling Sapling event": {
+    "search": ""
+  },
+  "Complete the Surprise Exam random event": {
+    "search": ""
+  },
+  "Complete the Theatre of Blood 25 Times": {
+    "search": ""
+  },
+  "Complete the Vale totems miniquest": {
+    "search": ""
+  },
+  "Complete Tzhaar-Ket-Rak's Special challenge": {
+    "search": ""
+  },
+  "Complete Tzhaar-Ket-Rak's third challenge": {
+    "search": ""
+  },
+  "Complete Wave 1 of Fortis Colosseum": {
+    "search": ""
+  },
+  "Complete Wave 12 of Fortis Colosseum": {
+    "search": ""
+  },
+  "Convert an item into at least 500 coins": {
+    "search": ""
+  },
+  "Cook 100 Swordfish": {
+    "search": ""
+  },
+  "Cook 50 Tuna": {
+    "search": ""
+  },
+  "Cook Shrimp": {
+    "search": "Raw shrimp"
+  },
+  "Cook something with an apron": {
+    "search": ""
+  },
+  "Craft 20 Silver items": {
+    "search": ""
+  },
+  "Craft 200 Essence Into Runes": {
+    "search": ""
+  },
+  "Craft 50 Nature Runes": {
+    "search": ""
+  },
+  "Craft a Sapphire Amulet": {
+    "search": ""
+  },
+  "Craft a Toxic Blowpipe": {
+    "search": ""
+  },
+  "Craft an Emerald Ring": {
+    "search": ""
+  },
+  "Craft Any Combination Rune": {
+    "search": ""
+  },
+  "Craft Leather chaps": {
+    "search": ""
+  },
+  "Create a Compost Potion": {
+    "search": "Volcanic ash,Harralander,Grimy harralander,Vial,Vial of water,Harralander potion (unf)"
+  },
+  "Create a Green d'hide shield": {
+    "search": ""
+  },
+  "Create a Guthix Rest Tea": {
+    "search": ""
+  },
+  "Create a Quetzal Whistle": {
+    "search": ""
+  },
+  "Create an Amulet of Blood Fury": {
+    "search": ""
+  },
+  "Create an Antipoison": {
+    "search": "Unicorn horn dust,Unicorn horn,Pestle and mortar,Marrentill,Grimy marrentill,Vial,Vial of water,Marrentill potion (unf)"
+  },
+  "Cry near a child": {
+    "search": ""
+  },
+  "Cut a Ruby": {
+    "search": ""
+  },
+  "Dance near a bard": {
+    "search": ""
+  },
+  "Defeat 10 Frost Crabs": {
+    "search": ""
+  },
+  "Defeat 25 Superior slayer creatures": {
+    "search": ""
+  },
+  "Defeat 3 chickens in 6 seconds": {
+    "search": ""
+  },
+  "Defeat 5 Bunnies": {
+    "search": ""
+  },
+  "Defeat 5 creatures with a mace": {
+    "search": ""
+  },
+  "Defeat 75 Superior slayer creatures": {
+    "search": ""
+  },
+  "Defeat a Basilisk Knight": {
+    "search": ""
+  },
+  "Defeat a Black Demon on Karamja": {
+    "search": ""
+  },
+  "Defeat a Buffalo": {
+    "search": ""
+  },
+  "Defeat a Chaos Dwarf in the Wilderness": {
+    "search": "Chaos Dwarf"
+  },
+  "Defeat a Chicken": {
+    "search": ""
+  },
+  "Defeat a Cockatrice in the Fremennik Province": {
+    "search": "Cockatrice,Mirror shield"
+  },
+  "Defeat a Demonic Gorilla": {
+    "search": ""
+  },
+  "Defeat a Dire Wolf": {
+    "search": ""
+  },
+  "Defeat a Frog": {
+    "search": ""
+  },
+  "Defeat a fully grown jaguar without taking any damage from it": {
+    "search": ""
+  },
+  "Defeat a Guard in Varlamore underground": {
+    "search": ""
+  },
+  "Defeat a Hill Giant": {
+    "search": ""
+  },
+  "Defeat a Mithril Dragon": {
+    "search": ""
+  },
+  "Defeat a Oryx with melee": {
+    "search": ""
+  },
+  "Defeat a Rat": {
+    "search": ""
+  },
+  "Defeat a scorpion": {
+    "search": ""
+  },
+  "Defeat a Scorpion with a Mithril Spear": {
+    "search": ""
+  },
+  "Defeat a Seagull": {
+    "search": ""
+  },
+  "Defeat a Snake in Karamja": {
+    "search": ""
+  },
+  "Defeat a Steel Dragon on Karamja": {
+    "search": ""
+  },
+  "Defeat a Superior slayer creature": {
+    "search": ""
+  },
+  "Defeat a thief": {
+    "search": ""
+  },
+  "Defeat a Troll in Asgarnia": {
+    "search": "Troll"
+  },
+  "Defeat a TzHaar": {
+    "search": ""
+  },
+  "Defeat a Werewolf in Morytania": {
+    "search": ""
+  },
+  "Defeat Amoxliatl 1 Time": {
+    "search": ""
+  },
+  "Defeat an Icefiend in Varlamore": {
+    "search": ""
+  },
+  "Defeat an Imp in a basement": {
+    "search": ""
+  },
+  "Defeat an Imp with an earth spell": {
+    "search": ""
+  },
+  "Defeat Awakened Duke Sucellus": {
+    "search": ""
+  },
+  "Defeat Awakened Leviathan": {
+    "search": ""
+  },
+  "Defeat Awakened Vardorvis": {
+    "search": ""
+  },
+  "Defeat Awakened Whisperer": {
+    "search": ""
+  },
+  "Defeat Hueycoatl 1 Time": {
+    "search": ""
+  },
+  "Defeat Nex Solo": {
+    "search": ""
+  },
+  "Defeat Phantom Muspah": {
+    "search": ""
+  },
+  "Defeat Phosani's Nightmare": {
+    "search": ""
+  },
+  "Defeat the Corporeal Beast": {
+    "search": ""
+  },
+  "Defeat the Kraken Boss 50 Times": {
+    "search": ""
+  },
+  "Defeat the Moons of Peril": {
+    "search": ""
+  },
+  "Defeat the Moons of Peril 10 times": {
+    "search": ""
+  },
+  "Defeat the Moons of Peril 25 times": {
+    "search": ""
+  },
+  "Defeat the Royal Titans solo": {
+    "search": ""
+  },
+  "Defeat Vorkath 5 Times Without Special Damage": {
+    "search": ""
+  },
+  "Defeat Zalcano": {
+    "search": ""
+  },
+  "Drink a cup of tea in auburn valley": {
+    "search": ""
+  },
+  "Drink a Strength Potion": {
+    "search": "Limpwurt,Limpwurt seed,Grimy tarromin,Tarromin,Vial,Vial of water,Tarromin potion (unf)"
+  },
+  "Drink from a bird bath": {
     "search": "",
     "points": "1555,3170,1713,3086"
   },
-  "1191": {
-    "taskName": "Give Oli some Stew",
+  "Drink some moon-lite": {
+    "search": ""
+  },
+  "Dye a cape Purple": {
+    "search": ""
+  },
+  "Eat a piece of food that restores at least 6 hitpoints": {
+    "search": ""
+  },
+  "Eat a Rabbit": {
+    "search": ""
+  },
+  "Eat an Onion": {
+    "search": "Onion"
+  },
+  "Eat some Purple Sweets": {
+    "search": ""
+  },
+  "Enter a dark cave in Varlamore": {
+    "search": ""
+  },
+  "Enter the Brimhaven Dungeon": {
+    "search": ""
+  },
+  "Enter the Tai Bwo Wannai Hardwood Grove": {
+    "search": ""
+  },
+  "Enter your Player Owned House": {
+    "search": "Portal (Player-owned house)"
+  },
+  "Equip a Corrupted Weapon": {
+    "search": ""
+  },
+  "Equip a Dark Bow in Tirannwn": {
+    "search": ""
+  },
+  "Equip a Dragon 2-Handed Sword in the Wilderness": {
+    "search": ""
+  },
+  "Equip a Dragon Chainbody in the Kharidian Desert": {
+    "search": ""
+  },
+  "Equip a Dragon Defender": {
+    "search": ""
+  },
+  "Equip a Dragon Hunter Lance": {
+    "search": ""
+  },
+  "Equip a Fire Cape": {
+    "search": ""
+  },
+  "Equip a Full Adamant Set": {
+    "search": ""
+  },
+  "Equip a Full Blue Dragonhide Set": {
+    "search": ""
+  },
+  "Equip a Full Bronze Set": {
+    "search": ""
+  },
+  "Equip a Full Red Dragonhide Set": {
+    "search": ""
+  },
+  "Equip a Full Tai Bwo Wannai Villager Set": {
+    "search": ""
+  },
+  "Equip a Godsword": {
+    "search": ""
+  },
+  "Equip a Malediction Ward": {
+    "search": ""
+  },
+  "Equip a Mithril Weapon": {
+    "search": ""
+  },
+  "Equip a Piece of a Mystic Set": {
+    "search": ""
+  },
+  "Equip a piece of Alchemists outfit": {
+    "search": ""
+  },
+  "Equip a piece of Beekeeper's Outfit": {
+    "search": ""
+  },
+  "Equip a piece of Camouflage outfit": {
+    "search": ""
+  },
+  "Equip a piece of Hueycoatl armour": {
+    "search": ""
+  },
+  "Equip a Piece of Masori Armour": {
+    "search": ""
+  },
+  "Equip a piece of Mime Outfit": {
+    "search": ""
+  },
+  "Equip a piece of Radiant Oathplate": {
+    "search": ""
+  },
+  "Equip a Piece of the Dagon'Hai Set": {
+    "search": ""
+  },
+  "Equip a piece of Zombie Outfit": {
+    "search": ""
+  },
+  "Equip a Rune Weapon": {
+    "search": ""
+  },
+  "Equip a Toktz-Ket-Xil": {
+    "search": ""
+  },
+  "Equip a Toktz-Xil-Ak": {
+    "search": ""
+  },
+  "Equip a Toktz-Xil-Ek": {
+    "search": ""
+  },
+  "Equip a Trident of the Seas": {
+    "search": ""
+  },
+  "Equip a Trimmed Amulet": {
+    "search": ""
+  },
+  "Equip a Tyras helm": {
+    "search": ""
+  },
+  "Equip a Willow Shield": {
+    "search": ""
+  },
+  "Equip a Yew Shortbow": {
+    "search": ""
+  },
+  "Equip an Abyssal Tentacle": {
+    "search": ""
+  },
+  "Equip an Adamant Weapon": {
+    "search": ""
+  },
+  "Equip an egg": {
+    "search": ""
+  },
+  "Equip an Elemental Battlestaff or Mystic Staff": {
+    "search": ""
+  },
+  "Equip an Elemental Staff": {
+    "search": "Staff of air,Staff of water,Staff of earth,Staff of fire"
+  },
+  "Equip an Infernal Cape": {
+    "search": ""
+  },
+  "Equip an Iron dagger": {
+    "search": "Iron dagger"
+  },
+  "Equip an Obsidian Cape": {
+    "search": ""
+  },
+  "Equip an Occult Necklace": {
+    "search": ""
+  },
+  "Equip an orange": {
+    "search": ""
+  },
+  "Equip any Ancestral piece": {
+    "search": ""
+  },
+  "Equip any Full Barrows Armour Set": {
+    "search": ""
+  },
+  "Equip any piece of armour from the moons of peril": {
+    "search": ""
+  },
+  "Equip any spear (kp)": {
+    "search": ""
+  },
+  "Equip Avernic Treads": {
+    "search": ""
+  },
+  "Equip Earthbound Tecpatl": {
+    "search": ""
+  },
+  "Equip Glacial Temotli": {
+    "search": ""
+  },
+  "Equip Osmumten's Fang (or)": {
+    "search": ""
+  },
+  "Equip Pendant of Ates": {
+    "search": ""
+  },
+  "Equip some Black armour": {
+    "search": ""
+  },
+  "Equip some Steel armour": {
+    "search": ""
+  },
+  "Equip Some Zenyte Jewelry": {
+    "search": ""
+  },
+  "Equip Sulphur Blades": {
+    "search": ""
+  },
+  "Equip the Bellator Ring": {
+    "search": ""
+  },
+  "Equip the Forestry Basket": {
+    "search": ""
+  },
+  "Equip the Magus Ring": {
+    "search": ""
+  },
+  "Equip the Venator Ring": {
+    "search": ""
+  },
+  "Equip the Voidwaker": {
+    "search": ""
+  },
+  "Exchange an Ent seed with an Ent": {
+    "search": ""
+  },
+  "Exit civitas via the secret passage": {
+    "search": ""
+  },
+  "Feed a dog some bones": {
+    "search": ""
+  },
+  "Fill 15 Hard Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill 20 Easy Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill 20 Medium Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill 3 Elite Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill 3 Hard Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill 5 Easy Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill 5 Medium Clue Collection Log Slots": {
+    "search": ""
+  },
+  "Fill a bucket with sand at the Sunset coast": {
+    "search": ""
+  },
+  "Fill a Bucket With Supercompost": {
+    "search": ""
+  },
+  "Fill a Crate With Bananas": {
+    "search": "Crate (Pirate's Treasure),Banana"
+  },
+  "Fill a Grape Barrel for the Foreman": {
+    "search": ""
+  },
+  "Fill a Large Pouch": {
+    "search": ""
+  },
+  "Fill a Medium STASH Unit": {
+    "search": ""
+  },
+  "Fill something up from a water pump": {
+    "search": ""
+  },
+  "Fish a House Key": {
+    "search": ""
+  },
+  "Fletch 1000 arrow shafts": {
+    "search": ""
+  },
+  "Fletch 150 Iron Arrows": {
+    "search": ""
+  },
+  "Fletch 25 Maple longbow (u)": {
+    "search": ""
+  },
+  "Fletch 25 Oak Stocks": {
+    "search": ""
+  },
+  "Fletch 50 Willow longbow (u)": {
+    "search": ""
+  },
+  "Fletch a Willow Shortbow (u)": {
+    "search": ""
+  },
+  "Fletch an Oak Shortbow": {
+    "search": "Oak shortbow (u),Oak logs,Knife,Bowstring,Flax,Spinning wheel"
+  },
+  "Fletch Some Arrow Shafts": {
+    "search": "Knife,Logs"
+  },
+  "Fletch some Broad Arrows or Bolts": {
+    "search": ""
+  },
+  "Fully decorate a Maple totem in the Auburn Valley": {
+    "search": ""
+  },
+  "Fully decorate a Willow totem in the Auburn Valley": {
+    "search": ""
+  },
+  "Fully decorate an Oak totem in the Auburn Valley": {
+    "search": ""
+  },
+  "Gain 10 Unique Items From Easy Clues": {
+    "search": ""
+  },
+  "Gain 10 Unique Items From Medium Clues": {
+    "search": ""
+  },
+  "Gain 20 Unique Items From Hard Clues": {
+    "search": ""
+  },
+  "Gain 35 Unique Items From Easy Clues": {
+    "search": ""
+  },
+  "Gain 5 Unique Items From Hard Clues": {
+    "search": ""
+  },
+  "Gain a Unique Item From a Hard Clue": {
+    "search": ""
+  },
+  "Gain a Unique Item From a Master Clue": {
+    "search": ""
+  },
+  "Gain a Unique Item From a Medium Clue": {
+    "search": ""
+  },
+  "Gain a Unique Item From an Easy Clue": {
+    "search": ""
+  },
+  "Get a Gem from a Gorak": {
+    "search": ""
+  },
+  "Get a haircut": {
+    "search": ""
+  },
+  "Give an Entling a haircut": {
+    "search": ""
+  },
+  "Give Oli some Stew": {
     "search": "Oli"
   },
-  "5905": {
-    "taskName": "Kill a Buffalo",
-    "search": "Buffalo"
+  "Harvest a Ranarr Weed": {
+    "search": ""
   },
-  "5714": {
-    "taskName": "Kill a Guard in Varlamore underground",
-    "search": "",
-    "points": "1641,3164"
+  "Have a Leprechaun send something to the bank": {
+    "search": ""
   },
-  "5907": {
-    "taskName": "Kill an Icefiend in Varlamore",
-    "search": "Icefiend"
+  "Imbue a God Cape": {
+    "search": ""
   },
-  "5906": {
-    "taskName": "Milk a Buffalo",
+  "Inspect a green flame": {
+    "search": ""
+  },
+  "Jump on Yama's stepping stones 666 times": {
+    "search": ""
+  },
+  "Kill 1 unique Echo Boss": {
+    "search": ""
+  },
+  "Kill 2 unique Echo Bosses": {
+    "search": ""
+  },
+  "Kill 3 unique Echo Bosses": {
+    "search": ""
+  },
+  "Kill 4 unique Echo Bosses": {
+    "search": ""
+  },
+  "Kill 8 penguins within 5 seconds": {
+    "search": ""
+  },
+  "Kill a Black Dragon in Tirannwn": {
+    "search": ""
+  },
+  "Land a hoop on a stick": {
+    "search": ""
+  },
+  "Light a Torch": {
+    "search": "Unlit torch,Tinderbox"
+  },
+  "Make 20 Stamina Potions": {
+    "search": ""
+  },
+  "Make 30 Prayer Potions": {
+    "search": ""
+  },
+  "Make a 4 dose potion": {
+    "search": ""
+  },
+  "Make a Greenman statue": {
+    "search": ""
+  },
+  "Make a Meat Pizza": {
+    "search": ""
+  },
+  "Make an Attack Potion": {
+    "search": "Eye of newt,Grimy guam leaf,Guam leaf,Vial,Vial of water,Guam potion (unf)"
+  },
+  "Make some Flour": {
+    "search": ""
+  },
+  "Milk a Buffalo": {
     "search": "Dairy Buffalo"
   },
-  "1192": {
-    "taskName": "Pet Renu",
-    "search": "Renu"
+  "Mine 10 Silver": {
+    "search": ""
   },
-  "3904": {
-    "taskName": "Pet Xolo in Civitas",
-    "search": "Xolo"
-  },
-  "4497": {
-    "taskName": "Pick some Sweetcorn from a Field",
-    "search": "Sweetcorn (scenery)"
-  },
-  "1214": {
-    "taskName": "Shear an Alpaca",
-    "search": "Alpaca"
-  },
-  "2508": {
-    "taskName": "Defeat a Chaos Dwarf in the Wilderness",
-    "search": "Chaos Dwarf"
-  },
-  "5040": {
-    "taskName": "Equip a team cape",
-    "search": "Team-cape"
-  },
-  "5165": {
-    "taskName": "Room 4 of Pyramid Plunder",
-    "search": "An anonymous looking door"
-  },
-  "5166": {
-    "taskName": "Room 5 of Pyramid Plunder",
-    "search": "An anonymous looking door"
-  },
-  "5167": {
-    "taskName": "Room 6 of Pyramid Plunder",
-    "search": "An anonymous looking door"
-  },
-  "1189": {
-    "taskName": "Kill 10 Frost Crabs",
-    "search": "Frost Crab"
-  },
-  "1187": {
-    "taskName": "Kill a Dire Wolf",
-    "search": "Dire Wolf"
-  },
-  "3857": {
-    "taskName": "Mine 20 Mithril Ore in the Stonecutter Outpost",
+  "Mine 20 Mithril Ore in the Stonecutter Outpost": {
     "search": "Avinia "
   },
-  "3854": {
-    "taskName": "Mine 250 Blessed Bone Shards",
+  "Mine 250 Blessed Bone Shards": {
     "search": "Calcified rocks"
   },
-  "3853": {
-    "taskName": "Mine a Calcified Deposit",
-    "search": "Calcified rocks"
+  "Mine 5 Tin Ore": {
+    "search": "Bronze pickaxe,Tin rocks"
   },
-  "3877": {
-    "taskName": "Pay an Urchin for Information",
+  "Mine 50 Iron Ore": {
+    "search": ""
+  },
+  "Mine 50 Mithril Ore": {
+    "search": ""
+  },
+  "Mine some Clay": {
+    "search": ""
+  },
+  "Mine some coal from Stone cutter outpost": {
+    "search": ""
+  },
+  "Mine some Ore With a Rune Pickaxe": {
+    "search": ""
+  },
+  "Mine some Ore With a Steel Pickaxe": {
+    "search": "Steel pickaxe"
+  },
+  "Obtain 800 Coins From Coin Pouches At Once": {
+    "search": ""
+  },
+  "Obtain a Bird Nest": {
+    "search": "n/a"
+  },
+  "Obtain a Casket from Fishing": {
+    "search": "n/a"
+  },
+  "Obtain a Clue Geode While Mining": {
+    "search": ""
+  },
+  "Obtain a Gem While Mining": {
+    "search": ""
+  },
+  "Obtain a Kebab from a random event": {
+    "search": ""
+  },
+  "Obtain an old boot from a fishing spot": {
+    "search": ""
+  },
+  "Open 1 Grubby Chest": {
+    "search": "Grubby chest,Grubby key"
+  },
+  "Open 28 Coin Pouches At Once": {
+    "search": ""
+  },
+  "Open the Leagues Menu": {
+    "search": "n/a"
+  },
+  "Open the Mystery Box": {
+    "search": ""
+  },
+  "Pay an Urchin for Information": {
     "search": "Urchin"
   },
-  "3863": {
-    "taskName": "Steal 15 House Keys",
+  "Perform a Special Attack": {
+    "search": "n/a"
+  },
+  "Pet a Caique": {
+    "search": ""
+  },
+  "Pet Renu": {
+    "search": "Renu"
+  },
+  "Pet Xolo in Civitas": {
+    "search": "Xolo"
+  },
+  "Pick 6 flax": {
+    "search": ""
+  },
+  "Pick 6 wheat, 6 cabbages and 6 potatoes": {
+    "search": ""
+  },
+  "Pick a Pineapple on Karamja": {
+    "search": "Pineapple Plant (wild)"
+  },
+  "Pick some Sweetcorn from a Field": {
+    "search": "Sweetcorn (scenery)"
+  },
+  "Pickpocket a Citizen": {
+    "search": "Citizen",
+    "no_strict": true
+  },
+  "Pickpocket a knight of varlamore 20 times": {
+    "search": ""
+  },
+  "Pickpocket a Master Farmer": {
+    "search": ""
+  },
+  "Plant Seeds in an Allotment Patch": {
+    "search": "Allotment Patch"
+  },
+  "Protect Your Crops": {
+    "search": "n/a"
+  },
+  "Purchase a Player Owned House": {
+    "search": "Estate agent"
+  },
+  "Rake a Flower Patch": {
+    "search": ""
+  },
+  "Reach a Prayer Bonus of 15": {
+    "search": ""
+  },
+  "Reach Base Level 10": {
+    "search": ""
+  },
+  "Reach Base Level 20": {
+    "search": ""
+  },
+  "Reach Base Level 30": {
+    "search": ""
+  },
+  "Reach Base Level 5": {
+    "search": ""
+  },
+  "Reach Combat Level 25": {
+    "search": "n/a"
+  },
+  "Reach Combat Level 50": {
+    "search": ""
+  },
+  "Reach Combat Level 75": {
+    "search": ""
+  },
+  "Reach Total Level 100": {
+    "search": ""
+  },
+  "Reach Total Level 250": {
+    "search": ""
+  },
+  "Reach Total Level 666": {
+    "search": ""
+  },
+  "Reach Total Level 750": {
+    "search": ""
+  },
+  "Receive an Agility Arena Ticket": {
+    "search": "Cap'n Izzy No-Beard"
+  },
+  "Redecorate your player Owned house": {
+    "search": ""
+  },
+  "Sacrifice something to Deaths coffer": {
+    "search": ""
+  },
+  "Salute next to a statue of Quoatlos": {
+    "search": ""
+  },
+  "Scatter some Ashes in Yama's lair": {
+    "search": ""
+  },
+  "Scrape some Blue Dragonhide": {
+    "search": ""
+  },
+  "Sell some silk to a silk trader": {
+    "search": ""
+  },
+  "Set a mummy ablaze": {
+    "search": "Mummy (Ancient Pyramid)"
+  },
+  "Shear an Alpaca": {
+    "search": "Alpaca"
+  },
+  "Shoot 6 iron arrows": {
+    "search": ""
+  },
+  "Sit near a stolen cabbage": {
+    "search": ""
+  },
+  "Slay 250 Creatures": {
+    "search": ""
+  },
+  "Sleep in Paramaya Inn": {
+    "search": ""
+  },
+  "Smelt a Bronze Bar": {
+    "search": "Copper ore,Tin ore,Bronze pickaxe,Copper rock,Tin rock,Furnace"
+  },
+  "Smelt a Steel Bar": {
+    "search": ""
+  },
+  "Smelt an Iron Bar": {
+    "search": "Iron ore,Bronze pickaxe,Iron rock,Furnace"
+  },
+  "Smith 10 Steel bolts (unf)": {
+    "search": ""
+  },
+  "Smith 150 Iron Arrowtips": {
+    "search": ""
+  },
+  "Smith 250 Mithril bolts (unf)": {
+    "search": ""
+  },
+  "Smith a Steel 2h sword": {
+    "search": ""
+  },
+  "Snare 15 Tropical Wagtails": {
+    "search": ""
+  },
+  "Snare 5 Crimson Swifts": {
+    "search": ""
+  },
+  "Snare a Bird": {
+    "search": "Bird snare,Crimson swift"
+  },
+  "Snare a Bird 20 times": {
+    "search": ""
+  },
+  "Spin a Ball of Wool": {
+    "search": "Spinning wheel"
+  },
+  "Steal 100 Valuables": {
+    "search": ""
+  },
+  "Steal 15 House Keys": {
     "search": "Wealthy citizen"
   },
-  "3862": {
-    "taskName": "Steal a House Key",
+  "Steal 25 Valuables": {
+    "search": ""
+  },
+  "Steal a House Key": {
     "search": "Wealthy citizen"
   },
-  "3861": {
-    "taskName": "Steal from the Fortis Spice Stall",
+  "Steal from the Fortis Spice Stall": {
     "search": "Spice Stall"
   },
-  "5168": {
-    "taskName": "Room 7 of Pyramid Plunder",
-    "search": "An anonymous looking door"
+  "Steal some bread": {
+    "search": ""
   },
-  "5169": {
-    "taskName": "Room 8 of Pyramid Plunder",
-    "search": "An anonymous looking door"
+  "Step onto an Ent trail": {
+    "search": ""
   },
-  "5170": {
-    "taskName": "Room 8 of Pyramid Plunder 25 Times",
-    "search": "An anonymous looking door"
+  "Store some bowstrings inside a bowstring spool": {
+    "search": ""
   },
-  "5909": {
-    "taskName": "Catch 100 Tecu salamanders",
-    "search": "Tecu salamander"
+  "Successfully Cook 5 Pieces of Food": {
+    "search": ""
   },
-  "3859": {
-    "taskName": "Catch 50 Moonlight Antelopes",
-    "search": "Moonlight Antelope"
+  "Successfully Cut a Red Topaz": {
+    "search": "Uncut red topaz"
   },
-  "2642": {
-    "taskName": "Visit Ferox Enclave",
-    "search": "Banker (Ferox Enclave)"
+  "Successfully pickpocket a Citizen 10 times in a row": {
+    "search": ""
   },
-  "2504": {
-    "taskName": "Defeat a Fire Giant in the Wilderness",
-    "search": "Fire giant"
+  "Take a Shortcut Across the Shilo Village River": {
+    "search": ""
   },
-  "2550": {
-    "taskName": "Enter the Wilderness Resource Area",
-    "points": "3184,3945"
+  "Talk to a Gladiator": {
+    "search": ""
   },
-  "2552": {
-    "taskName": "Enter the Wilderness God Wars Dungeon",
-    "points": "3016,3737,3068,3737"
+  "Talk to any Port master": {
+    "search": ""
   },
-  "2553": {
-    "taskName": "Use the Bank at the Mage Arena",
-    "search": "Lever (Mage Arena bank)"
+  "Teleport to Cam Torum using a Calcified Moth": {
+    "search": ""
   },
-  "5201": {
-    "taskName": "Sacrifice Some Bones at the Chaos Temple",
-    "points": "2950,3824"
+  "Teleport to Civitas illa Fortis": {
+    "search": ""
   },
-  "2485": {
-    "taskName": "Bury Some Lava Dragon Bones",
-    "points": "3201,3846"
+  "Teleport Using Law Runes": {
+    "search": ""
   },
-  "2489": {
-    "taskName": "Complete the Wilderness Agility Course",
-    "search": "Log balance (Wilderness Agility Course)"
+  "Trade a herb with Jekyll": {
+    "search": ""
   },
-  "2490": {
-    "taskName": "Catch a Black Salamander",
-    "search": "Black salamander (Hunter)"
+  "Travel in Achilka's boat": {
+    "search": ""
   },
-  "2491": {
-    "taskName": "Catch a Black Chinchompa",
-    "search": "Black chinchompa (Hunter)"
+  "Travel to Aldarin via Fairy ring": {
+    "search": ""
   },
-  "2496": {
-    "taskName": "Use the Abyss",
-    "search": "Mage of Zamorak"
+  "Travel using the Quetzal Transport System": {
+    "search": ""
   },
-  "2500": {
-    "taskName": "Defeat a Lava Dragon in the Wilderness",
-    "search": "Lava dragon"
+  "Trim your beard in Cam torum": {
+    "search": ""
   },
-  "2501": {
-    "taskName": "Defeat the Crazy Archaeologist",
-    "search": "Crazy Archaeologist"
+  "Turn any Logs Into a Plank": {
+    "search": "sawmill",
+    "no_strict": true
   },
-  "2509": {
-    "taskName": "Defeat the Chaos Fanatic",
-    "search": "Chaos Fanatic"
+  "Turn off your run": {
+    "search": ""
   },
-  "2512": {
-    "taskName": "Defeat a Green Dragon in the Wilderness",
-    "search": "Green Dragon"
+  "Upset the Sandwich lady": {
+    "search": ""
   },
-  "2515": {
-    "taskName": "Equip a Fedora",
-    "search": "crazy archaeologist"
+  "Use a prayer altar to restore 90 prayer in Prifddinas": {
+    "search": ""
+  },
+  "Use the pottery oven in Civitas": {
+    "search": ""
+  },
+  "Use the Protect from Melee Prayer": {
+    "search": ""
+  },
+  "Witness the gemstone Crab burrow away": {
+    "search": ""
   }
 }
