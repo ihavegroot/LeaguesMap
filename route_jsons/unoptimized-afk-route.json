@@ -1,0 +1,1445 @@
+{
+  "version": 3,
+  "name": "Wiki AFK 1",
+  "taskType": "LEAGUE_6",
+  "source": "GrootsLeagueMap",
+  "sections": [
+    {
+      "id": "mntiq7ns68i2p9nxhh9",
+      "name": "AFK mining 1",
+      "collapsed": false,
+      "showPins": false,
+      "items": [
+        {
+          "taskName": "Open the Leagues Menu",
+          "pinCoords": {
+            "lat": 3134.5,
+            "lng": 1674.2086426331823
+          },
+          "comments": [],
+          "taskId": 821838
+        },
+        {
+          "taskName": "Complete the Leagues Tutorial",
+          "pinCoords": {
+            "lat": 3135.25,
+            "lng": 1671.7091142109111
+          },
+          "comments": [],
+          "taskId": 268116
+        },
+        {
+          "taskName": "Turn off your run",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 752648
+        },
+        {
+          "taskName": "Pet Renu",
+          "pinCoords": {
+            "lat": 3144.5,
+            "lng": 1696.5
+          },
+          "comments": [],
+          "taskId": 630107
+        },
+        {
+          "taskName": "Travel using the Quetzal Transport System",
+          "pinCoords": {
+            "lat": 3058.5,
+            "lng": 1584.5
+          },
+          "comments": [],
+          "taskId": 253541
+        },
+        {
+          "taskName": "Mine some Copper Ore",
+          "pinCoords": {
+            "lat": 3090,
+            "lng": 1482.9169080041816
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Mine 5 Tin Ore",
+          "pinCoords": {
+            "lat": 3088.5,
+            "lng": 1482.5
+          },
+          "comments": [],
+          "taskId": 854639
+        },
+        {
+          "taskName": "Achieve Your First Level Up",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 605609
+        },
+        {
+          "id": "mntjscc3t4tkosgp94a",
+          "virtual": true,
+          "customName": "mine 15 of each ores to level 15",
+          "customDesc": "",
+          "pinCoords": null,
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Achieve Your First Level 5",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 403737
+        },
+        {
+          "taskName": "Achieve Your First Level 10",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 604357
+        },
+        {
+          "id": "mntjsy2c6bw6yc4svfq",
+          "virtual": true,
+          "customName": "run to Cam Torum and mine iron",
+          "customDesc": "Mine 45 iron",
+          "pinCoords": {
+            "lat": 9540.375,
+            "lng": 1509.9866348412625
+          },
+          "comments": [
+            "Bank, withdraw 45 iron and sell to store",
+            "Buy steel pic"
+          ],
+          "taskName": null
+        },
+        {
+          "taskName": "Mine 50 Iron Ore",
+          "pinCoords": {
+            "lat": 9541.5,
+            "lng": 1511.5
+          },
+          "comments": [],
+          "taskId": 107451
+        },
+        {
+          "taskName": "Get a haircut",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 408881
+        },
+        {
+          "taskName": "Trim your beard in Cam torum",
+          "pinCoords": {
+            "lat": 9556.695987026987,
+            "lng": 1454.7512798677524
+          },
+          "comments": [],
+          "taskId": 924064
+        },
+        {
+          "taskName": "Mine some Ore With a Steel Pickaxe",
+          "pinCoords": {
+            "lat": 9540.75,
+            "lng": 1506.8547655976656
+          },
+          "comments": [],
+          "taskId": 197154
+        },
+        {
+          "taskName": "Achieve Your First Level 20",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 532949
+        },
+        {
+          "taskName": "Achieve Your First Level 30",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 532982
+        },
+        {
+          "taskName": "Achieve Your First Level 40",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 533015
+        },
+        {
+          "id": "mntk3ndl75rw4bxm4uh",
+          "virtual": true,
+          "customName": "Buy addy pick",
+          "customDesc": "",
+          "pinCoords": null,
+          "comments": [
+            "Keep mining iron until level 60 ~ 30minutes",
+            "or 70 ~hour and a half"
+          ],
+          "taskName": null
+        },
+        {
+          "taskName": "Achieve Your First Level 50",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 533048
+        },
+        {
+          "taskName": "Achieve Your First Level 60",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 533081
+        },
+        {
+          "taskName": "Achieve Your First Level 70",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 581496
+        },
+        {
+          "taskName": "Mine a Calcified Deposit",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Mine 250 Blessed Bone Shards",
+          "pinCoords": {
+            "lat": 9542.5,
+            "lng": 1509.5
+          },
+          "comments": [],
+          "taskId": 821010
+        },
+        {
+          "id": "mntl4sr84ib2myomyun",
+          "virtual": true,
+          "customName": "Sell all except 100 iron ore to shop",
+          "customDesc": "Should end up with 30k to 60k gp",
+          "pinCoords": null,
+          "comments": [],
+          "taskName": null
+        }
+      ]
+    },
+    {
+      "id": "mntlblldw0w9e2z81ls",
+      "name": "AFK Fishing 1",
+      "collapsed": true,
+      "showPins": false,
+      "items": [
+        {
+          "taskName": "Teleport to Cam Torum using a Calcified Moth",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 944660
+        },
+        {
+          "taskName": "Cast Home Teleport",
+          "pinCoords": {
+            "lat": 3136.5,
+            "lng": 1682.9591827554386
+          },
+          "comments": [],
+          "taskId": 954979
+        },
+        {
+          "taskName": "Fish a House Key",
+          "pinCoords": {
+            "lat": 3104.5,
+            "lng": 1738.5
+          },
+          "comments": [],
+          "taskId": 681951
+        },
+        {
+          "taskName": "Obtain a Casket from Fishing",
+          "pinCoords": {
+            "lat": 3104.75,
+            "lng": 1739.6038198322428
+          },
+          "comments": [],
+          "taskId": 781909
+        },
+        {
+          "taskName": "Obtain an old boot from a fishing spot",
+          "pinCoords": {
+            "lat": 3100.625,
+            "lng": 1738.5243301974922
+          },
+          "comments": [],
+          "taskId": 968145
+        },
+        {
+          "id": "mntlzkoptzjul2hssi",
+          "virtual": true,
+          "customName": "Renu to Tal Teklan",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3091,
+            "lng": 1226.0302644935284
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "id": "mnxsdgsrtc58ng9v8e",
+          "virtual": true,
+          "customName": "buy some runes 100 casts?",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3120.148373002895,
+            "lng": 1212
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Witness the gemstone Crab burrow away",
+          "pinCoords": {
+            "lat": 3163.0118212161615,
+            "lng": 1275.5
+          },
+          "comments": [],
+          "taskId": 998227
+        },
+        {
+          "taskName": "Mine some Clay",
+          "pinCoords": {
+            "lat": 3162.25,
+            "lng": 1272.5
+          },
+          "comments": [],
+          "taskId": 150886
+        },
+        {
+          "taskName": "Travel in Achilka's boat",
+          "pinCoords": {
+            "lat": 3125.5,
+            "lng": 1255.5
+          },
+          "comments": [],
+          "taskId": 852138
+        },
+        {
+          "id": "mntm29jzufw0pquwul",
+          "virtual": true,
+          "customName": "Run to boat",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3124,
+            "lng": 1258.0238930212067
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "id": "mntn0g81957x2i3l3b",
+          "virtual": true,
+          "customName": "Land from boat",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3076.75,
+            "lng": 1389.4850170846184
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Pet a Caique",
+          "pinCoords": {
+            "lat": 3048.5,
+            "lng": 1358.5
+          },
+          "comments": [],
+          "taskId": 564474
+        },
+        {
+          "taskName": "Light a Torch",
+          "pinCoords": {
+            "lat": 3036.5,
+            "lng": 1359.5
+          },
+          "comments": [],
+          "taskId": 210649
+        },
+        {
+          "taskName": "Catch a Shrimp",
+          "pinCoords": {
+            "lat": 3011.5,
+            "lng": 1324.5
+          },
+          "comments": [],
+          "taskId": 244855
+        },
+        {
+          "taskName": "Catch an Anchovy",
+          "pinCoords": {
+            "lat": 3010.5,
+            "lng": 1339.5
+          },
+          "comments": [],
+          "taskId": 505290
+        },
+        {
+          "taskName": "Catch 25 Sardines",
+          "pinCoords": {
+            "lat": 3014.5,
+            "lng": 1337.4612733947943
+          },
+          "comments": [
+            "same location as shrimps"
+          ],
+          "taskId": null
+        },
+        {
+          "taskName": "Catch a Herring",
+          "pinCoords": {
+            "lat": 3014.25,
+            "lng": 1333.587741820056
+          },
+          "comments": [],
+          "taskId": 478195
+        },
+        {
+          "id": "mntmzkynocelgw8uidr",
+          "virtual": true,
+          "customName": "Buy rods/bait",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3038.5,
+            "lng": 1374.7379539351416
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "id": "mntn07158jfhztd2bns",
+          "virtual": true,
+          "customName": "Take boat back",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3073.5,
+            "lng": 1387.9853157473835
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "id": "mntn0durk48hie5009c",
+          "virtual": true,
+          "customName": "Land from boat",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3123.25,
+            "lng": 1255.7616478478383
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Catch 10 Pike",
+          "pinCoords": {
+            "lat": 3133.125,
+            "lng": 1265.230238480377
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Catch 75 Trout",
+          "pinCoords": {
+            "lat": 3132.5,
+            "lng": 1265.5
+          },
+          "comments": [],
+          "taskId": 757468
+        },
+        {
+          "taskName": "Catch 50 Salmon",
+          "pinCoords": {
+            "lat": 3132.5,
+            "lng": 1269.9265289597897
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "id": "mntn2htebkhk1arme0a",
+          "virtual": true,
+          "customName": "Hit T2, unlock Woodsman",
+          "customDesc": "Keep hitting salmons its bis xp",
+          "pinCoords": null,
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Catch 20 mackerel",
+          "pinCoords": {
+            "lat": 3148.5,
+            "lng": 1219.5
+          },
+          "comments": [],
+          "taskId": 374936
+        },
+        {
+          "taskName": "Catch 10 Cod",
+          "pinCoords": {
+            "lat": 3145.5625,
+            "lng": 1218.875
+          },
+          "comments": [],
+          "taskId": 158025
+        },
+        {
+          "taskName": "Catch 50 Tuna",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 202703
+        },
+        {
+          "taskName": "Catch 100 Tuna",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 391387
+        },
+        {
+          "taskName": "Catch 75 Lobsters",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 821676
+        },
+        {
+          "taskName": "Catch 100 Swordfish",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 659964
+        }
+      ]
+    },
+    {
+      "id": "mntl2njndhyyhky4j2o",
+      "name": "AFK Woodcutting 1",
+      "collapsed": true,
+      "showPins": false,
+      "items": [
+        {
+          "id": "mntn3um45dh5wda7eub",
+          "virtual": true,
+          "customName": "Renu or ring to aburnvale",
+          "customDesc": "We're going to do some woodcutting",
+          "pinCoords": {
+            "lat": 3350.375,
+            "lng": 1411.3758959882953
+          },
+          "comments": [
+            "~100 each type of log for fletch/fm/cons"
+          ],
+          "taskName": null
+        },
+        {
+          "id": "mntndpyzbklk77rl4un",
+          "virtual": true,
+          "customName": "Buy steel/mith/addy axe",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3343.375,
+            "lng": 1403.9815575742562
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Chop Some Logs",
+          "pinCoords": {
+            "lat": 3364.25,
+            "lng": 1419.7284216152227
+          },
+          "comments": [
+            "Chop 80 logs",
+            "Burn one with woodsman"
+          ],
+          "taskId": 198611
+        },
+        {
+          "taskName": "Burn Some Normal Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 710025
+        },
+        {
+          "taskName": "Chop Some Logs With a Steel Axe",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 856971
+        },
+        {
+          "id": "mntnihuwm366xi4cart",
+          "virtual": true,
+          "customName": "Chop 100 Oak logs",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3350,
+            "lng": 1369.2046032597075
+          },
+          "comments": [
+            "Burn 25 with woodsman"
+          ],
+          "taskName": null
+        },
+        {
+          "taskName": "Burn Some Oak Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 994203
+        },
+        {
+          "taskName": "Chop 100 Willow Logs",
+          "pinCoords": {
+            "lat": 3323.25,
+            "lng": 1398.8638001463094
+          },
+          "comments": [
+            "We actually chop 103 for other fletching tasks"
+          ],
+          "taskId": 220765
+        },
+        {
+          "taskName": "Burn 100 Willow Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 545898
+        },
+        {
+          "taskName": "Chop 50 Maple Logs",
+          "pinCoords": {
+            "lat": 3337.5,
+            "lng": 1380.5
+          },
+          "comments": [],
+          "taskId": 742786
+        },
+        {
+          "taskName": "Burn 25 Maple Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 882961
+        }
+      ]
+    },
+    {
+      "id": "mntkz4r7pf824zgnotb",
+      "name": "Active 1",
+      "collapsed": false,
+      "showPins": true,
+      "items": [
+        {
+          "id": "mntqm4i6knu7kdzv6vq",
+          "virtual": true,
+          "customName": "Home tele Civitas",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3135,
+            "lng": 1677.417469522582
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Bow near a quetzal",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 581293
+        },
+        {
+          "taskName": "Visit Death's Domain",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Pickpocket a Citizen",
+          "pinCoords": {
+            "lat": 3137.5,
+            "lng": 1680.5
+          },
+          "comments": [],
+          "taskId": 715588
+        },
+        {
+          "taskName": "Fill a bucket with sand at the Sunset coast",
+          "pinCoords": {
+            "lat": 2975.5,
+            "lng": 1533.6180376145885
+          },
+          "comments": [],
+          "taskId": 828562
+        },
+        {
+          "taskName": "Charter a Ship From Sunset Coast to Civitas",
+          "pinCoords": {
+            "lat": 2983.5,
+            "lng": 1521.5
+          },
+          "comments": [],
+          "taskId": 458524
+        },
+        {
+          "taskName": "Buy Something From Trader Crewmembers",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Defeat a Rat",
+          "pinCoords": {
+            "lat": 3152.5,
+            "lng": 1778.5
+          },
+          "comments": [],
+          "taskId": 261969
+        },
+        {
+          "taskName": "Talk to any Port master",
+          "pinCoords": {
+            "lat": 3151.75,
+            "lng": 1780.4392006721396
+          },
+          "comments": [],
+          "taskId": 660840
+        },
+        {
+          "taskName": "Talk to a Gladiator",
+          "pinCoords": {
+            "lat": 3107.5,
+            "lng": 1795.5
+          },
+          "comments": [],
+          "taskId": 369759
+        },
+        {
+          "taskName": "Use the pottery oven in Civitas",
+          "pinCoords": {
+            "lat": 3094.5,
+            "lng": 1766.5
+          },
+          "comments": [],
+          "taskId": 664430
+        },
+        {
+          "id": "mnxxeouyf6iwmhzcksm",
+          "virtual": true,
+          "customName": "Blow 20 glass",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3111.25,
+            "lng": 1769.2801434824119
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Kill 5 Bunnies",
+          "pinCoords": {
+            "lat": 3100.25,
+            "lng": 1736.3618588383363
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Defeat 5 creatures with a mace",
+          "pinCoords": {
+            "lat": 3099,
+            "lng": 1727.0468869562587
+          },
+          "comments": [],
+          "taskId": 813774
+        },
+        {
+          "taskName": "Drink from a bird bath",
+          "pinCoords": {
+            "lat": 3086.5,
+            "lng": 1713.5
+          },
+          "comments": [],
+          "taskId": 990277
+        },
+        {
+          "taskName": "Pet Xolo in Civitas",
+          "pinCoords": {
+            "lat": 3087.5,
+            "lng": 1710.5
+          },
+          "comments": [],
+          "taskId": 345037
+        },
+        {
+          "taskName": "Drink some moon-lite",
+          "pinCoords": {
+            "lat": 3116.25,
+            "lng": 1712.7639578030344
+          },
+          "comments": [
+            "buy cup of tea too",
+            "two stew, eat one"
+          ],
+          "taskId": 628088
+        },
+        {
+          "taskName": "Purchase a Player Owned House",
+          "pinCoords": {
+            "lat": 3101.5,
+            "lng": 1703.5
+          },
+          "comments": [],
+          "taskId": 490026
+        },
+        {
+          "taskName": "Steal a Chocolate Slice",
+          "pinCoords": {
+            "lat": 3111.5,
+            "lng": 1688.5
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Steal some bread",
+          "pinCoords": {
+            "lat": 3112.9375,
+            "lng": 1685.9869571924387
+          },
+          "comments": [],
+          "taskId": 900715
+        },
+        {
+          "taskName": "Cry near a child",
+          "pinCoords": {
+            "lat": 3107.5,
+            "lng": 1676.5
+          },
+          "comments": [],
+          "taskId": 673457
+        },
+        {
+          "taskName": "Sell some silk to a silk trader",
+          "pinCoords": {
+            "lat": 3113.5,
+            "lng": 1676.5
+          },
+          "comments": [],
+          "taskId": 371632
+        },
+        {
+          "id": "mnxo113cp1ts4txm2w",
+          "virtual": true,
+          "customName": "Buy apron and cape",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3101.125,
+            "lng": 1659.9158434749863
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Give Oli some Stew",
+          "pinCoords": {
+            "lat": 3103.5,
+            "lng": 1653.5
+          },
+          "comments": [],
+          "taskId": 582846
+        },
+        {
+          "taskName": "Equip a Mithril Weapon",
+          "pinCoords": {
+            "lat": 3139.639616546479,
+            "lng": 1659.6921326858749
+          },
+          "comments": [],
+          "taskId": 243575
+        },
+        {
+          "taskName": "Attack a dummy",
+          "pinCoords": {
+            "lat": 3150.125,
+            "lng": 1660.4781996733593
+          },
+          "comments": [],
+          "taskId": 449061
+        },
+        {
+          "taskName": "Salute next to a statue of Quoatlos",
+          "pinCoords": {
+            "lat": 3148.5,
+            "lng": 1650.5
+          },
+          "comments": [],
+          "taskId": 260556
+        },
+        {
+          "taskName": "Defeat a Guard in Varlamore underground",
+          "pinCoords": {
+            "lat": 3162.625,
+            "lng": 1640.8977478381635
+          },
+          "comments": [],
+          "taskId": 458018
+        },
+        {
+          "taskName": "Exit civitas via the secret passage",
+          "pinCoords": {
+            "lat": 3167.75,
+            "lng": 1625.2960269421862
+          },
+          "comments": [],
+          "taskId": 305360
+        },
+        {
+          "taskName": "Defeat a thief",
+          "pinCoords": {
+            "lat": 3164,
+            "lng": 1621.334422974755
+          },
+          "comments": [],
+          "taskId": 600178
+        },
+        {
+          "taskName": "Milk a Buffalo",
+          "pinCoords": {
+            "lat": 3122.5,
+            "lng": 1587.5
+          },
+          "comments": [],
+          "taskId": 967877
+        },
+        {
+          "taskName": "Bury Some Bones",
+          "pinCoords": {
+            "lat": 3119.25,
+            "lng": 1581.7208803804044
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Defeat a Buffalo",
+          "pinCoords": {
+            "lat": 3117.5,
+            "lng": 1576.5
+          },
+          "comments": [],
+          "taskId": 576161
+        },
+        {
+          "id": "mnxqdqttc5h8taduqr6",
+          "virtual": true,
+          "customName": "try pick iron dagger",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3141.270005135043,
+            "lng": 1573.1397712179294
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Shear an Alpaca",
+          "pinCoords": {
+            "lat": 3116.5,
+            "lng": 1560.5
+          },
+          "comments": [],
+          "taskId": 475068
+        },
+        {
+          "taskName": "Fill a Bucket With Supercompost",
+          "pinCoords": {
+            "lat": 3100,
+            "lng": 1590.276195632055
+          },
+          "comments": [],
+          "taskId": 958693
+        },
+        {
+          "taskName": "Protect Your Crops",
+          "pinCoords": {
+            "lat": 3098.25,
+            "lng": 1585.1761307427696
+          },
+          "comments": [],
+          "taskId": 820535
+        },
+        {
+          "taskName": "Rake a Flower Patch",
+          "pinCoords": {
+            "lat": 3095.125,
+            "lng": 1582.6059606645963
+          },
+          "comments": [],
+          "taskId": 378115
+        },
+        {
+          "taskName": "Pick 6 wheat, 6 cabbages and 6 potatoes",
+          "pinCoords": {
+            "lat": 3082.875,
+            "lng": 1587.864036604537
+          },
+          "comments": [
+            "6 potatos"
+          ],
+          "taskId": 205880
+        },
+        {
+          "id": "mnxwxf6g8eembjz2lrs",
+          "virtual": true,
+          "customName": "renu tele",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3056.375,
+            "lng": 1584.3904624138975
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Smelt a Bronze Bar",
+          "pinCoords": {
+            "lat": 3112.5,
+            "lng": 1208.5
+          },
+          "comments": [],
+          "taskId": 191883
+        },
+        {
+          "taskName": "Dye a cape Purple",
+          "pinCoords": {
+            "lat": 3119.5,
+            "lng": 1203.0123157085598
+          },
+          "comments": [],
+          "taskId": 265652
+        },
+        {
+          "id": "mnxoc2tjj2u6s6pcxv",
+          "virtual": true,
+          "customName": "buy 10 some iron arrows",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3095.875,
+            "lng": 1208.616285621409
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Defeat a Frog",
+          "pinCoords": {
+            "lat": 3105.5,
+            "lng": 1313.5
+          },
+          "comments": [],
+          "taskId": 555448
+        },
+        {
+          "taskName": "Chop a tree in the Tlati Rainforest",
+          "pinCoords": {
+            "lat": 3098.281590600455,
+            "lng": 1328.5453024887415
+          },
+          "comments": [],
+          "taskId": 149894
+        },
+        {
+          "taskName": "Defeat an Imp with an earth spell",
+          "pinCoords": {
+            "lat": 3051.625,
+            "lng": 1379.018690898873
+          },
+          "comments": [],
+          "taskId": 513725
+        },
+        {
+          "taskName": "Defeat an Imp in a basement",
+          "pinCoords": {
+            "lat": 3053.3125,
+            "lng": 1378.3072114898537
+          },
+          "comments": [],
+          "taskId": 903325
+        },
+        {
+          "taskName": "Cook 10 Sardines",
+          "pinCoords": {
+            "lat": 3039.147531035932,
+            "lng": 1379.125
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Burn Some Food",
+          "pinCoords": {
+            "lat": 3035.8984066815738,
+            "lng": 1377.75
+          },
+          "comments": [],
+          "taskId": 861651
+        },
+        {
+          "taskName": "Successfully Cook 5 Pieces of Food",
+          "pinCoords": {
+            "lat": 3035.8984066815738,
+            "lng": 1376
+          },
+          "comments": [],
+          "taskId": 801195
+        },
+        {
+          "taskName": "Cook Shrimp",
+          "pinCoords": {
+            "lat": 3036.5,
+            "lng": 1375.2365601755714
+          },
+          "comments": [],
+          "taskId": 256479
+        },
+        {
+          "taskName": "Cook 20 Pike",
+          "pinCoords": {
+            "lat": 3037.522968858753,
+            "lng": 1378.875
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Pick some Sweetcorn from a Field",
+          "pinCoords": {
+            "lat": 3069.5,
+            "lng": 1638.5
+          },
+          "comments": [],
+          "taskId": 629158
+        },
+        {
+          "taskName": "Defeat a Chicken",
+          "pinCoords": {
+            "lat": 3067.5,
+            "lng": 1653.5
+          },
+          "comments": [],
+          "taskId": 942943
+        },
+        {
+          "taskName": "Make some Flour",
+          "pinCoords": {
+            "lat": 3045.375,
+            "lng": 1654.7262811987398
+          },
+          "comments": [],
+          "taskId": 627465
+        },
+        {
+          "taskName": "Cry in a wheat field",
+          "pinCoords": {
+            "lat": 3050.5,
+            "lng": 1673.5
+          },
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "id": "mnxpvkadmkje2bsrco",
+          "virtual": true,
+          "customName": "pick 6 wheat",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3050.125,
+            "lng": 1670.2963650204604
+          },
+          "comments": [],
+          "taskName": null,
+          "customPoints": 0
+        },
+        {
+          "taskName": "Eat an Onion",
+          "pinCoords": {
+            "lat": 3051.5,
+            "lng": 1693.5
+          },
+          "comments": [],
+          "taskId": 725580
+        },
+        {
+          "taskName": "Sit near a stolen cabbage",
+          "pinCoords": {
+            "lat": 3052.5,
+            "lng": 1748.5
+          },
+          "comments": [
+            "also pick 6 cabbage"
+          ],
+          "taskId": 650809
+        },
+        {
+          "id": "mnxoljl1pexfi9c8xfc",
+          "virtual": true,
+          "customName": "buy a mace",
+          "customDesc": "",
+          "pinCoords": null,
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Dance near a bard",
+          "pinCoords": {
+            "lat": 3105.5,
+            "lng": 1511.5
+          },
+          "comments": [],
+          "taskId": 855507
+        },
+        {
+          "taskName": "Fill something up from a water pump",
+          "pinCoords": {
+            "lat": 3111.5,
+            "lng": 1475.5
+          },
+          "comments": [],
+          "taskId": 489036
+        },
+        {
+          "taskName": "Pick 6 flax",
+          "pinCoords": {
+            "lat": 3321.5,
+            "lng": 1374.5
+          },
+          "comments": [],
+          "taskId": 781192
+        },
+        {
+          "taskName": "Spin a Ball of Wool",
+          "pinCoords": {
+            "lat": 3314.5,
+            "lng": 1373.5
+          },
+          "comments": [],
+          "taskId": 701804
+        },
+        {
+          "taskName": "Admire some beautiful scenery",
+          "pinCoords": {
+            "lat": 3334.5,
+            "lng": 1347.5
+          },
+          "comments": [],
+          "taskId": 111544
+        },
+        {
+          "taskName": "Step onto an Ent trail",
+          "pinCoords": {
+            "lat": 3347,
+            "lng": 1430.2383604479887
+          },
+          "comments": [],
+          "taskId": 261062
+        },
+        {
+          "taskName": "Drink a cup of tea in auburn valley",
+          "pinCoords": {
+            "lat": 3354.289606125943,
+            "lng": 1405.2707676654145
+          },
+          "comments": [],
+          "taskId": 789017
+        },
+        {
+          "taskName": "Inspect a green flame",
+          "pinCoords": {
+            "lat": 3311.5,
+            "lng": 1575.5
+          },
+          "comments": [],
+          "taskId": 479653
+        },
+        {
+          "taskName": "Defeat a Seagull",
+          "pinCoords": {
+            "lat": 2968.5,
+            "lng": 1443.5
+          },
+          "comments": [],
+          "taskId": 756975
+        },
+        {
+          "id": "mnxpdrolmvbu17prd6m",
+          "virtual": true,
+          "customName": "do some gem store crafting",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 2973,
+            "lng": 1429.7604321296035
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Fill a Grape Barrel for the Foreman",
+          "pinCoords": {
+            "lat": 2918.5,
+            "lng": 1370.5
+          },
+          "comments": [],
+          "taskId": 597062
+        },
+        {
+          "taskName": "Travel to Aldarin via Fairy ring",
+          "pinCoords": {
+            "lat": 2943.5,
+            "lng": 1360.0091764102995
+          },
+          "comments": [],
+          "taskId": 691535
+        },
+        {
+          "taskName": "Eat a Rabbit",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 248975
+        },
+        {
+          "id": "mnxun25yoasvck448g",
+          "virtual": true,
+          "customName": "ring to AJP",
+          "customDesc": "",
+          "pinCoords": {
+            "lat": 3009.75,
+            "lng": 1651.8148105433577
+          },
+          "comments": [],
+          "taskName": null
+        },
+        {
+          "taskName": "Complete a Ribbiting Tale",
+          "pinCoords": {
+            "lat": 2974.5,
+            "lng": 1684.5
+          },
+          "comments": [],
+          "taskId": 267489
+        },
+        {
+          "taskName": "Defeat a Scorpion with a Mithril Spear",
+          "pinCoords": {
+            "lat": 2984.5,
+            "lng": 1644.5
+          },
+          "comments": [],
+          "taskId": 284855
+        },
+        {
+          "taskName": "Defeat a Hill Giant",
+          "pinCoords": {
+            "lat": 2959.5,
+            "lng": 1618.5
+          },
+          "comments": [],
+          "taskId": 958278
+        },
+        {
+          "taskName": "Enter a dark cave in Varlamore",
+          "pinCoords": {
+            "lat": 3047.5,
+            "lng": 1539.1012302946717
+          },
+          "comments": [],
+          "taskId": 461191
+        },
+        {
+          "taskName": "Scatter some Ashes in Yama's lair",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 649079
+        }
+      ]
+    },
+    {
+      "id": "mntoapq8q4yd18fozgf",
+      "name": "Woodcutting 2",
+      "collapsed": true,
+      "showPins": false,
+      "items": [
+        {
+          "id": "mntobe72h53qkbiyu7",
+          "virtual": true,
+          "customName": "Chop and burn Teaks until 99",
+          "customDesc": "",
+          "pinCoords": null,
+          "comments": [
+            "Once 80+ can send the other tasks easily enough"
+          ],
+          "taskName": null
+        },
+        {
+          "taskName": "Chop 100 Yew Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 144370
+        },
+        {
+          "taskName": "Burn 100 Yew Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 755615
+        }
+      ]
+    },
+    {
+      "id": "mntocxkmve46gtsqvci",
+      "name": "Tirannwn AFK",
+      "collapsed": true,
+      "showPins": false,
+      "items": [
+        {
+          "taskName": "Chop 100 Maples in Tirannwn",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Chop 50 Magic Logs in Tirannwn",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Burn Some Magic Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 167502
+        },
+        {
+          "taskName": "Chop 75 Magic Logs",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": 327033
+        },
+        {
+          "taskName": "Chop 100 Teak Logs in Prifddinas",
+          "pinCoords": null,
+          "comments": [],
+          "taskId": null
+        },
+        {
+          "taskName": "Kill an Icefiend in Varlamore",
+          "pinCoords": {
+            "lat": 3206.2532331531384,
+            "lng": 1445.5
+          },
+          "comments": [],
+          "taskId": null
+        }
+      ]
+    }
+  ]
+}
