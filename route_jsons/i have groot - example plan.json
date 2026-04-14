@@ -76,15 +76,6 @@
           "comments": []
         },
         {
-          "id": "mmlbuuuiw834giebz7",
-          "taskName": "Steal a Chocolate Slice",
-          "pinCoords": {
-            "lat": 3111.3899452250776,
-            "lng": 1685.875
-          },
-          "comments": []
-        },
-        {
           "id": "mmld2640hasmit3op7g",
           "virtual": true,
           "customName": "Buy stew from pub",
@@ -92,15 +83,6 @@
           "pinCoords": {
             "lat": 3116.6079027266187,
             "lng": 1713.6416153566893
-          },
-          "comments": []
-        },
-        {
-          "id": "mmlbxrwd1etd9qcjvxfj",
-          "taskName": "Eat a Banana",
-          "pinCoords": {
-            "lat": 3134.125,
-            "lng": 1742.0165205710064
           },
           "comments": []
         }
@@ -160,15 +142,6 @@
           "comments": []
         },
         {
-          "id": "mmo09dyte0mjg9mda7",
-          "taskName": "Cry in a wheat field",
-          "pinCoords": {
-            "lat": 3050.5,
-            "lng": 1673.5
-          },
-          "comments": []
-        },
-        {
           "id": "mmo059uyicckp16ypl",
           "taskName": "Pick some Sweetcorn from a Field",
           "pinCoords": {
@@ -193,15 +166,6 @@
           "pinCoords": {
             "lat": 3090.25,
             "lng": 1226.0075166588276
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo12jqucoeifkdrizq",
-          "taskName": "Dye a cape orange",
-          "pinCoords": {
-            "lat": 3119,
-            "lng": 1203.75
           },
           "comments": []
         },
@@ -277,24 +241,6 @@
           "pinCoords": {
             "lat": 3014.125,
             "lng": 1331.25
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo13wm5lrpv8nj6lp",
-          "taskName": "Catch 25 Sardines",
-          "pinCoords": {
-            "lat": 3012.5,
-            "lng": 1334.4375
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo13xegywe6119ycgj",
-          "taskName": "Cook 10 Sardines",
-          "pinCoords": {
-            "lat": 3037.375,
-            "lng": 1361.75
           },
           "comments": []
         },
@@ -437,29 +383,11 @@
           "comments": []
         },
         {
-          "id": "mmo0bbhy5z460cqgfoi",
-          "taskName": "Investigate Meztlan",
-          "pinCoords": {
-            "lat": 2917.625,
-            "lng": 1389.0285592839416
-          },
-          "comments": []
-        },
-        {
           "id": "mmnu7jvhj9of4qfrf4",
           "taskName": "Make some Flour",
           "pinCoords": {
             "lat": 2893.25,
             "lng": 1395.5
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo2s8nwk0urn5os16g",
-          "taskName": "Obtain a Cake from a Nest",
-          "pinCoords": {
-            "lat": 2893.25,
-            "lng": 1398.5
           },
           "comments": []
         }
@@ -499,42 +427,6 @@
             "lng": 1659.25
           },
           "comments": []
-        },
-        {
-          "id": "mmo2ni1pjrbxv4zriwl",
-          "taskName": "Kill a Guard in Varlamore underground",
-          "pinCoords": {
-            "lat": 3164.5,
-            "lng": 1641.5
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo2nvvf5d931kh3rvd",
-          "taskName": "Kill a Buffalo",
-          "pinCoords": {
-            "lat": 3116.5,
-            "lng": 1574.5
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo2o005yvjj3b6eoza",
-          "taskName": "Kill a Dire Wolf",
-          "pinCoords": {
-            "lat": 3126.5,
-            "lng": 1501.5
-          },
-          "comments": []
-        },
-        {
-          "id": "mmo2nxq76lltyojn13p",
-          "taskName": "Kill an Icefiend in Varlamore",
-          "pinCoords": {
-            "lat": 3209.5,
-            "lng": 1445.5
-          },
-          "comments": []
         }
       ]
     },
@@ -544,12 +436,6 @@
       "collapsed": false,
       "showPins": true,
       "items": [
-        {
-          "id": "mmo216ofpem870hiw5i",
-          "taskName": "Visit Death's Domain",
-          "pinCoords": null,
-          "comments": []
-        },
         {
           "id": "mmo21dbyxhdq9ur74y",
           "taskName": "Cast Home Teleport",

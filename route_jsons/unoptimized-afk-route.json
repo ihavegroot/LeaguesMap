@@ -53,15 +53,6 @@
           "taskId": 253541
         },
         {
-          "taskName": "Mine some Copper Ore",
-          "pinCoords": {
-            "lat": 3090,
-            "lng": 1482.9169080041816
-          },
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Mine 5 Tin Ore",
           "pinCoords": {
             "lat": 3088.5,
@@ -192,12 +183,6 @@
           "pinCoords": null,
           "comments": [],
           "taskId": 581496
-        },
-        {
-          "taskName": "Mine a Calcified Deposit",
-          "pinCoords": null,
-          "comments": [],
-          "taskId": null
         },
         {
           "taskName": "Mine 250 Blessed Bone Shards",
@@ -379,17 +364,6 @@
           "taskId": 505290
         },
         {
-          "taskName": "Catch 25 Sardines",
-          "pinCoords": {
-            "lat": 3014.5,
-            "lng": 1337.4612733947943
-          },
-          "comments": [
-            "same location as shrimps"
-          ],
-          "taskId": null
-        },
-        {
           "taskName": "Catch a Herring",
           "pinCoords": {
             "lat": 3014.25,
@@ -435,15 +409,6 @@
           "taskName": null
         },
         {
-          "taskName": "Catch 10 Pike",
-          "pinCoords": {
-            "lat": 3133.125,
-            "lng": 1265.230238480377
-          },
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Catch 75 Trout",
           "pinCoords": {
             "lat": 3132.5,
@@ -451,15 +416,6 @@
           },
           "comments": [],
           "taskId": 757468
-        },
-        {
-          "taskName": "Catch 50 Salmon",
-          "pinCoords": {
-            "lat": 3132.5,
-            "lng": 1269.9265289597897
-          },
-          "comments": [],
-          "taskId": null
         },
         {
           "id": "mntn2htebkhk1arme0a",
@@ -649,12 +605,6 @@
           "taskId": 581293
         },
         {
-          "taskName": "Visit Death's Domain",
-          "pinCoords": null,
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Pickpocket a Citizen",
           "pinCoords": {
             "lat": 3137.5,
@@ -680,12 +630,6 @@
           },
           "comments": [],
           "taskId": 458524
-        },
-        {
-          "taskName": "Buy Something From Trader Crewmembers",
-          "pinCoords": null,
-          "comments": [],
-          "taskId": null
         },
         {
           "taskName": "Defeat a Rat",
@@ -736,15 +680,6 @@
           "taskName": null
         },
         {
-          "taskName": "Kill 5 Bunnies",
-          "pinCoords": {
-            "lat": 3100.25,
-            "lng": 1736.3618588383363
-          },
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Defeat 5 creatures with a mace",
           "pinCoords": {
             "lat": 3099,
@@ -791,15 +726,6 @@
           },
           "comments": [],
           "taskId": 490026
-        },
-        {
-          "taskName": "Steal a Chocolate Slice",
-          "pinCoords": {
-            "lat": 3111.5,
-            "lng": 1688.5
-          },
-          "comments": [],
-          "taskId": null
         },
         {
           "taskName": "Steal some bread",
@@ -911,15 +837,6 @@
           },
           "comments": [],
           "taskId": 967877
-        },
-        {
-          "taskName": "Bury Some Bones",
-          "pinCoords": {
-            "lat": 3119.25,
-            "lng": 1581.7208803804044
-          },
-          "comments": [],
-          "taskId": null
         },
         {
           "taskName": "Defeat a Buffalo",
@@ -1068,15 +985,6 @@
           "taskId": 903325
         },
         {
-          "taskName": "Cook 10 Sardines",
-          "pinCoords": {
-            "lat": 3039.147531035932,
-            "lng": 1379.125
-          },
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Burn Some Food",
           "pinCoords": {
             "lat": 3035.8984066815738,
@@ -1104,15 +1012,6 @@
           "taskId": 256479
         },
         {
-          "taskName": "Cook 20 Pike",
-          "pinCoords": {
-            "lat": 3037.522968858753,
-            "lng": 1378.875
-          },
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Pick some Sweetcorn from a Field",
           "pinCoords": {
             "lat": 3069.5,
@@ -1138,15 +1037,6 @@
           },
           "comments": [],
           "taskId": 627465
-        },
-        {
-          "taskName": "Cry in a wheat field",
-          "pinCoords": {
-            "lat": 3050.5,
-            "lng": 1673.5
-          },
-          "comments": [],
-          "taskId": null
         },
         {
           "id": "mnxpvkadmkje2bsrco",
@@ -1401,18 +1291,6 @@
       "showPins": false,
       "items": [
         {
-          "taskName": "Chop 100 Maples in Tirannwn",
-          "pinCoords": null,
-          "comments": [],
-          "taskId": null
-        },
-        {
-          "taskName": "Chop 50 Magic Logs in Tirannwn",
-          "pinCoords": null,
-          "comments": [],
-          "taskId": null
-        },
-        {
           "taskName": "Burn Some Magic Logs",
           "pinCoords": null,
           "comments": [],
@@ -1423,21 +1301,6 @@
           "pinCoords": null,
           "comments": [],
           "taskId": 327033
-        },
-        {
-          "taskName": "Chop 100 Teak Logs in Prifddinas",
-          "pinCoords": null,
-          "comments": [],
-          "taskId": null
-        },
-        {
-          "taskName": "Kill an Icefiend in Varlamore",
-          "pinCoords": {
-            "lat": 3206.2532331531384,
-            "lng": 1445.5
-          },
-          "comments": [],
-          "taskId": null
         }
       ]
     }
